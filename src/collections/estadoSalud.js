@@ -77,6 +77,56 @@ class EstadosSalud {
       }
     }
   }
+
+  async actualizarEstadoSalud() {
+    try {
+      this.session = await startTransaction();
+      const connection = await this.connect();
+      const resultado = await connection.updateOne(
+        {
+          id: this.id,
+        },
+        {
+          $set: {
+            estado: this.estado,
+          },
+        }
+      );
+      await this.session.commitTransaction();
+      return resultado;
+    } catch (error) {
+      if (this.session) {
+        await this.session.abortTransaction();
+      }
+      throw error;
+    } finally {
+      if (this.session) {
+        this.session.endSession();
+      }
+    }
+  }
+
+  async eliminarEstadoSalud(estadoSaludId) {
+    try {
+      this.session = await startTransaction();
+      const connection = await this.connect();
+      const resultado = await connection.deleteOne({
+        id: Number(estadoSaludId),
+      });
+      await this.session.commitTransaction();
+      return resultado;
+    } catch (error) {
+      if (this.session) {
+        await this.session.abortTransaction();
+      }
+      throw error;
+    } finally {
+      if (this.session) {
+        this.session.endSession();
+      }
+    }
+  }
+
 }
 
 export { EstadosSalud };
