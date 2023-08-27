@@ -12,6 +12,11 @@ db.counters.insertMany([
     { _id: "horarios_de_alimentacionMantenimientoId", sequence_value: 0 },
     { _id: "historial_de_eventosId", sequence_value: 0 },
     { _id: "eventosId", sequence_value: 0 },
+    { _id: "puestosId", sequence_value: 0 },
+    { _id: "horarios_trabajoId", sequence_value: 0 },
+    { _id: "seguimiento_empleadoId", sequence_value: 0 },
+    { _id: "capacitacionesId", sequence_value: 0 },
+    { _id: "evaluacion_desempenoId", sequence_value: 0 },
 
 ]);
 function siguienteId(coleccion) {
@@ -63,6 +68,47 @@ db.createCollection("animales", {
         }
     }
 });
+db.animales.insertMany([
+    {
+        id: siguienteId("animales"),
+        nombre: "León",
+        especie: 1, 
+        historialSalud: 1, 
+        alimentacion: 1, 
+        habitat: 1, 
+        reproduccion: {
+            gestacion: "90 días",
+            camadas_anuales: 1,
+            promedio_crias: 3
+        }
+    },
+    {
+        id: siguienteId("animales"),
+        nombre: "Tigre",
+        especie: 2, 
+        historialSalud: 2, 
+        alimentacion: 2, 
+        habitat: 2, 
+        reproduccion: {
+            gestacion: "100 días",
+            camadas_anuales: 1,
+            promedio_crias: 2
+        }
+    },
+    {
+        id: siguienteId("animales"),
+        nombre: "Jirafa",
+        especie: 3, 
+        historialSalud: 3, 
+        alimentacion: 3, 
+        habitat: 3, 
+        reproduccion: {
+            gestacion: "450 días",
+            camadas_anuales: 1,
+            promedio_crias: 1
+        }
+    }
+]);
 
 // Seccion Salud del animal
 // Colección para la información de salud
@@ -245,7 +291,6 @@ db.alimentacion.insertMany([
     }
 ]);
 
-
 // Seccion mantenimiento de habitat
 // Colección para la información del hábitat
 db.createCollection("habitat", {
@@ -294,7 +339,6 @@ db.habitat.insertMany([
         idHistorial: 3
     }
 ]);
-
 
 // Colección para los horarios de alimentación y manteimiento
 db.createCollection("horarios_de_alimentacionMantenimiento", {
@@ -351,7 +395,6 @@ db.horarios_de_alimentacionMantenimiento.insertMany([
         descripcion: "limpieza y mantenimiento"
     }
 ]);
-
 
 // Colección para el historial de eventos asociado a hábitats
 db.createCollection("historial_de_eventos", {
@@ -458,8 +501,315 @@ db.eventos.insertMany([
 ]);
 
 
+//Seccion manejo de personal
+//Coleccion empleados
+db.createCollection("empleados", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "nombre", "fecha_contratacion", "id_seguimiento", "idPuesto"],
+            properties: {
+                id: {
+                    bsonType: "string",
+                    pattern: "^[0-9]{10}$",
+                    description: "Id del empleado"
+                },
+                nombre: {
+                    bsonType: "string",
+                    description: "Nombre del empleado"
+                },
+                fecha_contratacion: {
+                    bsonType: "date",
+                    description: "Fecha de contratación del empleado"
+                },
+                id_seguimiento: {
+                    bsonType: "int",
+                    description: "ID de seguimiento del empleado"
+                },
+                idPuesto: {
+                    bsonType: "int",
+                    description: "id del puesto del empleado"
+                }
+            }
+        }
+    }
+});
+db.empleados.insertMany([
+    {
+        id: "1234567890", 
+        nombre: "Juan Pérez",
+        fecha_contratacion: new Date("2022-01-15"),
+        salario: 45000,
+        id_seguimiento: 1, 
+        idPuesto: 1 
+    },
+    {
+        id: "9876543210", 
+        nombre: "María González",
+        fecha_contratacion: new Date("2021-11-10"),
+        salario: 38000,
+        id_seguimiento: 2, 
+        idPuesto: 2 
+    },
+    {
+        id: "5432109876", 
+        nombre: "Carlos Rodríguez",
+        fecha_contratacion: new Date("2022-03-20"),
+        salario: 52000,
+        id_seguimiento: 3, 
+        idPuesto: 1 
+    }
+]);
 
+// Coleccion pustos
+db.createCollection("puestos", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "nombre", "salario", "idHorario"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del puesto"
+                },
+                nombre: {
+                    bsonType: "string",
+                    description: "Nombre del puesto"
+                },
+                salario: {
+                    bsonType: "number",
+                    description: "Salario del empleado"
+                },
+                horario: {
+                    bsonType: "int",
+                    description: "Id del horario de trabajo"
+                }
+            }
+        }
+    }
+});
+// Inserción de puestos de ejemplo
+db.puestos.insertMany([
+    {
+        id: siguienteId("puestos"),
+        nombre: "Gerente de Operaciones",
+        salario: 60000,
+        idHorario: 1 
+    },
+    {
+        id: siguienteId("puestos"),
+        nombre: "Cuidador de Animales",
+        salario: 35000,
+        idHorario: 2 
+    },
+    {
+        id: siguienteId("puestos"),
+        nombre: "Asistente de Ventas",
+        salario: 40000,
+        idHorario: 3 
+    },
+    {
+        id: siguienteId("puestos"),
+        nombre: "Veterinario",
+        salario: 55000,
+        idHorario: 4 
+    }
+]);
 
+// Coleccion horarios_trabajo
+db.createCollection("horarios_trabajo", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "hora_inicio", "hora_fin"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del horario de trabajo"
+                },
+                hora_inicio: {
+                    bsonType: "string",
+                    description: "Hora de inicio del horario en formato HH:MM"
+                },
+                hora_fin: {
+                    bsonType: "string",
+                    description: "Hora de fin del horario en formato HH:MM"
+                }
+            }
+        }
+    }
+});
+db.horarios_trabajo.insertMany([
+    {
+        id: siguienteId("horarios_trabajo"),
+        hora_inicio: "08:00",
+        hora_fin: "16:00"
+    },
+    {
+        id: siguienteId("horarios_trabajo"),
+        hora_inicio: "10:00",
+        hora_fin: "18:00"
+    },
+    {
+        id: siguienteId("horarios_trabajo"),
+        hora_inicio: "09:00",
+        hora_fin: "17:00"
+    },
+    {
+        id: siguienteId("horarios_trabajo"),
+        hora_inicio: "07:30",
+        hora_fin: "15:30"
+    }
+]);
 
+// Coleccion seguimiento empleado
+db.createCollection("seguimiento_empleado", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "fecha_creacion", "fecha_actualizacion"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del seguimiento del trabajador"
+                },
+                fecha_creacion: {
+                    bsonType: "date",
+                    description: "Fecha de creación del seguimiento"
+                },
+                fecha_actualizacion: {
+                    bsonType: "date",
+                    description: "Fecha de actualización del seguimiento"
+                }
+            }
+        }
+    }
+});
+db.seguimiento_empleado.insertMany([
+    {
+        id: siguienteId("seguimiento_empleado"),
+        fecha_creacion: new Date(),
+        fecha_actualizacion: new Date()
+    },
+    {
+        id: siguienteId("seguimiento_empleado"),
+        fecha_creacion: new Date(),
+        fecha_actualizacion: new Date()
+    },
+    {
+        id: siguienteId("seguimiento_empleado"),
+        fecha_creacion: new Date(),
+        fecha_actualizacion: new Date()
+    }
+]);
 
+// Coleccion capacitaciones
+db.createCollection("capacitaciones", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "id_seguimiento", "nombre", "fecha", "descripcion"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del la capacitacion"
+                },
+                id_seguimiento: {
+                    bsonType: "int",
+                    description: "ID de seguimiento relacionado con la capacitación"
+                },
+                nombre: {
+                    bsonType: "string",
+                    description: "Nombre de la capacitación"
+                },
+                fecha: {
+                    bsonType: "date",
+                    description: "Fecha de la capacitación"
+                },
+                descripcion: {
+                    bsonType: "string",
+                    description: "Descripción de la capacitación"
+                }
+            }
+        }
+    }
+});
+db.capacitaciones.insertMany([
+    {
+        id: siguienteId("capacitaciones"),
+        id_seguimiento: 1, 
+        nombre: "Curso de Primeros Auxilios",
+        fecha: new Date("2023-09-10"),
+        descripcion: "Capacitación en primeros auxilios para el personal"
+    },
+    {
+        id: siguienteId("capacitaciones"),
+        id_seguimiento: 2, 
+        nombre: "Taller de Comunicación Efectiva",
+        fecha: new Date("2023-09-15"),
+        descripcion: "Taller sobre técnicas de comunicación efectiva"
+    },
+    {
+        id: siguienteId("capacitaciones"),
+        id_seguimiento: 3, 
+        nombre: "Entrenamiento en Conservación",
+        fecha: new Date("2023-09-20"),
+        descripcion: "Capacitación en técnicas de conservación de la fauna"
+    }
+]);
 
+// coleccion evaluacion de desempeño
+db.createCollection("evaluacion_desempeno", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "id_seguimiento", "fecha_reporte", "id_empleado_reporte", "descripcion"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del la capacitacion"
+                },
+                id_seguimiento: {
+                    bsonType: "int",
+                    description: "ID de seguimiento relacionado con la evaluación"
+                },
+                fecha_reporte: {
+                    bsonType: "date",
+                    description: "Fecha del reporte de evaluación"
+                },
+                id_empleado_reporte: {
+                    bsonType: "string",
+                    pattern: "^[0-9]{10}$",
+                    description: "ID del empleado que realiza el reporte"
+                },
+                descripcion: {
+                    bsonType: "string",
+                    description: "Descripción de la evaluación de desempeño"
+                }
+            }
+        }
+    }
+});
+db.evaluacion_desempeno.insertMany([
+    {
+        id: siguienteId("evaluacion_desempeno"),
+        id_seguimiento: 1, 
+        fecha_reporte: new Date("2023-09-25"),
+        id_empleado_reporte: "1234567890", 
+        descripcion: "Evaluación de desempeño trimestral"
+    },
+    {
+        id: siguienteId("evaluacion_desempeno"),
+        id_seguimiento: 2, 
+        fecha_reporte: new Date("2023-09-30"),
+        id_empleado_reporte: "9876543210", 
+        descripcion: "Evaluación de desempeño anual"
+    },
+    {
+        id: siguienteId("evaluacion_desempeno"),
+        id_seguimiento: 3, 
+        fecha_reporte: new Date("2023-10-05"),
+        id_empleado_reporte: "5432109876", 
+        descripcion: "Evaluación de desempeño semestral"
+    }
+]);
