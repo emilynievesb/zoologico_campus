@@ -10,7 +10,7 @@ class Animales {
   reproduccion;
   habitat;
   session;
-  constructor() {}
+  constructor() { }
 
   async connect() {
     try {
@@ -173,6 +173,61 @@ class Animales {
       }
     }
   }
+
+  async actualizarAnimal() {
+    try {
+      this.session = await startTransaction();
+      const connection = await this.connect();
+      const resultado = await connection.updateOne(
+        {
+          id: this.id,
+        },
+        {
+          $set: {
+            nombre: this.nombre,
+            especie: this.especie,
+            historialSalud: this.historialSalud,
+            alimentacion: this.alimentacion,
+            reproduccion: this.reproduccion,
+            habitat: this.habitat,
+          },
+        }
+      );
+      await this.session.commitTransaction();
+      return resultado;
+    } catch (error) {
+      if (this.session) {
+        await this.session.abortTransaction();
+      }
+      throw error;
+    } finally {
+      if (this.session) {
+        this.session.endSession();
+      }
+    }
+  }
+
+  async eliminarAnimal(animalId) {
+    try {
+      this.session = await startTransaction();
+      const connection = await this.connect();
+      const resultado = await connection.deleteOne({
+        id: Number(animalId),
+      });
+      await this.session.commitTransaction();
+      return resultado;
+    } catch (error) {
+      if (this.session) {
+        await this.session.abortTransaction();
+      }
+      throw error;
+    } finally {
+      if (this.session) {
+        this.session.endSession();
+      }
+    }
+  }
+
 }
 
-export { Bodegas };
+export { Animales };
