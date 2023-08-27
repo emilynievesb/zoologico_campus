@@ -103,6 +103,57 @@ class Alimentacion {
       }
     }
   }
+
+  async actualizarTipoAlimentacion() {
+    try {
+      this.session = await startTransaction();
+      const connection = await this.connect();
+      const resultado = await connection
+        .updateOne(
+          {
+            id: this.id,
+          },
+          {
+            $set: {
+              tipo: this.tipo,
+            },
+          }
+        );
+      await this.session.commitTransaction();
+      return resultado;
+    } catch (error) {
+      if (this.session) {
+        await this.session.abortTransaction();
+      }
+      throw error;
+    } finally {
+      if (this.session) {
+        this.session.endSession();
+      }
+    }
+  }
+
+  async eliminarTipoAlimentacion(tipoAlimentacionId) {
+    try {
+      this.session = await startTransaction();
+      const connection = await this.connect();
+      const resultado = await connection.deleteOne({
+        id: Number(tipoAlimentacionId),
+      });
+      await this.session.commitTransaction();
+      return resultado;
+    } catch (error) {
+      if (this.session) {
+        await this.session.abortTransaction();
+      }
+      throw error;
+    } finally {
+      if (this.session) {
+        this.session.endSession();
+      }
+    }
+  }
+
 }
 
 export { Alimentacion };
