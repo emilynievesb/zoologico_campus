@@ -8,7 +8,7 @@ class Puestos {
   idHorario;
   session;
 
-  constructor() {}
+  constructor() { }
 
   async connect() {
     try {
@@ -107,6 +107,7 @@ class Puestos {
       }
     }
   }
+  
   async agregarPuesto() {
     try {
       const incremental = await autoIncrementID("puestos");
@@ -132,6 +133,58 @@ class Puestos {
       }
     }
   }
+
+  async actualizarPuesto() {
+    try {
+      this.session = await startTransaction();
+      const connection = await this.connect();
+      const resultado = await connection.updateOne(
+        {
+          id: this.id,
+        },
+        {
+          $set: {
+            nombre: this.nombre,
+            salario: Number(this.salario),
+            idHorario: Number(this.idHorario),
+          },
+        }
+      );
+      await this.session.commitTransaction();
+      return resultado;
+    } catch (error) {
+      if (this.session) {
+        await this.session.abortTransaction();
+      }
+      throw error;
+    } finally {
+      if (this.session) {
+        this.session.endSession();
+      }
+    }
+  }
+
+  async eliminarPuesto(puestoId) {
+    try {
+      this.session = await startTransaction();
+      const connection = await this.connect();
+      const resultado = await connection.deleteOne({
+        id: Number(puestoId),
+      });
+      await this.session.commitTransaction();
+      return resultado;
+    } catch (error) {
+      if (this.session) {
+        await this.session.abortTransaction();
+      }
+      throw error;
+    } finally {
+      if (this.session) {
+        this.session.endSession();
+      }
+    }
+  }
+
 }
 
 export { Puestos };
