@@ -18,7 +18,7 @@ db.counters.insertMany([
     { _id: "capacitacionesId", sequence_value: 0 },
     { _id: "evaluacion_desempenoId", sequence_value: 0 },
     { _id: "zonasId", sequence_value: 0 },
-    { _id: "estadoHabitadId", sequence_value: 0 },
+    { _id: "estadohabitatId", sequence_value: 0 },
     { _id: "planificacion_eventosId", sequence_value: 0 },
     { _id: "facturaEntradaId", sequence_value: 0 },
     { _id: "lista_boletasId", sequence_value: 0 },
@@ -416,7 +416,7 @@ db.createCollection("historial_de_eventos", {
     validator: {
         $jsonSchema: {
             bsonType: "object",
-            required: ["id", "fecha_creacion", "ultima_modificacion", "idEstadoHabitad"],
+            required: ["id", "fecha_creacion", "ultima_modificacion", "idEstadohabitat"],
             properties: {
                 id: {
                     bsonType: "int",
@@ -430,9 +430,9 @@ db.createCollection("historial_de_eventos", {
                     bsonType: "date",
                     description: "Fecha de la última modificación del historial de eventos"
                 },
-                idEstadoHabitad: {
+                idEstadohabitat: {
                     bsonType: "int",
-                    description: "id del estado del habitad"
+                    description: "id del estado del habitat"
                 },
             }
         }
@@ -443,19 +443,19 @@ db.historial_de_eventos.insertMany([
         id: siguienteId("historial_de_eventos"),
         fecha_creacion: new Date(),
         ultima_modificacion: new Date(),
-        idEstadoHabitad: 1
+        idEstadohabitat: 1
     },
     {
         id: siguienteId("historial_de_eventos"),
         fecha_creacion: new Date(),
         ultima_modificacion: new Date(),
-        idEstadoHabitad: 2
+        idEstadohabitat: 2
     },
     {
         id: siguienteId("historial_de_eventos"),
         fecha_creacion: new Date(),
         ultima_modificacion: new Date(),
-        idEstadoHabitad: 3
+        idEstadohabitat: 3
     }
 ]);
 
@@ -878,8 +878,8 @@ db.zonas.insertMany([
     }
 ]);
 
-// Colección "estadoHabitad"
-db.createCollection("estadoHabitad", {
+// Colección "estadohabitat"
+db.createCollection("estadohabitat", {
     validator: {
         $jsonSchema: {
             bsonType: "object",
@@ -887,27 +887,27 @@ db.createCollection("estadoHabitad", {
             properties: {
                 id: {
                     bsonType: "int",
-                    description: "Id del estadoDelHabitad"
+                    description: "Id del estadoDelhabitat"
                 },
                 descripcionEstado: {
                     bsonType: "string",
-                    description: "Descripcion del estado del habitad"
+                    description: "Descripcion del estado del habitat"
                 }
             }
         }
     }
 });
-db.estadoHabitad.insertMany([
+db.estadohabitat.insertMany([
     {
-        id: siguienteId("estadoHabitad"),
+        id: siguienteId("estadohabitat"),
         descripcionEstado: "En buen estado",
     },
     {
-        id: siguienteId("estadoHabitad"),
+        id: siguienteId("estadohabitat"),
         descripcionEstado: "Requiere mantenimiento",
     },
     {
-        id: siguienteId("estadoHabitad"),
+        id: siguienteId("estadohabitat"),
         descripcionEstado: "En construcción",
     }
 ]);
