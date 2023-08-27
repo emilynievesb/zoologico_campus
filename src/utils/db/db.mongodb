@@ -70,7 +70,7 @@ db.createCollection("estadoSalud", {
     validator: {
         $jsonSchema: {
             bsonType: "object",
-            required: ["id", "estado", "descripcion", "ultima_modificacion"],
+            required: ["id", "estado"],
             properties: {
                 id: {
                     bsonType: "int",
@@ -84,6 +84,29 @@ db.createCollection("estadoSalud", {
         }
     }
 });
+db.estadoSalud.insertMany([
+    {
+        id: siguienteId("estadoSalud"),
+        estado: "Saludable",
+    },
+    {
+        id: siguienteId("estadoSalud"),
+        estado: "En tratamiento"
+    },
+    {
+        id: siguienteId("estadoSalud"),
+        estado: "En recuperacion"
+    },
+    {
+        id: siguienteId("estadoSalud"),
+        estado: "Estado critico"
+    },
+    {
+        id: siguienteId("estadoSalud"),
+        estado: "Muerto"
+    },
+]);
+
 // Colección para los historiales medicos
 db.createCollection("historialSalud", {
     validator: {
@@ -111,6 +134,27 @@ db.createCollection("historialSalud", {
         }
     }
 });
+db.historialSalud.insertMany([
+    {
+        id: siguienteId("historialSalud"),
+        idEstadoSalud: 1,
+        fecha_apertura: new Date(),
+        ultima_modificacion: new Date()
+    },
+    {
+        id: siguienteId("historialSalud"),
+        idEstadoSalud: 2,
+        fecha_apertura: new Date(),
+        ultima_modificacion: new Date()
+    },
+    {
+        id: siguienteId("historialSalud"),
+        idEstadoSalud: 3,
+        fecha_apertura: new Date(),
+        ultima_modificacion: new Date()
+    }
+]);
+
 // Colección para las citas médicas
 db.createCollection("citas_medicas", {
     validator: {
@@ -135,13 +179,38 @@ db.createCollection("citas_medicas", {
                     description: "Descripción de la cita médica"
                 },
                 id_veterinario: {
-                    bsonType: "int",
+                    bsonType: "string",
+                    pattern: "^[0-9]{10}$",
                     description: "ID del veterinario que atiende la cita"
                 }
             }
         }
     }
 });
+db.citas_medicas.insertMany([
+    {
+        id: siguienteId("citas_medicas"),
+        idHistorialSalud: 1,
+        fecha_cita: new Date("2023-08-28T10:30:00"),
+        descripcion: "Cita de control",
+        id_veterinario: "1098817776"
+    },
+    {
+        id: siguienteId("citas_medicas"),
+        idHistorialSalud: 2,
+        fecha_cita: new Date("2023-08-29T14:00:00"),
+        descripcion: "Cita de seguimiento",
+        id_veterinario: "2088776555"
+    },
+    {
+        id: siguienteId("citas_medicas"),
+        idHistorialSalud: 3,
+        fecha_cita: new Date("2023-08-30T11:45:00"),
+        descripcion: "Cita de revisión",
+        id_veterinario: "3078634444"
+    }
+]);
+
 // Colección para la información de alimentación
 db.createCollection("alimentacion", {
     validator: {
@@ -161,6 +230,21 @@ db.createCollection("alimentacion", {
         }
     }
 });
+db.alimentacion.insertMany([
+    {
+        id: siguienteId("alimentacion"),
+        tipo: "vegetariana"
+    },
+    {
+        id: siguienteId("alimentacion"),
+        tipo: "carnívora"
+    },
+    {
+        id: siguienteId("alimentacion"),
+        tipo: "omnívora"
+    }
+]);
+
 
 // Seccion mantenimiento de habitat
 // Colección para la información del hábitat
@@ -190,12 +274,34 @@ db.createCollection("habitat", {
         }
     }
 });
+db.habitat.insertMany([
+    {
+        id: siguienteId("habitat"),
+        tipo: "acuario",
+        descripcion: "zona húmeda",
+        idHistorial: 1
+    },
+    {
+        id: siguienteId("habitat"),
+        tipo: "selva tropical",
+        descripcion: "entorno exuberante",
+        idHistorial: 2
+    },
+    {
+        id: siguienteId("habitat"),
+        tipo: "sabana africana",
+        descripcion: "llanura extensa",
+        idHistorial: 3
+    }
+]);
+
+
 // Colección para los horarios de alimentación y manteimiento
 db.createCollection("horarios_de_alimentacionMantenimiento", {
     validator: {
         $jsonSchema: {
             bsonType: "object",
-            required: ["id_habitat", "hora_alimentacion", "id_encargado", "descripcion"],
+            required: ["id", "id_habitat", "hora_alimentacionMantenimiento", "id_encargado", "descripcion"],
             properties: {
                 id: {
                     bsonType: "int",
@@ -211,7 +317,7 @@ db.createCollection("horarios_de_alimentacionMantenimiento", {
                     description: "Hora de alimentación y mantenimiento en formato HH:MM"
                 },
                 id_encargado: {
-                    bsonType: "int",
+                    bsonType: "string",
                     description: "ID del encargado de los alimentos y mantenimiento"
                 },
                 descripcion: {
@@ -222,12 +328,37 @@ db.createCollection("horarios_de_alimentacionMantenimiento", {
         }
     }
 });
+db.horarios_de_alimentacionMantenimiento.insertMany([
+    {
+        id: siguienteId("horarios_de_alimentacionMantenimiento"),
+        id_habitat: 1,
+        hora_alimentacionMantenimiento: "10:10",
+        id_encargado: "1698847776",
+        descripcion: "alimentación diaria"
+    },
+    {
+        id: siguienteId("horarios_de_alimentacionMantenimiento"),
+        id_habitat: 2,
+        hora_alimentacionMantenimiento: "15:30",
+        id_encargado: "2777665555",
+        descripcion: "cuidado de plantas"
+    },
+    {
+        id: siguienteId("horarios_de_alimentacionMantenimiento"),
+        id_habitat: 3,
+        hora_alimentacionMantenimiento: "09:45",
+        id_encargado: "3866554444",
+        descripcion: "limpieza y mantenimiento"
+    }
+]);
+
+
 // Colección para el historial de eventos asociado a hábitats
 db.createCollection("historial_de_eventos", {
     validator: {
         $jsonSchema: {
             bsonType: "object",
-            required: ["id", "fecha_creacion", "ultima_modificacion", "habitatId"],
+            required: ["id", "fecha_creacion", "ultima_modificacion"],
             properties: {
                 id: {
                     bsonType: "int",
@@ -245,6 +376,24 @@ db.createCollection("historial_de_eventos", {
         }
     }
 });
+db.historial_de_eventos.insertMany([
+    {
+        id: siguienteId("historial_de_eventos"),
+        fecha_creacion: new Date(),
+        ultima_modificacion: new Date()
+    },
+    {
+        id: siguienteId("historial_de_eventos"),
+        fecha_creacion: new Date(),
+        ultima_modificacion: new Date()
+    },
+    {
+        id: siguienteId("historial_de_eventos"),
+        fecha_creacion: new Date(),
+        ultima_modificacion: new Date()
+    }
+]);
+
 // Colección para eventos específicos
 db.createCollection("eventos", {
     validator: {
@@ -261,7 +410,8 @@ db.createCollection("eventos", {
                     description: "id del historial asociado"
                 },
                 empleadoId: {
-                    bsonType: "int",
+                    bsonType: "string",
+                    pattern: "^[0-9]{10}$",
                     description: "Id del empleado que reporta el evento"
                 },
                 fecha_evento: {
@@ -280,6 +430,35 @@ db.createCollection("eventos", {
         }
     }
 });
+db.eventos.insertMany([
+    {
+        id: siguienteId("eventos"),
+        historialId: 1,
+        empleadoId: "1526684995",
+        fecha_evento: new Date("2023-08-30T10:50:00"),
+        descripcion: "Se quebró hamaca de la zona de pandas",
+        recomendaciones: "Cambiar lo más pronto posible"
+    },
+    {
+        id: siguienteId("eventos"),
+        historialId: 2,
+        empleadoId: "2599777333",
+        fecha_evento: new Date("2023-08-31T14:20:00"),
+        descripcion: "Lluvia intensa en el hábitat de los leones",
+        recomendaciones: "Verificar el drenaje"
+    },
+    {
+        id: siguienteId("eventos"),
+        historialId: 3,
+        empleadoId: "3677888222",
+        fecha_evento: new Date("2023-09-01T09:00:00"),
+        descripcion: "Visitantes en el área restringida",
+        recomendaciones: "Reforzar la seguridad"
+    }
+]);
+
+
+
 
 
 
