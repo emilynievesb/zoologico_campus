@@ -20,6 +20,11 @@ db.counters.insertMany([
     { _id: "zonasId", sequence_value: 0 },
     { _id: "estadoHabitadId", sequence_value: 0 },
     { _id: "planificacion_eventosId", sequence_value: 0 },
+    { _id: "facturaEntradaId", sequence_value: 0 },
+    { _id: "lista_boletasId", sequence_value: 0 },
+    { _id: "boletasId", sequence_value: 0 },
+    { _id: "tipos_boletasId", sequence_value: 0 },
+    { _id: "promocionesId", sequence_value: 0 },
 
 ]);
 function siguienteId(coleccion) {
@@ -891,7 +896,6 @@ db.createCollection("estadoHabitad", {
             }
         }
     }
-
 });
 db.estadoHabitad.insertMany([
     {
@@ -949,7 +953,7 @@ db.planificacion_eventos.insertMany([
         nombre: "Día de los pandas",
         fecha_inicio: new Date("2023-09-15"),
         fecha_fin: new Date("2023-09-16"),
-        idZona: 2, 
+        idZona: 2,
         descripcion: "Evento especial para celebrar a los pandas del zoológico.",
     },
     {
@@ -957,7 +961,243 @@ db.planificacion_eventos.insertMany([
         nombre: "Festival de aves tropicales",
         fecha_inicio: new Date("2023-10-20"),
         fecha_fin: new Date("2023-10-22"),
-        idZona: 3, 
+        idZona: 3,
         descripcion: "Un festival dedicado a las coloridas aves tropicales del zoológico.",
+    }
+]);
+
+
+//Seccion gestion de entradas
+// Coleccion de facturacion de entradas
+db.createCollection("facturaEntrada", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "fecha_compra", "documento_visitante", "precio", "evento_especial", "precio_descuento", "idLista_boletas"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id de la factura"
+                },
+                fecha_compra: {
+                    bsonType: "date",
+                    description: "Fecha de compra de la entrada"
+                },
+                documento_visitante: {
+                    bsonType: "string",
+                    pattern: "^[0-9]{10}$",
+                    description: "documento del visitante que compró la entrada"
+                },
+                precio: {
+                    bsonType: "number",
+                    description: "total facturacion"
+                },
+                evento_especial: {
+                    bsonType: "bool",
+                    description: "Indica si la entrada es para un evento especial"
+                },
+                precio_descuento: {
+                    bsonType: "number",
+                    description: "total facturacion"
+                },
+                idLista_boletas: {
+                    bsonType: "int",
+                    description: "Id de la lista de boletas compradas"
+                }
+            }
+        }
+    }
+});
+db.facturaEntrada.insertMany([
+    {
+        id: siguienteId("facturaEntrada"),
+        fecha_compra: new Date(),
+        documento_visitante: "1234567890",
+        precio: 55.0,
+        evento_especial: false,
+        precio_descuento: 0,
+        idLista_boletas: 1
+    },
+    {
+        id: siguienteId("facturaEntrada"),
+        fecha_compra: new Date(),
+        documento_visitante: "0987654321",
+        precio: 75.0,
+        evento_especial: true,
+        precio_descuento: 0,
+        idLista_boletas: 2
+    }
+]);
+
+// Coleccion de lista boletas
+db.createCollection("lista_boletas", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "idFactura"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id de la lista de boletas"
+                },
+                idFactura: {
+                    bsonType: "int",
+                    description: "Id de la factura"
+                }
+            }
+        }
+    }
+});
+db.lista_boletas.insertMany([
+    {
+        id: siguienteId("lista_boletas"),
+        idFactura: 1
+    },
+    {
+        id: siguienteId("lista_boletas"),
+        idFactura: 2
+    }
+]);
+
+// Coleccion de boletas
+db.createCollection("boletas", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "idLista", "idtipo", "cantidad"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id de la lista de boletas"
+                },
+                idLista: {
+                    bsonType: "int",
+                    description: "Id de la lista asociada a la factura"
+                },
+                idtipo: {
+                    bsonType: "int",
+                    description: "Id de la factura"
+                },
+                cantidad: {
+                    bsonType: "int",
+                    description: "cantidad del tipo comprado"
+                }
+            }
+        }
+    }
+});
+db.boletas.insertMany([
+    {
+        id: siguienteId("boletas"),
+        idLista: 1,
+        idtipo: 2,
+        cantidad: 2
+    },
+    {
+        id: siguienteId("boletas"),
+        idLista: 1,
+        idtipo: 1,
+        cantidad: 2
+    },
+    {
+        id: siguienteId("boletas"),
+        idLista: 2,
+        idtipo: 1,
+        cantidad: 3
+    }
+]);
+
+// Coleccion de tipos de boletas
+db.createCollection("tipos_boletas", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "tipo", "precio"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del precio de entrada"
+                },
+                tipo: {
+                    bsonType: "string",
+                    description: "Tipo de entrada"
+                },
+                precio: {
+                    bsonType: "number",
+                    description: "Precio de la entrada para este tipo"
+                }
+            }
+        }
+    }
+});
+db.tipos_boletas.insertMany([
+    {
+        id: siguienteId("tipos_boletas"),
+        tipo: "Adulto",
+        precio: 20.0
+    },
+    {
+        id: siguienteId("tipos_boletas"),
+        tipo: "Niño",
+        precio: 10.0
+    },
+    {
+        id: siguienteId("tipos_boletas"),
+        tipo: "Grupo",
+        precio: 15.0
+    }
+]);
+
+// Coleccion de promociones
+db.createCollection("promociones", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "nombre", "descripcion", "descuento", "fecha_inicio", "fecha_fin"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id de la promoción"
+                },
+                nombre: {
+                    bsonType: "string",
+                    description: "Nombre de la promoción"
+                },
+                descripcion: {
+                    bsonType: "string",
+                    description: "Descripción de la promoción"
+                },
+                descuento: {
+                    bsonType: "number",
+                    description: "Descuento ofrecido por la promoción (porcentaje)"
+                },
+                fecha_inicio: {
+                    bsonType: "date",
+                    description: "Fecha de inicio de la promoción"
+                },
+                fecha_fin: {
+                    bsonType: "date",
+                    description: "Fecha de finalización de la promoción"
+                }
+            }
+        }
+    }
+});
+db.promociones.insertMany([
+    {
+        id: siguienteId("promociones"),
+        nombre: "Verano Especial",
+        descripcion: "Descuento de verano",
+        descuento: 10.0,
+        fecha_inicio: new Date("2023-07-01"),
+        fecha_fin: new Date("2023-08-31")
+    },
+    {
+        id: siguienteId("promociones"),
+        nombre: "Día del Niño",
+        descripcion: "Promoción especial para niños",
+        descuento: 15.0,
+        fecha_inicio: new Date("2023-04-01"),
+        fecha_fin: new Date("2023-04-30")
     }
 ]);
