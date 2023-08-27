@@ -133,6 +133,57 @@ class HistorialesSalud {
       }
     }
   }
+
+  async actualizarHistorialSalud() {
+    try {
+      this.session = await startTransaction();
+      const connection = await this.connect();
+      const resultado = await connection.updateOne(
+        {
+          id: this.id,
+        },
+        {
+          $set: {
+            idEstadoSalud: Number(this.idEstadoSalud),
+            fecha_apertura: this.fecha_apertura,
+            ultima_modificacion: this.ultima_modificacion,
+          },
+        }
+      );
+      await this.session.commitTransaction();
+      return resultado;
+    } catch (error) {
+      if (this.session) {
+        await this.session.abortTransaction();
+      }
+      throw error;
+    } finally {
+      if (this.session) {
+        this.session.endSession();
+      }
+    }
+  }
+
+  async eliminarHistorialSalud(historialSaludId) {
+    try {
+      this.session = await startTransaction();
+      const connection = await this.connect();
+      const resultado = await connection.deleteOne({
+        id: Number(historialSaludId),
+      });
+      await this.session.commitTransaction();
+      return resultado;
+    } catch (error) {
+      if (this.session) {
+        await this.session.abortTransaction();
+      }
+      throw error;
+    } finally {
+      if (this.session) {
+        this.session.endSession();
+      }
+    }
+  }
 }
 
 export { HistorialesSalud };

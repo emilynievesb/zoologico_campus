@@ -119,6 +119,60 @@ class Eventos {
       }
     }
   }
+
+  async actualizarEvento() {
+    try {
+      this.session = await startTransaction();
+      const connection = await this.connect();
+      const resultado = await connection.updateOne(
+        {
+          id: this.id,
+        },
+        {
+          $set: {
+            historialId: Number(this.historialId),
+            empleadoId: this.empleadoId,
+            fecha_evento: this.fecha_evento,
+            descripcion: this.descripcion,
+            recomendaciones: this.recomendaciones,
+          },
+        }
+      );
+      await this.session.commitTransaction();
+      return resultado;
+    } catch (error) {
+      if (this.session) {
+        await this.session.abortTransaction();
+      }
+      throw error;
+    } finally {
+      if (this.session) {
+        this.session.endSession();
+      }
+    }
+  }
+
+  async eliminarEvento(eventoId) {
+    try {
+      this.session = await startTransaction();
+      const connection = await this.connect();
+      const resultado = await connection.deleteOne({
+        id: Number(eventoId),
+      });
+      await this.session.commitTransaction();
+      return resultado;
+    } catch (error) {
+      if (this.session) {
+        await this.session.abortTransaction();
+      }
+      throw error;
+    } finally {
+      if (this.session) {
+        this.session.endSession();
+      }
+    }
+  }
+
 }
 
 export { Eventos };

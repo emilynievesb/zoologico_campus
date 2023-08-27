@@ -107,6 +107,57 @@ class HistorialEventos {
       }
     }
   }
+
+  async actualizarHistorialEvento() {
+    try {
+      this.session = await startTransaction();
+      const connection = await this.connect();
+      const resultado = await connection.updateOne(
+        {
+          id: this.id,
+        },
+        {
+          $set: {
+            fecha_creacion: this.fecha_creacion,
+            ultima_modificacion: this.ultima_modificacion,
+          },
+        }
+      );
+      await this.session.commitTransaction();
+      return resultado;
+    } catch (error) {
+      if (this.session) {
+        await this.session.abortTransaction();
+      }
+      throw error;
+    } finally {
+      if (this.session) {
+        this.session.endSession();
+      }
+    }
+  }
+
+  async eliminarHistorialEvento(historialId) {
+    try {
+      this.session = await startTransaction();
+      const connection = await this.connect();
+      const resultado = await connection.deleteOne({
+        id: Number(historialId),
+      });
+      await this.session.commitTransaction();
+      return resultado;
+    } catch (error) {
+      if (this.session) {
+        await this.session.abortTransaction();
+      }
+      throw error;
+    } finally {
+      if (this.session) {
+        this.session.endSession();
+      }
+    }
+  }
+
 }
 
 export { HistorialEventos };

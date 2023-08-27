@@ -171,6 +171,60 @@ class Empleado {
       }
     }
   }
+
+  async actualizarEmpleado() {
+    try {
+      this.session = await startTransaction();
+      const connection = await this.connect();
+      const resultado = await connection.updateOne(
+        {
+          id: this.id,
+        },
+        {
+          $set: {
+            nombre: this.nombre,
+            fecha_contratacion: this.fecha_contratacion,
+            id_seguimiento: Number(this.id_seguimiento),
+            idPuesto: Number(this.idPuesto),
+            salario: this.salario,
+          },
+        }
+      );
+      await this.session.commitTransaction();
+      return resultado;
+    } catch (error) {
+      if (this.session) {
+        await this.session.abortTransaction();
+      }
+      throw error;
+    } finally {
+      if (this.session) {
+        this.session.endSession();
+      }
+    }
+  }
+
+  async eliminarEmpleado(empleadoId) {
+    try {
+      this.session = await startTransaction();
+      const connection = await this.connect();
+      const resultado = await connection.deleteOne({
+        id: Number(empleadoId),
+      });
+      await this.session.commitTransaction();
+      return resultado;
+    } catch (error) {
+      if (this.session) {
+        await this.session.abortTransaction();
+      }
+      throw error;
+    } finally {
+      if (this.session) {
+        this.session.endSession();
+      }
+    }
+  }
+
 }
 
 export { Empleado };
