@@ -17,6 +17,9 @@ db.counters.insertMany([
     { _id: "seguimiento_empleadoId", sequence_value: 0 },
     { _id: "capacitacionesId", sequence_value: 0 },
     { _id: "evaluacion_desempenoId", sequence_value: 0 },
+    { _id: "zonasId", sequence_value: 0 },
+    { _id: "estadoHabitadId", sequence_value: 0 },
+    { _id: "planificacion_eventosId", sequence_value: 0 },
 
 ]);
 function siguienteId(coleccion) {
@@ -72,10 +75,10 @@ db.animales.insertMany([
     {
         id: siguienteId("animales"),
         nombre: "León",
-        especie: 1, 
-        historialSalud: 1, 
-        alimentacion: 1, 
-        habitat: 1, 
+        especie: 1,
+        historialSalud: 1,
+        alimentacion: 1,
+        habitat: 1,
         reproduccion: {
             gestacion: "90 días",
             camadas_anuales: 1,
@@ -85,10 +88,10 @@ db.animales.insertMany([
     {
         id: siguienteId("animales"),
         nombre: "Tigre",
-        especie: 2, 
-        historialSalud: 2, 
-        alimentacion: 2, 
-        habitat: 2, 
+        especie: 2,
+        historialSalud: 2,
+        alimentacion: 2,
+        habitat: 2,
         reproduccion: {
             gestacion: "100 días",
             camadas_anuales: 1,
@@ -98,10 +101,10 @@ db.animales.insertMany([
     {
         id: siguienteId("animales"),
         nombre: "Jirafa",
-        especie: 3, 
-        historialSalud: 3, 
-        alimentacion: 3, 
-        habitat: 3, 
+        especie: 3,
+        historialSalud: 3,
+        alimentacion: 3,
+        habitat: 3,
         reproduccion: {
             gestacion: "450 días",
             camadas_anuales: 1,
@@ -297,7 +300,7 @@ db.createCollection("habitat", {
     validator: {
         $jsonSchema: {
             bsonType: "object",
-            required: ["id", "tipo", "descripcion", "idHistorial"],
+            required: ["id", "tipo", "descripcion", "idHistorial", "idZona"],
             properties: {
                 id: {
                     bsonType: "int",
@@ -314,6 +317,10 @@ db.createCollection("habitat", {
                 idHistorial: {
                     bsonType: "int",
                     description: "Id de historial de eventos asociados al habitat"
+                },
+                idZona: {
+                    bsonType: "int",
+                    description: "Id de la zona"
                 }
             }
         }
@@ -324,19 +331,22 @@ db.habitat.insertMany([
         id: siguienteId("habitat"),
         tipo: "acuario",
         descripcion: "zona húmeda",
-        idHistorial: 1
+        idHistorial: 1,
+        idZona: 1
     },
     {
         id: siguienteId("habitat"),
         tipo: "selva tropical",
         descripcion: "entorno exuberante",
-        idHistorial: 2
+        idHistorial: 2,
+        idZona: 2
     },
     {
         id: siguienteId("habitat"),
         tipo: "sabana africana",
         descripcion: "llanura extensa",
-        idHistorial: 3
+        idHistorial: 3,
+        idZona: 3
     }
 ]);
 
@@ -401,7 +411,7 @@ db.createCollection("historial_de_eventos", {
     validator: {
         $jsonSchema: {
             bsonType: "object",
-            required: ["id", "fecha_creacion", "ultima_modificacion"],
+            required: ["id", "fecha_creacion", "ultima_modificacion", "idEstadoHabitad"],
             properties: {
                 id: {
                     bsonType: "int",
@@ -414,7 +424,11 @@ db.createCollection("historial_de_eventos", {
                 ultima_modificacion: {
                     bsonType: "date",
                     description: "Fecha de la última modificación del historial de eventos"
-                }
+                },
+                idEstadoHabitad: {
+                    bsonType: "int",
+                    description: "id del estado del habitad"
+                },
             }
         }
     }
@@ -423,17 +437,20 @@ db.historial_de_eventos.insertMany([
     {
         id: siguienteId("historial_de_eventos"),
         fecha_creacion: new Date(),
-        ultima_modificacion: new Date()
+        ultima_modificacion: new Date(),
+        idEstadoHabitad: 1
     },
     {
         id: siguienteId("historial_de_eventos"),
         fecha_creacion: new Date(),
-        ultima_modificacion: new Date()
+        ultima_modificacion: new Date(),
+        idEstadoHabitad: 2
     },
     {
         id: siguienteId("historial_de_eventos"),
         fecha_creacion: new Date(),
-        ultima_modificacion: new Date()
+        ultima_modificacion: new Date(),
+        idEstadoHabitad: 3
     }
 ]);
 
@@ -536,28 +553,28 @@ db.createCollection("empleados", {
 });
 db.empleados.insertMany([
     {
-        id: "1234567890", 
+        id: "1234567890",
         nombre: "Juan Pérez",
         fecha_contratacion: new Date("2022-01-15"),
         salario: 45000,
-        id_seguimiento: 1, 
-        idPuesto: 1 
+        id_seguimiento: 1,
+        idPuesto: 1
     },
     {
-        id: "9876543210", 
+        id: "9876543210",
         nombre: "María González",
         fecha_contratacion: new Date("2021-11-10"),
         salario: 38000,
-        id_seguimiento: 2, 
-        idPuesto: 2 
+        id_seguimiento: 2,
+        idPuesto: 2
     },
     {
-        id: "5432109876", 
+        id: "5432109876",
         nombre: "Carlos Rodríguez",
         fecha_contratacion: new Date("2022-03-20"),
         salario: 52000,
-        id_seguimiento: 3, 
-        idPuesto: 1 
+        id_seguimiento: 3,
+        idPuesto: 1
     }
 ]);
 
@@ -594,25 +611,25 @@ db.puestos.insertMany([
         id: siguienteId("puestos"),
         nombre: "Gerente de Operaciones",
         salario: 60000,
-        idHorario: 1 
+        idHorario: 1
     },
     {
         id: siguienteId("puestos"),
         nombre: "Cuidador de Animales",
         salario: 35000,
-        idHorario: 2 
+        idHorario: 2
     },
     {
         id: siguienteId("puestos"),
         nombre: "Asistente de Ventas",
         salario: 40000,
-        idHorario: 3 
+        idHorario: 3
     },
     {
         id: siguienteId("puestos"),
         nombre: "Veterinario",
         salario: 55000,
-        idHorario: 4 
+        idHorario: 4
     }
 ]);
 
@@ -737,21 +754,21 @@ db.createCollection("capacitaciones", {
 db.capacitaciones.insertMany([
     {
         id: siguienteId("capacitaciones"),
-        id_seguimiento: 1, 
+        id_seguimiento: 1,
         nombre: "Curso de Primeros Auxilios",
         fecha: new Date("2023-09-10"),
         descripcion: "Capacitación en primeros auxilios para el personal"
     },
     {
         id: siguienteId("capacitaciones"),
-        id_seguimiento: 2, 
+        id_seguimiento: 2,
         nombre: "Taller de Comunicación Efectiva",
         fecha: new Date("2023-09-15"),
         descripcion: "Taller sobre técnicas de comunicación efectiva"
     },
     {
         id: siguienteId("capacitaciones"),
-        id_seguimiento: 3, 
+        id_seguimiento: 3,
         nombre: "Entrenamiento en Conservación",
         fecha: new Date("2023-09-20"),
         descripcion: "Capacitación en técnicas de conservación de la fauna"
@@ -793,23 +810,154 @@ db.createCollection("evaluacion_desempeno", {
 db.evaluacion_desempeno.insertMany([
     {
         id: siguienteId("evaluacion_desempeno"),
-        id_seguimiento: 1, 
+        id_seguimiento: 1,
         fecha_reporte: new Date("2023-09-25"),
-        id_empleado_reporte: "1234567890", 
+        id_empleado_reporte: "1234567890",
         descripcion: "Evaluación de desempeño trimestral"
     },
     {
         id: siguienteId("evaluacion_desempeno"),
-        id_seguimiento: 2, 
+        id_seguimiento: 2,
         fecha_reporte: new Date("2023-09-30"),
-        id_empleado_reporte: "9876543210", 
+        id_empleado_reporte: "9876543210",
         descripcion: "Evaluación de desempeño anual"
     },
     {
         id: siguienteId("evaluacion_desempeno"),
-        id_seguimiento: 3, 
+        id_seguimiento: 3,
         fecha_reporte: new Date("2023-10-05"),
-        id_empleado_reporte: "5432109876", 
+        id_empleado_reporte: "5432109876",
         descripcion: "Evaluación de desempeño semestral"
+    }
+]);
+
+//Seccion exhibicion e infraestructura
+// Coleccion zonas
+db.createCollection("zonas", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "nombre", "descripcion"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del la zona"
+                },
+                nombre: {
+                    bsonType: "string",
+                    description: "Nombre de la zona"
+                },
+                descripcion: {
+                    bsonType: "string",
+                    description: "Descripción de la zona"
+                }
+            }
+        }
+    }
+});
+db.zonas.insertMany([
+    {
+        id: siguienteId("zonas"),
+        nombre: "Zona de mamiferos selvaticos",
+        descripcion: "Hábitat de los leones en el zoológico",
+    },
+    {
+        id: siguienteId("zonas"),
+        nombre: "Zona de agua",
+        descripcion: "Hábitat de los pandas en el zoológico",
+    },
+    {
+        id: siguienteId("zonas"),
+        nombre: "Zona de las aves tropicales",
+        descripcion: "Hábitat de aves tropicales en el zoológico",
+    }
+]);
+
+// Colección "estadoHabitad"
+db.createCollection("estadoHabitad", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "descripcionEstado"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del estadoDelHabitad"
+                },
+                descripcionEstado: {
+                    bsonType: "string",
+                    description: "Descripcion del estado del habitad"
+                }
+            }
+        }
+    }
+
+});
+db.estadoHabitad.insertMany([
+    {
+        id: siguienteId("estadoHabitad"),
+        descripcionEstado: "En buen estado",
+    },
+    {
+        id: siguienteId("estadoHabitad"),
+        descripcionEstado: "Requiere mantenimiento",
+    },
+    {
+        id: siguienteId("estadoHabitad"),
+        descripcionEstado: "En construcción",
+    }
+]);
+
+// Coleccion planificacion_de eventos
+db.createCollection("planificacion_eventos", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "nombre", "fecha_inicio", "fecha_fin", "idZona", "descripcion"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del evento planificado"
+                },
+                nombre: {
+                    bsonType: "string",
+                    description: "Nombre del evento"
+                },
+                fecha_inicio: {
+                    bsonType: "date",
+                    description: "Fecha de inicio del evento"
+                },
+                fecha_fin: {
+                    bsonType: "date",
+                    description: "Fecha de finalización del evento"
+                },
+                idZona: {
+                    bsonType: "int",
+                    description: "id de la zona donde se enfocara el evento del evento en el zoológico"
+                },
+                descripcion: {
+                    bsonType: "string",
+                    description: "Descripción del evento"
+                }
+            }
+        }
+    }
+});
+db.planificacion_eventos.insertMany([
+    {
+        id: siguienteId("planificacion_eventos"),
+        nombre: "Día de los pandas",
+        fecha_inicio: new Date("2023-09-15"),
+        fecha_fin: new Date("2023-09-16"),
+        idZona: 2, 
+        descripcion: "Evento especial para celebrar a los pandas del zoológico.",
+    },
+    {
+        id: siguienteId("planificacion_eventos"),
+        nombre: "Festival de aves tropicales",
+        fecha_inicio: new Date("2023-10-20"),
+        fecha_fin: new Date("2023-10-22"),
+        idZona: 3, 
+        descripcion: "Un festival dedicado a las coloridas aves tropicales del zoológico.",
     }
 ]);
