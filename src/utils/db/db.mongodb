@@ -1,0 +1,286 @@
+use("db_zoologico_campus");
+
+// Coleccion de autoincrementables
+db.createCollection("counters");
+db.counters.insertMany([
+    { _id: "animalesId", sequence_value: 0 },
+    { _id: "estadoSaludId", sequence_value: 0 },
+    { _id: "historialSaludId", sequence_value: 0 },
+    { _id: "citas_medicasId", sequence_value: 0 },
+    { _id: "alimentacionId", sequence_value: 0 },
+    { _id: "habitatId", sequence_value: 0 },
+    { _id: "horarios_de_alimentacionMantenimientoId", sequence_value: 0 },
+    { _id: "historial_de_eventosId", sequence_value: 0 },
+    { _id: "eventosId", sequence_value: 0 },
+
+]);
+function siguienteId(coleccion) {
+    const sequenceDocument = db.counters.findOneAndUpdate(
+        { _id: `${coleccion}Id` },
+        { $inc: { sequence_value: 1 } },
+        { returnDocument: "after" }
+    );
+    return sequenceDocument.sequence_value;
+}
+
+// Gestion de animales:
+// Coleccion animales
+db.createCollection("animales", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "nombre", "especie", "historialSalud", "alimentacion", "habitat", "reproduccion"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del animañ"
+                },
+                nombre: {
+                    bsonType: "string",
+                    description: "Nombre del animal"
+                },
+                especie: {
+                    bsonType: "int",
+                    description: "ID de la especie del animal"
+                },
+                historialSalud: {
+                    bsonType: "int",
+                    description: "ID de la información de salud del animal"
+                },
+                alimentacion: {
+                    bsonType: "int",
+                    description: "ID de la información de alimentación del animal"
+                },
+                habitat: {
+                    bsonType: "int",
+                    description: "ID de la información de hábitat del animal"
+                },
+                reproduccion: {
+                    bsonType: "object",
+                    description: "Información de reproducción del animal"
+                }
+            }
+        }
+    }
+});
+
+// Seccion Salud del animal
+// Colección para la información de salud
+db.createCollection("estadoSalud", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "estado", "descripcion", "ultima_modificacion"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id de la condicion de salud"
+                },
+                estado: {
+                    bsonType: "string",
+                    description: "Condición de salud del animal"
+                }
+            }
+        }
+    }
+});
+// Colección para los historiales medicos
+db.createCollection("historialSalud", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "idEstadoSalud", "fecha_apertura", "ultima_modificacion"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del historial medico"
+                },
+                idEstadoSalud: {
+                    bsonType: "int",
+                    description: "Id del estado de salud actual del animal"
+                },
+                fecha_apertura: {
+                    bsonType: "date",
+                    description: "Fecha de apertura del historial médico"
+                },
+                ultima_modificacion: {
+                    bsonType: "date",
+                    description: "Fecha de la última modificación del historial médico"
+                }
+            }
+        }
+    }
+});
+// Colección para las citas médicas
+db.createCollection("citas_medicas", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "idHistorialSalud", "fecha_cita", "descripcion", "id_veterinario"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id de la cita medica"
+                },
+                idHistorialSalud: {
+                    bsonType: "int",
+                    description: "ID del historial médico asociado a la cita"
+                },
+                fecha_cita: {
+                    bsonType: "date",
+                    description: "Fecha de la cita médica"
+                },
+                descripcion: {
+                    bsonType: "string",
+                    description: "Descripción de la cita médica"
+                },
+                id_veterinario: {
+                    bsonType: "int",
+                    description: "ID del veterinario que atiende la cita"
+                }
+            }
+        }
+    }
+});
+// Colección para la información de alimentación
+db.createCollection("alimentacion", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "tipo"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del tipo de alimentacion"
+                },
+                tipo: {
+                    bsonType: "string",
+                    description: "Tipo de alimentación del animal"
+                }
+            }
+        }
+    }
+});
+
+// Seccion mantenimiento de habitat
+// Colección para la información del hábitat
+db.createCollection("habitat", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "tipo", "descripcion", "idHistorial"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del habitat"
+                },
+                tipo: {
+                    bsonType: "string",
+                    description: "Tipo de hábitat del animal"
+                },
+                descripcion: {
+                    bsonType: "string",
+                    description: "Descripción del hábitat"
+                },
+                idHistorial: {
+                    bsonType: "int",
+                    description: "Id de historial de eventos asociados al habitat"
+                }
+            }
+        }
+    }
+});
+// Colección para los horarios de alimentación y manteimiento
+db.createCollection("horarios_de_alimentacionMantenimiento", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id_habitat", "hora_alimentacion", "id_encargado", "descripcion"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del horario de almientacion y mantenimiento"
+                },
+                id_habitat: {
+                    bsonType: "int",
+                    description: "ID del hábitat asociado"
+                },
+                hora_alimentacionMantenimiento: {
+                    bsonType: "string",
+                    pattern: "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$",
+                    description: "Hora de alimentación y mantenimiento en formato HH:MM"
+                },
+                id_encargado: {
+                    bsonType: "int",
+                    description: "ID del encargado de los alimentos y mantenimiento"
+                },
+                descripcion: {
+                    bsonType: "string",
+                    description: "Descripcion de el trabajo realizado"
+                },
+            }
+        }
+    }
+});
+// Colección para el historial de eventos asociado a hábitats
+db.createCollection("historial_de_eventos", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "fecha_creacion", "ultima_modificacion", "habitatId"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id de el historial de eventos"
+                },
+                fecha_creacion: {
+                    bsonType: "date",
+                    description: "Fecha de creación del historial de eventos"
+                },
+                ultima_modificacion: {
+                    bsonType: "date",
+                    description: "Fecha de la última modificación del historial de eventos"
+                }
+            }
+        }
+    }
+});
+// Colección para eventos específicos
+db.createCollection("eventos", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "historialId", "empleadoId", "fecha_evento", "descripcion", "recomendaciones"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del evento"
+                },
+                historialId: {
+                    bsonType: "int",
+                    description: "id del historial asociado"
+                },
+                empleadoId: {
+                    bsonType: "int",
+                    description: "Id del empleado que reporta el evento"
+                },
+                fecha_evento: {
+                    bsonType: "date",
+                    description: "Fecha del evento"
+                },
+                descripcion: {
+                    bsonType: "string",
+                    description: "Descripción general del evento"
+                },
+                recomendaciones: {
+                    bsonType: "string",
+                    description: "Recomendaciones relacionadas con el evento"
+                }
+            }
+        }
+    }
+});
+
+
+
+
