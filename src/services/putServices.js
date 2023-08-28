@@ -1,6 +1,7 @@
 import { Alimentacion } from "../collections/alimentacion.js";
 import { Animales } from "../collections/animales.js";
 import { Boletas } from "../collections/boletas.js";
+import { Capacitaciones } from "../collections/capacitaciones.js";
 
 const actualizarTipoAlimentacion = async (id, tipo) => {
     const tipoAlimentacion = new Alimentacion();
@@ -62,4 +63,24 @@ const actualizarBoleta = async (id, idLista, idtipo, cantidad) => {
     }
 };
 
-export { actualizarTipoAlimentacion, actualizarAnimal, actualizarBoleta };
+const actualizarCapacitacion = async (id, id_seguimiento, nombre, fecha, descripcion) => {
+    try {
+        const capacitacion = new Capacitaciones();
+        capacitacion.id = id;
+        capacitacion.id_seguimiento = id_seguimiento;
+        capacitacion.nombre = nombre;
+        capacitacion.fecha = new Date(fecha);
+        capacitacion.descripcion = descripcion;
+
+        const resultado = await capacitacion.actualizarCapacitacion();
+        if (resultado.modifiedCount > 0) {
+            return "Capacitación actualizada correctamente";
+        } else {
+            return "No se encontró la capacitación o no se realizaron cambios";
+        }
+    } catch (error) {
+        throw error;
+    }
+};
+
+export { actualizarTipoAlimentacion, actualizarAnimal, actualizarBoleta, actualizarCapacitacion };

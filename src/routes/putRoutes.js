@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { actualizarAnimalController, actualizarBoletaController, actualizarTipoAlimentacionController } from "../controllers/putControllers.js";
+import { actualizarAnimalController, actualizarBoletaController, actualizarCapacitacionController, actualizarTipoAlimentacionController } from "../controllers/putControllers.js";
 
 const putInitRoute = () => {
     const router = Router();
@@ -14,6 +14,10 @@ const putInitRoute = () => {
     router.put(
         "/actualizarBoleta",
         actualizarBoletaController
+    );
+    router.put(
+        "/actualizarCapacitacion",
+        actualizarCapacitacionController
     );
     return router;
 };
