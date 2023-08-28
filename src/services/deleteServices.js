@@ -4,6 +4,7 @@ import { Boletas } from "../collections/boletas.js";
 import { Capacitaciones } from "../collections/capacitaciones.js";
 import { CitasMedicas } from "../collections/citasMedicas.js";
 import { Empleado } from "../collections/empleado.js";
+import { EstadoHabitat } from "../collections/estadohabitad.js";
 
 const eliminarTipoAlimentacionService = async (id) => {
     const alimentacion = new Alimentacion();
@@ -35,11 +36,17 @@ const eliminarEmpleadoService = async (id) => {
     return await empleado.eliminarEmpleado(id);
 };
 
+const eliminarEstadoHabitatService = async (id) => {
+    const estadoHabitad = new EstadoHabitat();
+    return await estadoHabitad.eliminarEstadoHabitat(id);
+};
+
 export {
     eliminarTipoAlimentacionService,
     eliminarAnimalService,
     eliminarBoletasService,
     eliminarCapacitacionesService,
     eliminarCitaMedicaService,
-    eliminarEmpleadoService
+    eliminarEmpleadoService,
+    eliminarEstadoHabitatService
 }

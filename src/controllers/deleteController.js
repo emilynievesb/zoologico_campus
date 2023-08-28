@@ -1,4 +1,4 @@
-import { eliminarAnimalService, eliminarBoletasService, eliminarCapacitacionesService, eliminarCitaMedicaService, eliminarEmpleadoService, eliminarTipoAlimentacionService } from "../services/deleteServices.js";
+import { eliminarAnimalService, eliminarBoletasService, eliminarCapacitacionesService, eliminarCitaMedicaService, eliminarEmpleadoService, eliminarEstadoHabitatService, eliminarTipoAlimentacionService } from "../services/deleteServices.js";
 
 const eliminarTipoAlimentacionController = async (req, res, next) => {
     try {
@@ -90,11 +90,27 @@ const eliminarEmpleadoController = async (req, res, next) => {
     }
 };
 
+const eliminarEstadoHabitatController = async (req, res, next) => {
+    try {
+        const { id } = req.query
+        const result = await eliminarEstadoHabitatService(id)
+        if (result.deletedCount == 0) {
+            res.status(500).json({ message: `no se ha encontrado ningun registro de id ${id}`, result });
+
+        } else {
+            res.status(200).json({ message: `se ha eliminado el registro de id ${id} con exito`, result });
+        }
+    } catch (error) {
+        res.status(500).json(error.stack);
+    }
+};
+
 export {
     eliminarTipoAlimentacionController,
     eliminarAnimalController,
     eliminarBoletasController,
     eliminarCapacitacioncesControler,
     eliminarCitaMedicaController,
-    eliminarEmpleadoController
+    eliminarEmpleadoController,
+    eliminarEstadoHabitatController
 }
