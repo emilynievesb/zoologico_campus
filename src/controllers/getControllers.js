@@ -1,4 +1,4 @@
-import { obtenerTiposAlimentacionService, obtenerTipoAlimentacionService, obtenerAnimalesService, obtenerAnimalService, obtenerBoletaService, obtenerBoletasService, obtenerCapacitacionService, obtenerCapacitacionesService, obtenerCitasMedicaService, obtenerCitasMedicasService, obtenerEmpleadosService, obtenerEmpleadoService, obtenerEstadoHabitatService, obtenerEstadoHabitatsService, obtenerEstadoSaludService, obtenerEstadosSaludService, obtenerEvaluacionDesempenoService, obtenerEvaluacionesDesempenoService, obtenerEventoService, obtenerEventosService } from "../services/getServices.js";
+import { obtenerTiposAlimentacionService, obtenerTipoAlimentacionService, obtenerAnimalesService, obtenerAnimalService, obtenerBoletaService, obtenerBoletasService, obtenerCapacitacionService, obtenerCapacitacionesService, obtenerCitasMedicaService, obtenerCitasMedicasService, obtenerEmpleadosService, obtenerEmpleadoService, obtenerEstadoHabitatService, obtenerEstadoHabitatsService, obtenerEstadoSaludService, obtenerEstadosSaludService, obtenerEvaluacionDesempenoService, obtenerEvaluacionesDesempenoService, obtenerEventoService, obtenerEventosService, obtenerFacturaEntradaService, obtenerFacturasEntradaService } from "../services/getServices.js";
 
 const obtenerAlimentracionController = async (req, res, next) => {
     try {
@@ -171,6 +171,23 @@ const obtenerEventosController = async (req, res, next) => {
     }
 };
 
+const obtenerFavturasEntradaController = async (req, res, next) => {
+    try {
+        const { id } = req.query
+        let result;
+        if (id) {
+            const consulta = await obtenerFacturaEntradaService(id);
+            result = consulta
+        } else {
+            const consulta = await obtenerFacturasEntradaService();
+            result = consulta
+        }
+        res.status(200).json({ message: `se han encontrado ${result.length} resultados`, result });
+    } catch (error) {
+        res.status(500).json(error.stack);
+    }
+};
+
 export {
     obtenerAlimentracionController,
     obtenerAnimalesController,
@@ -181,5 +198,6 @@ export {
     obtenerEstadoHabitatController,
     obtenerEstadosSaludController,
     obtenerEvaluacionesDesempenoController,
-    obtenerEventosController
+    obtenerEventosController,
+    obtenerFavturasEntradaController
 }

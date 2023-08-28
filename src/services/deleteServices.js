@@ -8,6 +8,7 @@ import { EstadosSalud } from "../collections/estadoSalud.js";
 import { EstadoHabitat } from "../collections/estadohabitad.js";
 import { EvaluacionDesempeno } from "../collections/evaluacion_desempeno.js";
 import { Eventos } from "../collections/eventos.js";
+import { FacturaEntrada } from "../collections/facturaEntrada.js";
 
 const eliminarTipoAlimentacionService = async (id) => {
     const alimentacion = new Alimentacion();
@@ -59,6 +60,11 @@ const eliminarEventoService = async (id) => {
     return await evento.eliminarEvento(id);
 };
 
+const eliminarFacturasEntradaService = async (id) => {
+    const facturaEntrada = new FacturaEntrada();
+    return await facturaEntrada.eliminarFacturaEntrada(id);
+};
+
 
 export {
     eliminarTipoAlimentacionService,
@@ -70,5 +76,6 @@ export {
     eliminarEstadoHabitatService,
     eliminarEstadosSaludService,
     eliminarEvaluacionesDesempenoService,
-    eliminarEventoService
+    eliminarEventoService,
+    eliminarFacturasEntradaService
 }

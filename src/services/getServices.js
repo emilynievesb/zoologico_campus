@@ -8,6 +8,7 @@ import { EstadosSalud } from "../collections/estadoSalud.js";
 import { EstadoHabitat } from "../collections/estadohabitad.js";
 import { EvaluacionDesempeno } from "../collections/evaluacion_desempeno.js";
 import { Eventos } from "../collections/eventos.js";
+import { FacturaEntrada } from "../collections/facturaEntrada.js";
 
 const obtenerTiposAlimentacionService = async () => {
     const alimentacion = new Alimentacion();
@@ -109,6 +110,16 @@ const obtenerEventoService = async (id) => {
     return await evento.obtenerEvento(id);
 };
 
+const obtenerFacturasEntradaService = async () => {
+    const facturaEntrada = new FacturaEntrada();
+    return await facturaEntrada.obtenerFacturasEntrada();
+};
+
+const obtenerFacturaEntradaService = async (id) => {
+    const facturaEntrada = new FacturaEntrada();
+    return await facturaEntrada.obtenerFacturaEntradaPorId(id);
+};
+
 export {
     obtenerTiposAlimentacionService,
     obtenerTipoAlimentacionService,
@@ -129,5 +140,7 @@ export {
     obtenerEvaluacionDesempenoService,
     obtenerEvaluacionesDesempenoService,
     obtenerEventosService,
-    obtenerEventoService
+    obtenerEventoService,
+    obtenerFacturasEntradaService,
+    obtenerFacturaEntradaService
 }
