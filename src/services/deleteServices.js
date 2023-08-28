@@ -13,6 +13,7 @@ import { Habitat } from "../collections/habitat.js";
 import { HistorialEventos } from "../collections/historialEventos.js";
 import { HistorialesSalud } from "../collections/historialesSalud.js";
 import { HorariosAlimentacionMantenimiento } from "../collections/horariosAlimentacionMantenimiento.js";
+import { HorariosTrabajo } from "../collections/horariosTrabajo.js";
 
 const eliminarTipoAlimentacionService = async (id) => {
     const alimentacion = new Alimentacion();
@@ -89,8 +90,10 @@ const eliminarHorarioAlimentacionMantenimientoService = async (id) => {
     return await horarios.eliminarHorarioAlimentacionMantenimiento(id);
 };
 
-
-
+const eliminarHorarioTrabajoService = async (id) => {
+    const horarios = new HorariosTrabajo();
+    return await horarios.eliminarHorarioTrabajo(id);
+};
 
 export {
     eliminarTipoAlimentacionService,
@@ -107,5 +110,6 @@ export {
     eliminarHabitatService,
     eliminarHistorialSaludService,
     eliminarHistorialEventoService,
-    eliminarHorarioAlimentacionMantenimientoService
+    eliminarHorarioAlimentacionMantenimientoService,
+    eliminarHorarioTrabajoService
 }

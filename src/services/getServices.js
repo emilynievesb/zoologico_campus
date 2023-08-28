@@ -13,6 +13,7 @@ import { Habitat } from "../collections/habitat.js";
 import { HistorialEventos } from "../collections/historialEventos.js";
 import { HistorialesSalud } from "../collections/historialesSalud.js";
 import { HorariosAlimentacionMantenimiento } from "../collections/horariosAlimentacionMantenimiento.js";
+import { HorariosTrabajo } from "../collections/horariosTrabajo.js";
 
 const obtenerTiposAlimentacionService = async () => {
     const alimentacion = new Alimentacion();
@@ -164,6 +165,17 @@ const obtenerHorarioAlimentacionMantenimientoService = async (id) => {
     return await horarios.obtenerHorarioAlimentacionMantenimientoPorId(id);
 };
 
+const obtenerHorariosTrabajoService = async () => {
+    const horarios = new HorariosTrabajo();
+    return await horarios.obtenerHorariosTrabajo();
+};
+
+const obtenerHorarioTrabajoService = async (id) => {
+    const horarios = new HorariosTrabajo();
+    return await horarios.obtenerHorarioTrabajoPorId(id);
+};
+
+
 
 
 export {
@@ -196,5 +208,7 @@ export {
     obtenerHistorialesEventoService,
     obtenerHistorialEventoService,
     obtenerHorarioAlimentacionMantenimientoService,
-    obtenerHorariosAlimentacionMantenimientoService
+    obtenerHorariosAlimentacionMantenimientoService,
+    obtenerHorariosTrabajoService,
+    obtenerHorarioTrabajoService
 }
