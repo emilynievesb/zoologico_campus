@@ -10,6 +10,7 @@ import { EvaluacionDesempeno } from "../collections/evaluacion_desempeno.js";
 import { Eventos } from "../collections/eventos.js";
 import { FacturaEntrada } from "../collections/facturaEntrada.js";
 import { Habitat } from "../collections/habitat.js";
+import { HistorialesSalud } from "../collections/historialesSalud.js";
 
 const obtenerTiposAlimentacionService = async () => {
     const alimentacion = new Alimentacion();
@@ -131,6 +132,16 @@ const obtenerHabitatService = async (id) => {
     return await habitat.obtenerHabitat(id);
 };
 
+const obtenerHistorialesSaludService = async () => {
+    const historialSalud = new HistorialesSalud();
+    return await historialSalud.obtenerHistorialesSalud();
+};
+
+const obtenerHistorialSaludService = async (id) => {
+    const historialSalud = new HistorialesSalud();
+    return await historialSalud.obtenerHistorialSalud(id)
+};
+
 export {
     obtenerTiposAlimentacionService,
     obtenerTipoAlimentacionService,
@@ -155,5 +166,7 @@ export {
     obtenerFacturasEntradaService,
     obtenerFacturaEntradaService,
     obtenerHabitatsService,
-    obtenerHabitatService
+    obtenerHabitatService,
+    obtenerHistorialesSaludService,
+    obtenerHistorialSaludService
 }

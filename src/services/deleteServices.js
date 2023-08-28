@@ -10,6 +10,7 @@ import { EvaluacionDesempeno } from "../collections/evaluacion_desempeno.js";
 import { Eventos } from "../collections/eventos.js";
 import { FacturaEntrada } from "../collections/facturaEntrada.js";
 import { Habitat } from "../collections/habitat.js";
+import { HistorialesSalud } from "../collections/historialesSalud.js";
 
 const eliminarTipoAlimentacionService = async (id) => {
     const alimentacion = new Alimentacion();
@@ -71,6 +72,11 @@ const eliminarHabitatService = async (id) => {
     return await habitat.eliminarHabitat(id);
 };
 
+const eliminarHistorialSaludService = async (id) => {
+    const historialSalud = new HistorialesSalud();
+    return await historialSalud.eliminarHistorialSalud(id)
+};
+
 
 
 export {
@@ -85,5 +91,6 @@ export {
     eliminarEvaluacionesDesempenoService,
     eliminarEventoService,
     eliminarFacturasEntradaService,
-    eliminarHabitatService
+    eliminarHabitatService,
+    eliminarHistorialSaludService
 }

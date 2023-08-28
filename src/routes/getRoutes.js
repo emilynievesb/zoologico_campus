@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { obtenerAlimentracionController, obtenerAnimalesController, obtenerBoletasController, obtenerCapacitacionesController, obtenerCitasMedicasController, obtenerEmpleadosController, obtenerEstadoHabitatController, obtenerEstadosSaludController, obtenerEvaluacionesDesempenoController, obtenerEventosController, obtenerFavturasEntradaController, obtenerHabitatsController } from "../controllers/getControllers.js";
+import { obtenerAlimentracionController, obtenerAnimalesController, obtenerBoletasController, obtenerCapacitacionesController, obtenerCitasMedicasController, obtenerEmpleadosController, obtenerEstadoHabitatController, obtenerEstadosSaludController, obtenerEvaluacionesDesempenoController, obtenerEventosController, obtenerFavturasEntradaController, obtenerHabitatsController, obtenerHistorialesSaludController } from "../controllers/getControllers.js";
 
 const getInitRoute = () => {
   const router = Router();
@@ -15,6 +15,7 @@ const getInitRoute = () => {
   router.get("/obtenerEventos", obtenerEventosController);
   router.get("/obtenerFacturasEntrada", obtenerFavturasEntradaController);
   router.get("/obtenerHabitats", obtenerHabitatsController);
+  router.get("/obtenerHistorialesSalud", obtenerHistorialesSaludController);
   return router;
 };
 
