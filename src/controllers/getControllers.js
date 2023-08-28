@@ -1,4 +1,4 @@
-import { obtenerTiposAlimentacionService, obtenerTipoAlimentacionService, obtenerAnimalesService, obtenerAnimalService, obtenerBoletaService, obtenerBoletasService, obtenerCapacitacionService, obtenerCapacitacionesService } from "../services/getServices.js";
+import { obtenerTiposAlimentacionService, obtenerTipoAlimentacionService, obtenerAnimalesService, obtenerAnimalService, obtenerBoletaService, obtenerBoletasService, obtenerCapacitacionService, obtenerCapacitacionesService, obtenerCitasMedicaService, obtenerCitasMedicasService } from "../services/getServices.js";
 
 const obtenerAlimentracionController = async (req, res, next) => {
     try {
@@ -68,10 +68,27 @@ const obtenerCapacitacionesController = async (req, res, next) => {
     }
 };
 
+const obtenerCitasMedicasController = async (req, res, next) => {
+    try {
+        const { id } = req.query
+        let result;
+        if (id) {
+            const consulta = await obtenerCitasMedicaService(id);
+            result = consulta
+        } else {
+            const consulta = await obtenerCitasMedicasService();
+            result = consulta
+        }
+        res.status(200).json({ message: `se han encontrado ${result.length} resultados`, result });
+    } catch (error) {
+        res.status(500).json(error.stack);
+    }
+};
 export {
     obtenerAlimentracionController,
     obtenerAnimalesController,
     obtenerBoletasController,
-    obtenerCapacitacionesController
-    
+    obtenerCapacitacionesController,
+    obtenerCitasMedicasController
+
 }

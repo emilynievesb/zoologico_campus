@@ -2,6 +2,7 @@ import { Alimentacion } from "../collections/alimentacion.js";
 import { Animales } from "../collections/animales.js";
 import { Boletas } from "../collections/boletas.js";
 import { Capacitaciones } from "../collections/capacitaciones.js";
+import { CitasMedicas } from "../collections/citasMedicas.js";
 
 const eliminarTipoAlimentacionService = async (id) => {
     const alimentacion = new Alimentacion();
@@ -23,9 +24,15 @@ const eliminarCapacitacionesService = async (id) => {
     return await capacitacion.eliminarCapacitacion(id);
 };
 
+const eliminarCitaMedicaService = async (id) => {
+    const citaMedica = new CitasMedicas();
+    return await citaMedica.eliminarCitaMedica(id);
+};
+
 export {
     eliminarTipoAlimentacionService,
     eliminarAnimalService,
     eliminarBoletasService,
-    eliminarCapacitacionesService
+    eliminarCapacitacionesService,
+    eliminarCitaMedicaService
 }
