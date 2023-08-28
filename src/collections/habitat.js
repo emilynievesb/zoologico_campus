@@ -1,5 +1,5 @@
 import autoIncrementID from "../utils/autoIncrement.js";
-import connection from "../utils/connect.js";
+import { connection } from "../utils/connect.js";
 
 class Habitat {
   id;
@@ -9,7 +9,7 @@ class Habitat {
   idZona;
   session;
 
-  constructor() {}
+  constructor() { }
 
   async connect() {
     try {

@@ -1,12 +1,12 @@
 import autoIncrementID from "../utils/autoIncrement.js";
-import connection from "../utils/connect.js";
+import { connection } from "../utils/connect.js";
 
 class Alimentacion {
   id;
   tipo;
   session;
 
-  constructor() {}
+  constructor() { }
 
   async connect() {
     try {
