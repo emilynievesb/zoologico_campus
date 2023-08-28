@@ -1,4 +1,4 @@
-import { eliminarAnimalService, eliminarBoletasService, eliminarCapacitacionesService, eliminarCitaMedicaService, eliminarEmpleadoService, eliminarEstadoHabitatService, eliminarEstadosSaludService, eliminarEvaluacionesDesempenoService, eliminarEventoService, eliminarFacturasEntradaService, eliminarHabitatService, eliminarHistorialEventoService, eliminarHistorialSaludService, eliminarHorarioAlimentacionMantenimientoService, eliminarHorarioTrabajoService, eliminarTipoAlimentacionService, eliminarlistaBoletasService } from "../services/deleteServices.js";
+import { eliminarAnimalService, eliminarBoletasService, eliminarCapacitacionesService, eliminarCitaMedicaService, eliminarEmpleadoService, eliminarEstadoHabitatService, eliminarEstadosSaludService, eliminarEvaluacionesDesempenoService, eliminarEventoService, eliminarFacturasEntradaService, eliminarHabitatService, eliminarHistorialEventoService, eliminarHistorialSaludService, eliminarHorarioAlimentacionMantenimientoService, eliminarHorarioTrabajoService, eliminarPlanificacionEventosService, eliminarTipoAlimentacionService, eliminarlistaBoletasService } from "../services/deleteServices.js";
 
 const eliminarTipoAlimentacionController = async (req, res, next) => {
     try {
@@ -255,6 +255,21 @@ const eliminarListaBoletasController = async (req, res, next) => {
     }
 };
 
+const eliminarPlanificacionEventosController = async (req, res, next) => {
+    try {
+        const { id } = req.query
+        const result = await eliminarPlanificacionEventosService(id)
+        if (result.deletedCount == 0) {
+            res.status(500).json({ message: `no se ha encontrado ningun registro de id ${id}`, result });
+
+        } else {
+            res.status(200).json({ message: `se ha eliminado el registro de id ${id} con exito`, result });
+        }
+    } catch (error) {
+        res.status(500).json(error.stack);
+    }
+};
+
 export {
     eliminarTipoAlimentacionController,
     eliminarAnimalController,
@@ -272,5 +287,6 @@ export {
     eliminarHistorialEventoController,
     eliminarHorarioAlimentacionMantenimientoController,
     eliminarHorarioTrabajoController,
-    eliminarListaBoletasController   
+    eliminarListaBoletasController,
+    eliminarPlanificacionEventosController
 }

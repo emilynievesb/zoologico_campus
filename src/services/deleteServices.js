@@ -15,6 +15,7 @@ import { HistorialesSalud } from "../collections/historialesSalud.js";
 import { HorariosAlimentacionMantenimiento } from "../collections/horariosAlimentacionMantenimiento.js";
 import { HorariosTrabajo } from "../collections/horariosTrabajo.js";
 import { ListaBoletas } from "../collections/lista_boletas.js";
+import { PlanificacionEventos } from "../collections/planificacion_eventos.js";
 
 const eliminarTipoAlimentacionService = async (id) => {
     const alimentacion = new Alimentacion();
@@ -101,6 +102,11 @@ const eliminarlistaBoletasService = async (id) => {
     return await listaBoletas.eliminarListaBoletas(id);
 };
 
+const eliminarPlanificacionEventosService = async (id) => {
+    const planificacionEvento = new PlanificacionEventos();
+    return await planificacionEvento.eliminarPlanificacionEventos(id);
+};
+
 
 
 export {
@@ -120,5 +126,6 @@ export {
     eliminarHistorialEventoService,
     eliminarHorarioAlimentacionMantenimientoService,
     eliminarHorarioTrabajoService,
-    eliminarlistaBoletasService
+    eliminarlistaBoletasService,
+    eliminarPlanificacionEventosService
 }
