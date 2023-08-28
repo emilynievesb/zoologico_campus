@@ -5,6 +5,7 @@ import { Capacitaciones } from "../collections/capacitaciones.js";
 import { CitasMedicas } from "../collections/citasMedicas.js";
 import { Empleado } from "../collections/empleado.js";
 import { EstadosSalud } from "../collections/estadoSalud.js";
+import { EvaluacionDesempeno } from "../collections/evaluacion_desempeno.js"
 
 const actualizarTipoAlimentacion = async (id, tipo) => {
     const tipoAlimentacion = new Alimentacion();
@@ -143,4 +144,25 @@ const actualizarEstadoSalud = async (id, estado) => {
     }
 };
 
-export { actualizarTipoAlimentacion, actualizarAnimal, actualizarBoleta, actualizarCapacitacion, actualizarCitaMedica, actualizarEmpleado, actualizarEstadoSalud };
+const actualizarEvaluacionDesempeno = async (id, seguimiento, fecha, jefe, descripcion) => {
+    try {
+        const evaluacionDesempeno = new EvaluacionDesempeno();
+        evaluacionDesempeno.id = Number(id);
+        evaluacionDesempeno.seguimiento = Number(seguimiento);
+        evaluacionDesempeno.fecha = new Date(fecha);
+        evaluacionDesempeno.jefe = jefe;
+        evaluacionDesempeno.descripcion = descripcion;
+
+        const resultado = await evaluacionDesempeno.actualizarEvaluacionDesempeno();
+        if (resultado.modifiedCount > 0) {
+            return "Evaluación de desempeño actualizada correctamente";
+        } else {
+            return "No se encontró la evaluación de desempeño o no se realizaron cambios";
+        }
+    } catch (error) {
+        throw error;
+    }
+};
+
+
+export { actualizarTipoAlimentacion, actualizarAnimal, actualizarBoleta, actualizarCapacitacion, actualizarCitaMedica, actualizarEmpleado, actualizarEstadoSalud, actualizarEvaluacionDesempeno };
