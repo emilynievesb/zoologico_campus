@@ -9,6 +9,7 @@ import { EstadoHabitat } from "../collections/estadohabitad.js";
 import { EvaluacionDesempeno } from "../collections/evaluacion_desempeno.js";
 import { Eventos } from "../collections/eventos.js";
 import { FacturaEntrada } from "../collections/facturaEntrada.js";
+import { Habitat } from "../collections/habitat.js";
 
 const obtenerTiposAlimentacionService = async () => {
     const alimentacion = new Alimentacion();
@@ -120,6 +121,16 @@ const obtenerFacturaEntradaService = async (id) => {
     return await facturaEntrada.obtenerFacturaEntradaPorId(id);
 };
 
+const obtenerHabitatsService = async () => {
+    const habitat = new Habitat();
+    return await habitat.obtenerHabitats();
+};
+
+const obtenerHabitatService = async (id) => {
+    const habitat = new Habitat();
+    return await habitat.obtenerHabitat(id);
+};
+
 export {
     obtenerTiposAlimentacionService,
     obtenerTipoAlimentacionService,
@@ -142,5 +153,7 @@ export {
     obtenerEventosService,
     obtenerEventoService,
     obtenerFacturasEntradaService,
-    obtenerFacturaEntradaService
+    obtenerFacturaEntradaService,
+    obtenerHabitatsService,
+    obtenerHabitatService
 }

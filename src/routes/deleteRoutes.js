@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { eliminarAnimalController, eliminarBoletasController, eliminarCapacitacioncesControler, eliminarCitaMedicaController, eliminarEmpleadoController, eliminarEstadoHabitatController, eliminarEstadoSaludController, eliminarEvaluacionDesempenoController, eliminarEventoController, eliminarFacturaEntradaController, eliminarTipoAlimentacionController } from "../controllers/deleteController.js";
+import { eliminarAnimalController, eliminarBoletasController, eliminarCapacitacioncesControler, eliminarCitaMedicaController, eliminarEmpleadoController, eliminarEstadoHabitatController, eliminarEstadoSaludController, eliminarEvaluacionDesempenoController, eliminarEventoController, eliminarFacturaEntradaController, eliminarHabitatController, eliminarTipoAlimentacionController } from "../controllers/deleteController.js";
 
 const deleteRoute = () => {
     const router = Router();
@@ -14,6 +14,7 @@ const deleteRoute = () => {
     router.delete("/eliminarEvaluacionDesempeno", eliminarEvaluacionDesempenoController);
     router.delete("/eliminarEvento", eliminarEventoController);
     router.delete("/eliminarFacturasEntrada", eliminarFacturaEntradaController);
+    router.delete("/eliminarHabitat", eliminarHabitatController);
     return router;
 };
 
