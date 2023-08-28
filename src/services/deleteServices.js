@@ -19,6 +19,7 @@ import { PlanificacionEventos } from "../collections/planificacion_eventos.js";
 import { Promociones } from "../collections/promociones.js";
 import { Puestos } from "../collections/puestos.js";
 import { SeguimientoEmpleado } from "../collections/seguimientoEmpleados.js";
+import { TipoBoleta } from "../collections/tiposBoletas.js";
 
 const eliminarTipoAlimentacionService = async (id) => {
     const alimentacion = new Alimentacion();
@@ -125,6 +126,11 @@ const eliminarSeguimientoEmpleadoService = async (id) => {
     return await seguimientoEmpleado.eliminarSeguimientoEmpleado(id);
 };
 
+const eliminarTipoBoletasService = async (id) => {
+    const tipoBoleta = new TipoBoleta();
+    return await tipoBoleta.eliminarTipoBoleta(id);
+};
+
 
 
 
@@ -150,5 +156,6 @@ export {
     eliminarPlanificacionEventosService,
     eliminarPromocionesService,
     eliminarPuestoService,
-    eliminarSeguimientoEmpleadoService
+    eliminarSeguimientoEmpleadoService,
+    eliminarTipoBoletasService
 }

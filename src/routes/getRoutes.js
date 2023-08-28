@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { obtenerAlimentracionController, obtenerAnimalesController, obtenerBoletasController, obtenerCapacitacionesController, obtenerCitasMedicasController, obtenerEmpleadosController, obtenerEstadoHabitatController, obtenerEstadosSaludController, obtenerEvaluacionesDesempenoController, obtenerEventosController, obtenerFavturasEntradaController, obtenerHabitatsController, obtenerHistorialesEventoController, obtenerHistorialesSaludController, obtenerHorariosAlimentacionMantenimientoController, obtenerHorariosTrabajoController, obtenerListasBoletasController, obtenerPlanificacionesEventosController, obtenerPromocionesController, obtenerPuestosController, obtenerSeguimientosEmpleadoController } from "../controllers/getControllers.js";
+import { obtenerAlimentracionController, obtenerAnimalesController, obtenerBoletasController, obtenerCapacitacionesController, obtenerCitasMedicasController, obtenerEmpleadosController, obtenerEstadoHabitatController, obtenerEstadosSaludController, obtenerEvaluacionesDesempenoController, obtenerEventosController, obtenerFavturasEntradaController, obtenerHabitatsController, obtenerHistorialesEventoController, obtenerHistorialesSaludController, obtenerHorariosAlimentacionMantenimientoController, obtenerHorariosTrabajoController, obtenerListasBoletasController, obtenerPlanificacionesEventosController, obtenerPromocionesController, obtenerPuestosController, obtenerSeguimientosEmpleadoController, obtenerTiposBoletasController } from "../controllers/getControllers.js";
 
 const getInitRoute = () => {
   const router = Router();
@@ -24,6 +24,7 @@ const getInitRoute = () => {
   router.get("/obtenerPromociones", obtenerPromocionesController);
   router.get("/obtenerPuestos", obtenerPuestosController);
   router.get("/obtenerSeguimientoEmpleados", obtenerSeguimientosEmpleadoController);
+  router.get("/obtenerTiposBoleta", obtenerTiposBoletasController);
   return router;
 };
 
