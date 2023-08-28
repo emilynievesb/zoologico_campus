@@ -10,6 +10,7 @@ import { EvaluacionDesempeno } from "../collections/evaluacion_desempeno.js";
 import { Eventos } from "../collections/eventos.js";
 import { FacturaEntrada } from "../collections/facturaEntrada.js";
 import { Habitat } from "../collections/habitat.js";
+import { HistorialEventos } from "../collections/historialEventos.js";
 import { HistorialesSalud } from "../collections/historialesSalud.js";
 
 const eliminarTipoAlimentacionService = async (id) => {
@@ -77,6 +78,12 @@ const eliminarHistorialSaludService = async (id) => {
     return await historialSalud.eliminarHistorialSalud(id)
 };
 
+const eliminarHistorialEventoService = async (id) => {
+    const historialEventos = new HistorialEventos();
+    return await historialEventos.obtenerHistorialEvento(id);
+};
+
+
 
 
 export {
@@ -92,5 +99,6 @@ export {
     eliminarEventoService,
     eliminarFacturasEntradaService,
     eliminarHabitatService,
-    eliminarHistorialSaludService
+    eliminarHistorialSaludService,
+    eliminarHistorialEventoService
 }

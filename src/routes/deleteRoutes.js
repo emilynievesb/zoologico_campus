@@ -16,6 +16,7 @@ const deleteRoute = () => {
     router.delete("/eliminarFacturasEntrada", eliminarFacturaEntradaController);
     router.delete("/eliminarHabitat", eliminarHabitatController);
     router.delete("/eliminarHistorialesSalud", eliminarHistorialesSaludController);
+    router.delete("/eliminarHistorialEvento", eliminarHistorialesSaludController);
     return router;
 };
 
