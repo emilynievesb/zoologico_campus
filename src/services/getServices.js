@@ -1,6 +1,7 @@
 import { Alimentacion } from "../collections/alimentacion.js";
 import { Animales } from "../collections/animales.js";
 import { Boletas } from "../collections/boletas.js";
+import { Capacitaciones } from "../collections/capacitaciones.js";
 
 const obtenerTiposAlimentacionService = async () => {
     const alimentacion = new Alimentacion();
@@ -32,6 +33,15 @@ const obtenerBoletaService = async (id) => {
     return await boleta.obtenerBoletasporId(id);
 };
 
+const obtenerCapacitacionesService = async () => {
+    const capacitacion = new Capacitaciones();
+    return await capacitacion.obtenerCapacitaciones();
+};
+
+const obtenerCapacitacionService = async (id) => {
+    const capacitacion = new Capacitaciones();
+    return await capacitacion.obtenerCapacitacionPorId(id);
+};
 
 export {
     obtenerTiposAlimentacionService,
@@ -39,5 +49,7 @@ export {
     obtenerAnimalesService,
     obtenerAnimalService,
     obtenerBoletasService,
-    obtenerBoletaService
+    obtenerBoletaService,
+    obtenerCapacitacionesService,
+    obtenerCapacitacionService
 }

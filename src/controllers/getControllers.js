@@ -1,15 +1,15 @@
-import { obtenerTiposAlimentacionService, obtenerTipoAlimentacionService, obtenerAnimalesService, obtenerAnimalService, obtenerBoletaService, obtenerBoletasService } from "../services/getServices.js";
+import { obtenerTiposAlimentacionService, obtenerTipoAlimentacionService, obtenerAnimalesService, obtenerAnimalService, obtenerBoletaService, obtenerBoletasService, obtenerCapacitacionService, obtenerCapacitacionesService } from "../services/getServices.js";
 
 const obtenerAlimentracionController = async (req, res, next) => {
     try {
         const { id } = req.query
         let result;
         if (id) {
-            const alimentacion = await obtenerTipoAlimentacionService(id);
-            result = alimentacion
+            const consulta = await obtenerTipoAlimentacionService(id);
+            result = consulta
         } else {
-            const alimentacion = await obtenerTiposAlimentacionService();
-            result = alimentacion
+            const consulta = await obtenerTiposAlimentacionService();
+            result = consulta
         }
         res.status(200).json({ message: `se han encontrado ${result.length} resultados`, result });
     } catch (error) {
@@ -22,11 +22,11 @@ const obtenerAnimalesController = async (req, res, next) => {
         const { id } = req.query
         let result;
         if (id) {
-            const alimentacion = await obtenerAnimalService(id);
-            result = alimentacion
+            const consulta = await obtenerAnimalService(id);
+            result = consulta
         } else {
-            const alimentacion = await obtenerAnimalesService();
-            result = alimentacion
+            const consulta = await obtenerAnimalesService();
+            result = consulta
         }
         res.status(200).json({ message: `se han encontrado ${result.length} resultados`, result });
     } catch (error) {
@@ -39,11 +39,28 @@ const obtenerBoletasController = async (req, res, next) => {
         const { id } = req.query
         let result;
         if (id) {
-            const alimentacion = await obtenerBoletaService(id);
-            result = alimentacion
+            const consulta = await obtenerBoletaService(id);
+            result = consulta
         } else {
-            const alimentacion = await obtenerBoletasService();
-            result = alimentacion
+            const consulta = await obtenerBoletasService();
+            result = consulta
+        }
+        res.status(200).json({ message: `se han encontrado ${result.length} resultados`, result });
+    } catch (error) {
+        res.status(500).json(error.stack);
+    }
+};
+
+const obtenerCapacitacionesController = async (req, res, next) => {
+    try {
+        const { id } = req.query
+        let result;
+        if (id) {
+            const consulta = await obtenerCapacitacionService(id);
+            result = consulta
+        } else {
+            const consulta = await obtenerCapacitacionesService();
+            result = consulta
         }
         res.status(200).json({ message: `se han encontrado ${result.length} resultados`, result });
     } catch (error) {
@@ -54,6 +71,7 @@ const obtenerBoletasController = async (req, res, next) => {
 export {
     obtenerAlimentracionController,
     obtenerAnimalesController,
-    obtenerBoletasController
+    obtenerBoletasController,
+    obtenerCapacitacionesController
     
 }

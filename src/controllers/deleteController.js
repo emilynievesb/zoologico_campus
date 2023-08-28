@@ -1,10 +1,15 @@
-import { eliminarAnimalService, eliminarBoletasService, eliminarTipoAlimentacionService } from "../services/deleteServices.js";
+import { eliminarAnimalService, eliminarBoletasService, eliminarCapacitacionesService, eliminarTipoAlimentacionService } from "../services/deleteServices.js";
 
 const eliminarTipoAlimentacionController = async (req, res, next) => {
     try {
         const { id } = req.query
         const result = await eliminarTipoAlimentacionService(id)
-        res.status(200).json({ message: `se ha eliminado el registro de id ${id} con exito`, result });
+        if (result.deletedCount == 0) {
+            res.status(500).json({ message: `no se ha encontrado ningun registro de ${id}`, result });
+
+        } else {
+            res.status(200).json({ message: `se ha eliminado el registro de id ${id} con exito`, result });
+        }
     } catch (error) {
         res.status(500).json(error.stack);
     }
@@ -14,7 +19,12 @@ const eliminarAnimalController = async (req, res, next) => {
     try {
         const { id } = req.query
         const result = await eliminarAnimalService(id)
-        res.status(200).json({ message: `se ha eliminado el registro de id ${id} con exito`, result });
+        if (result.deletedCount == 0) {
+            res.status(500).json({ message: `no se ha encontrado ningun registro de ${id}`, result });
+
+        } else {
+            res.status(200).json({ message: `se ha eliminado el registro de id ${id} con exito`, result });
+        }
     } catch (error) {
         res.status(500).json(error.stack);
     }
@@ -24,14 +34,36 @@ const eliminarBoletasController = async (req, res, next) => {
     try {
         const { id } = req.query
         const result = await eliminarBoletasService(id)
-        res.status(200).json({ message: `se ha eliminado el registro de id ${id} con exito`, result });
+        if (result.deletedCount == 0) {
+            res.status(500).json({ message: `no se ha encontrado ningun registro de ${id}`, result });
+
+        } else {
+            res.status(200).json({ message: `se ha eliminado el registro de id ${id} con exito`, result });
+        }
     } catch (error) {
         res.status(500).json(error.stack);
     }
 };
 
+const eliminarCapacitacioncesControler = async (req, res, next) => {
+    try {
+        const { id } = req.query
+        const result = await eliminarCapacitacionesService(id)
+        if (result.deletedCount == 0) {
+            res.status(500).json({ message: `no se ha encontrado ningun registro de ${id}`, result });
+
+        } else {
+            res.status(200).json({ message: `se ha eliminado el registro de id ${id} con exito`, result });
+        }
+    } catch (error) {
+        res.status(500).json(error.stack);
+    }
+};
+
+
 export {
     eliminarTipoAlimentacionController,
     eliminarAnimalController,
-    eliminarBoletasController
+    eliminarBoletasController,
+    eliminarCapacitacioncesControler
 }
