@@ -7,6 +7,7 @@ import { Empleado } from "../collections/empleado.js";
 import { EstadosSalud } from "../collections/estadoSalud.js";
 import { EstadoHabitat } from "../collections/estadohabitad.js";
 import { EvaluacionDesempeno } from "../collections/evaluacion_desempeno.js";
+import { Eventos } from "../collections/eventos.js";
 
 const obtenerTiposAlimentacionService = async () => {
     const alimentacion = new Alimentacion();
@@ -98,6 +99,16 @@ const obtenerEvaluacionesDesempenoService = async () => {
     return await evaluacionDesempeno.obtenerEvaluacionesDesempeno();
 };
 
+const obtenerEventosService = async () => {
+    const evento = new Eventos();
+    return await evento.obtenerEventos();
+};
+
+const obtenerEventoService = async (id) => {
+    const evento = new Eventos();
+    return await evento.obtenerEvento(id);
+};
+
 export {
     obtenerTiposAlimentacionService,
     obtenerTipoAlimentacionService,
@@ -116,5 +127,7 @@ export {
     obtenerEstadoSaludService,
     obtenerEstadosSaludService,
     obtenerEvaluacionDesempenoService,
-    obtenerEvaluacionesDesempenoService
+    obtenerEvaluacionesDesempenoService,
+    obtenerEventosService,
+    obtenerEventoService
 }
