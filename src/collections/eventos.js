@@ -1,5 +1,5 @@
 import autoIncrementID from "../utils/autoIncrement.js";
-import connection from "../utils/connect.js";
+import { connection } from "../utils/connect.js";
 
 class Eventos {
   id;
@@ -10,7 +10,7 @@ class Eventos {
   recomendaciones;
   session;
 
-  constructor() {}
+  constructor() { }
 
   async connect() {
     try {

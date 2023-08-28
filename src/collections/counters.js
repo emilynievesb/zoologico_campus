@@ -1,9 +1,9 @@
-import connection, { startTransaction } from "../utils/connect.js";
+import { connection, startTransaction } from "../utils/connect.js";
 
 class Counters {
   collection;
 
-  constructor() {}
+  constructor() { }
 
   async connect() {
     try {

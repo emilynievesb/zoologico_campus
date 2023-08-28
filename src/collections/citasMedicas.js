@@ -1,5 +1,5 @@
 import autoIncrementID from "../utils/autoIncrement.js";
-import connection from "../utils/connect.js";
+import { connection } from "../utils/connect.js";
 
 class CitasMedicas {
   id;
@@ -8,7 +8,7 @@ class CitasMedicas {
   descripcion;
   id_veterinario;
 
-  constructor() {}
+  constructor() { }
 
   async connect() {
     try {
