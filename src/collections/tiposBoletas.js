@@ -1,5 +1,5 @@
 import autoIncrementID from "../utils/autoIncrement.js";
-import {connection} from "../utils/connect.js";
+import { connection, startTransaction } from "../utils/connect.js";
 
 class TipoBoleta {
     id;
