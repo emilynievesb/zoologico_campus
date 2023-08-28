@@ -124,7 +124,7 @@ class Capacitaciones {
                     {
                         id: Number(id)
                     }
-                ).toArray();
+                );
             await this.session.commitTransaction();
             return resultado;
         } catch (error) {
