@@ -20,6 +20,7 @@ import { Promociones } from "../collections/promociones.js";
 import { Puestos } from "../collections/puestos.js";
 import { SeguimientoEmpleado } from "../collections/seguimientoEmpleados.js";
 import { TipoBoleta } from "../collections/tiposBoletas.js";
+import { Zona } from "../collections/zonas.js";
 
 const obtenerTiposAlimentacionService = async () => {
     const alimentacion = new Alimentacion();
@@ -241,6 +242,15 @@ const obtenerTipoBoletasService = async (id) => {
     return await tipoBoleta.obtenerTipoBoletaPorId(id);
 };
 
+const obtenerZonasService = async () => {
+    const zona = new Zona();
+    return await zona.obtenerZonas();
+};
+
+const obtenerZonaService = async (id) => {
+    const zona = new Zona();
+    return await zona.obtenerZonaPorId(id);
+};
 
 export {
     obtenerTiposAlimentacionService,
@@ -286,5 +296,7 @@ export {
     obtenerSeguimientosEmpleadoService,
     obtenerSeguimientoEmpleadoService,
     obtenerTiposBoletasService,
-    obtenerTipoBoletasService
+    obtenerTipoBoletasService,
+    obtenerZonasService,
+    obtenerZonaService
 }

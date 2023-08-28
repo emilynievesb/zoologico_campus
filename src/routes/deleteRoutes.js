@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { eliminarAnimalController, eliminarBoletasController, eliminarCapacitacioncesControler, eliminarCitaMedicaController, eliminarEmpleadoController, eliminarEstadoHabitatController, eliminarEstadoSaludController, eliminarEvaluacionDesempenoController, eliminarEventoController, eliminarFacturaEntradaController, eliminarHabitatController, eliminarHistorialesSaludController, eliminarHorarioAlimentacionMantenimientoController, eliminarHorarioTrabajoController, eliminarListaBoletasController, eliminarPlanificacionEventosController, eliminarPromocionesController, eliminarPuestoController, eliminarSeguimientoEmpleadoController, eliminarTipoAlimentacionController, eliminarTipoBoletasController } from "../controllers/deleteController.js";
+import { eliminarAnimalController, eliminarBoletasController, eliminarCapacitacioncesControler, eliminarCitaMedicaController, eliminarEmpleadoController, eliminarEstadoHabitatController, eliminarEstadoSaludController, eliminarEvaluacionDesempenoController, eliminarEventoController, eliminarFacturaEntradaController, eliminarHabitatController, eliminarHistorialesSaludController, eliminarHorarioAlimentacionMantenimientoController, eliminarHorarioTrabajoController, eliminarListaBoletasController, eliminarPlanificacionEventosController, eliminarPromocionesController, eliminarPuestoController, eliminarSeguimientoEmpleadoController, eliminarTipoAlimentacionController, eliminarTipoBoletasController, eliminarZonasController } from "../controllers/deleteController.js";
 
 const deleteRoute = () => {
     const router = Router();
@@ -25,6 +25,7 @@ const deleteRoute = () => {
     router.delete("/eliminarPuesto", eliminarPuestoController);
     router.delete("/eliminarSeguimientoEmpleado", eliminarSeguimientoEmpleadoController);
     router.delete("/eliminarTipoBoleta", eliminarTipoBoletasController);
+    router.delete("/eliminarZonas", eliminarZonasController);
     return router;
 };
 
