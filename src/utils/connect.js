@@ -3,7 +3,7 @@ import { MongoClient } from "mongodb";
 
 let dbConnection = null;
 
-async function connection() {
+async function connectionDB() {
   if (dbConnection) {
     return dbConnection;
   }
@@ -20,18 +20,17 @@ async function connection() {
     return { status: 500, message: error };
   }
 }
-
-const connect = async (coleccion) => {
-  const db = await connection();
+const connection = async (coleccion) => {
+  const db = await connectionDB();
   const newCollection = db.collection(coleccion);
   return newCollection;
 };
 
 const startTransaction = async () => {
-  const db = await connection();
+  const db = await connectionDB();
   const session = db.client.startSession();
   session.startTransaction();
   return session;
 };
 
-export { connect, startTransaction };
+export { connection, startTransaction };
