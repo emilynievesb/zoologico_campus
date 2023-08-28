@@ -14,6 +14,7 @@ import { HistorialEventos } from "../collections/historialEventos.js";
 import { HistorialesSalud } from "../collections/historialesSalud.js";
 import { HorariosAlimentacionMantenimiento } from "../collections/horariosAlimentacionMantenimiento.js";
 import { HorariosTrabajo } from "../collections/horariosTrabajo.js";
+import { ListaBoletas } from "../collections/lista_boletas.js";
 
 const obtenerTiposAlimentacionService = async () => {
     const alimentacion = new Alimentacion();
@@ -175,8 +176,15 @@ const obtenerHorarioTrabajoService = async (id) => {
     return await horarios.obtenerHorarioTrabajoPorId(id);
 };
 
+const obtenerlistaBoletasService = async (id) => {
+    const listaBoletas = new ListaBoletas();
+    return await listaBoletas.obtenerListaBoletasPorId(id);
+};
 
-
+const obtenerlistasBoletasService = async () => {
+    const listaBoletas = new ListaBoletas();
+    return await listaBoletas.obtenerListasBoletas();
+};
 
 export {
     obtenerTiposAlimentacionService,
@@ -210,5 +218,7 @@ export {
     obtenerHorarioAlimentacionMantenimientoService,
     obtenerHorariosAlimentacionMantenimientoService,
     obtenerHorariosTrabajoService,
-    obtenerHorarioTrabajoService
+    obtenerHorarioTrabajoService,
+    obtenerlistaBoletasService,
+    obtenerlistasBoletasService
 }
