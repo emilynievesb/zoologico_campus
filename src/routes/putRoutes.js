@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { actualizarAnimalController, actualizarBoletaController, actualizarCapacitacionController, actualizarCitaMedicaController, actualizarEmpleadoController, actualizarTipoAlimentacionController } from "../controllers/putControllers.js";
+import { actualizarAnimalController, actualizarBoletaController, actualizarCapacitacionController, actualizarCitaMedicaController, actualizarEmpleadoController, actualizarEstadoSaludController, actualizarTipoAlimentacionController } from "../controllers/putControllers.js";
 import { actualizarEmpleado } from "../services/putServices.js";
 
 const putInitRoute = () => {
@@ -25,6 +25,9 @@ const putInitRoute = () => {
     )
     router.put(
         "/actualizarEmpleado", actualizarEmpleadoController
+    )
+    router.put(
+        "/actualizarEstadoSalud", actualizarEstadoSaludController
     )
     return router;
 };

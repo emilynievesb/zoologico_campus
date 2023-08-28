@@ -4,6 +4,7 @@ import { Boletas } from "../collections/boletas.js";
 import { Capacitaciones } from "../collections/capacitaciones.js";
 import { CitasMedicas } from "../collections/citasMedicas.js";
 import { Empleado } from "../collections/empleado.js";
+import { EstadosSalud } from "../collections/estadoSalud.js";
 
 const actualizarTipoAlimentacion = async (id, tipo) => {
     const tipoAlimentacion = new Alimentacion();
@@ -125,4 +126,21 @@ const actualizarEmpleado = async (id, nombre, fecha_contratacion, id_seguimiento
     }
 };
 
-export { actualizarTipoAlimentacion, actualizarAnimal, actualizarBoleta, actualizarCapacitacion, actualizarCitaMedica, actualizarEmpleado };
+const actualizarEstadoSalud = async (id, estado) => {
+    try {
+        const estadosSalud = new EstadosSalud();
+        estadosSalud.id = id;
+        estadosSalud.estado = estado;
+
+        const resultado = await estadosSalud.actualizarEstadoSalud();
+        if (resultado.modifiedCount > 0) {
+            return "Estado de salud actualizado correctamente";
+        } else {
+            return "No se encontró el estado de salud o no se realizaron cambios";
+        }
+    } catch (error) {
+        throw error;
+    }
+};
+
+export { actualizarTipoAlimentacion, actualizarAnimal, actualizarBoleta, actualizarCapacitacion, actualizarCitaMedica, actualizarEmpleado, actualizarEstadoSalud };
