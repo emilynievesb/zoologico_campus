@@ -53,6 +53,7 @@ class CitasMedicas {
 
   async obtenerCitaMedica(citaMedicaId) {
     try {
+      this.session = await startTransaction();
       const connection = await this.connect();
       const resultado = await connection
         .aggregate([
