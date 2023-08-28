@@ -18,6 +18,7 @@ import { ListaBoletas } from "../collections/lista_boletas.js";
 import { PlanificacionEventos } from "../collections/planificacion_eventos.js";
 import { Promociones } from "../collections/promociones.js";
 import { Puestos } from "../collections/puestos.js";
+import { SeguimientoEmpleado } from "../collections/seguimientoEmpleados.js";
 
 const obtenerTiposAlimentacionService = async () => {
     const alimentacion = new Alimentacion();
@@ -219,6 +220,16 @@ const obtenerPuestoService = async (id) => {
     return await puesto.obtenerPuesto(id);
 };
 
+const obtenerSeguimientosEmpleadoService = async () => {
+    const seguimientoEmpleado = new SeguimientoEmpleado();
+    return await seguimientoEmpleado.obtenerSeguimientosEmpleado();
+};
+
+const obtenerSeguimientoEmpleadoService = async (id) => {
+    const seguimientoEmpleado = new SeguimientoEmpleado();
+    return await seguimientoEmpleado.obtenerSeguimientoEmpleadoPorId(id);
+};
+
 
 export {
     obtenerTiposAlimentacionService,
@@ -260,5 +271,7 @@ export {
     obtenerPromocionesService,
     obtenerPromocionService,
     obtenerPuestosService,
-    obtenerPuestoService
+    obtenerPuestoService,
+    obtenerSeguimientosEmpleadoService,
+    obtenerSeguimientoEmpleadoService
 }
