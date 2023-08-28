@@ -6,6 +6,7 @@ import { CitasMedicas } from "../collections/citasMedicas.js";
 import { Empleado } from "../collections/empleado.js";
 import { EstadosSalud } from "../collections/estadoSalud.js";
 import { EstadoHabitat } from "../collections/estadohabitad.js";
+import { EvaluacionDesempeno } from "../collections/evaluacion_desempeno.js";
 
 const obtenerTiposAlimentacionService = async () => {
     const alimentacion = new Alimentacion();
@@ -82,11 +83,20 @@ const obtenerEstadoSaludService = async (id) => {
     return await estadoSalud.obtenerEstadoSalud(id);
 };
 
-const obtenerEstadosSaludService = async (id) => {
+const obtenerEstadosSaludService = async () => {
     const estadoSalud = new EstadosSalud();
-    return await estadoSalud.obtenerEstadosSalud(id);
+    return await estadoSalud.obtenerEstadosSalud();
 };
 
+const obtenerEvaluacionDesempenoService = async (id) => {
+    const evaluacionDesempeno = new EvaluacionDesempeno();
+    return await evaluacionDesempeno.obtenerEvaluacionDesempenoPorId(id);
+};
+
+const obtenerEvaluacionesDesempenoService = async () => {
+    const evaluacionDesempeno = new EvaluacionDesempeno();
+    return await evaluacionDesempeno.obtenerEvaluacionesDesempeno();
+};
 
 export {
     obtenerTiposAlimentacionService,
@@ -104,5 +114,7 @@ export {
     obtenerEstadoHabitatService,
     obtenerEstadoHabitatsService,
     obtenerEstadoSaludService,
-    obtenerEstadosSaludService
+    obtenerEstadosSaludService,
+    obtenerEvaluacionDesempenoService,
+    obtenerEvaluacionesDesempenoService
 }
