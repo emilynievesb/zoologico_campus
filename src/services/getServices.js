@@ -1,4 +1,5 @@
 import { Alimentacion } from "../collections/alimentacion.js";
+import { Animales } from "../collections/animales.js";
 
 const obtenerTiposAlimentacionService = async () => {
     const alimentacion = new Alimentacion();
@@ -10,7 +11,20 @@ const obtenerTipoAlimentacionService = async (tipoAlimentacionId) => {
     return await alimentacion.obtenerTipoAlimentacion(tipoAlimentacionId);
 };
 
+const obtenerAnimalesService = async () => {
+    const animal = new Animales();
+    return await animal.obtenerAnimales();
+};
+
+const obtenerAnimalService = async (animalId) => {
+    const animal = new Animales();
+    return await animal.obtenerAnimal(animalId);
+};
+
+
 export {
     obtenerTiposAlimentacionService,
-    obtenerTipoAlimentacionService
+    obtenerTipoAlimentacionService,
+    obtenerAnimalesService,
+    obtenerAnimalService
 }
