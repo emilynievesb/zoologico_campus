@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { obtenerAlimentracionController, obtenerAnimalesController, obtenerBoletasController, obtenerCapacitacionesController, obtenerCitasMedicasController } from "../controllers/getControllers.js";
+import { obtenerAlimentracionController, obtenerAnimalesController, obtenerBoletasController, obtenerCapacitacionesController, obtenerCitasMedicasController, obtenerEmpleadosController } from "../controllers/getControllers.js";
 
 const getInitRoute = () => {
   const router = Router();
@@ -8,6 +8,7 @@ const getInitRoute = () => {
   router.get("/obtenerBoletas", obtenerBoletasController);
   router.get("/obtenerCapacitaciones", obtenerCapacitacionesController);
   router.get("/obtenerCitasMedicas", obtenerCitasMedicasController);
+  router.get("/obtenerEmpleados", obtenerEmpleadosController);
   return router;
 };
 
