@@ -1,4 +1,4 @@
-import { obtenerTiposAlimentacionService, obtenerTipoAlimentacionService, obtenerAnimalesService, obtenerAnimalService, obtenerBoletaService, obtenerBoletasService, obtenerCapacitacionService, obtenerCapacitacionesService, obtenerCitasMedicaService, obtenerCitasMedicasService, obtenerEmpleadosService, obtenerEmpleadoService, obtenerEstadoHabitatService, obtenerEstadoHabitatsService, obtenerEstadoSaludService, obtenerEstadosSaludService, obtenerEvaluacionDesempenoService, obtenerEvaluacionesDesempenoService, obtenerEventoService, obtenerEventosService, obtenerFacturaEntradaService, obtenerFacturasEntradaService, obtenerHabitatService, obtenerHabitatsService, obtenerHistorialSaludService, obtenerHistorialesSaludService, obtenerHistorialesEventoService, obtenerHistorialEventoService, obtenerHorariosAlimentacionMantenimientoService, obtenerHorarioAlimentacionMantenimientoService, obtenerHorarioTrabajoService, obtenerHorariosTrabajoService, obtenerlistaBoletasService, obtenerlistasBoletasService, obtenerPlanificacionEventosService, obtenerPlanificacionesEventosService } from "../services/getServices.js";
+import { obtenerTiposAlimentacionService, obtenerTipoAlimentacionService, obtenerAnimalesService, obtenerAnimalService, obtenerBoletaService, obtenerBoletasService, obtenerCapacitacionService, obtenerCapacitacionesService, obtenerCitasMedicaService, obtenerCitasMedicasService, obtenerEmpleadosService, obtenerEmpleadoService, obtenerEstadoHabitatService, obtenerEstadoHabitatsService, obtenerEstadoSaludService, obtenerEstadosSaludService, obtenerEvaluacionDesempenoService, obtenerEvaluacionesDesempenoService, obtenerEventoService, obtenerEventosService, obtenerFacturaEntradaService, obtenerFacturasEntradaService, obtenerHabitatService, obtenerHabitatsService, obtenerHistorialSaludService, obtenerHistorialesSaludService, obtenerHistorialesEventoService, obtenerHistorialEventoService, obtenerHorariosAlimentacionMantenimientoService, obtenerHorarioAlimentacionMantenimientoService, obtenerHorarioTrabajoService, obtenerHorariosTrabajoService, obtenerlistaBoletasService, obtenerlistasBoletasService, obtenerPlanificacionEventosService, obtenerPlanificacionesEventosService, obtenerPromocionService, obtenerPromocionesService } from "../services/getServices.js";
 
 const obtenerAlimentracionController = async (req, res, next) => {
     try {
@@ -307,6 +307,23 @@ const obtenerPlanificacionesEventosController = async (req, res, next) => {
     }
 };
 
+const obtenerPromocionesController = async (req, res, next) => {
+    try {
+        const { id } = req.query
+        let result;
+        if (id) {
+            const consulta = await obtenerPromocionService(id);
+            result = consulta
+        } else {
+            const consulta = await obtenerPromocionesService();
+            result = consulta
+        }
+        res.status(200).json({ message: `se han encontrado ${result.length} resultados`, result });
+    } catch (error) {
+        res.status(500).json(error.stack);
+    }
+};
+
 export {
     obtenerAlimentracionController,
     obtenerAnimalesController,
@@ -325,5 +342,6 @@ export {
     obtenerHorariosAlimentacionMantenimientoController,
     obtenerHorariosTrabajoController,
     obtenerListasBoletasController,
-    obtenerPlanificacionesEventosController
+    obtenerPlanificacionesEventosController,
+    obtenerPromocionesController
 }
