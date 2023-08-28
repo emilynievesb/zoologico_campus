@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { agregarTipoAlimentacionController } from "../controllers/postControllers.js";
+import { agregarAnimalController, agregarTipoAlimentacionController } from "../controllers/postControllers.js";
 
 const postInitRoute = () => {
   const router = Router();
   router.post("/agregarTipoAlimentacion", agregarTipoAlimentacionController);
+  router.post("/agregarAnimal", agregarAnimalController);
   return router;
 };
 
