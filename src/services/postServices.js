@@ -1,5 +1,6 @@
 import { Alimentacion } from "../collections/alimentacion.js";
 import { Animales } from "../collections/animales.js";
+import { EstadosSalud } from "../collections/estadoSalud.js";
 
 const agregarTipoAlimentacion = async (tipo) => {
   const tipoAlimentacion = new Alimentacion();
@@ -37,4 +38,18 @@ const agregarAnimal = async (
   }
 };
 
-export { agregarTipoAlimentacion, agregarAnimal };
+const agregarEstadoSalud = async (estado) => {
+  try {
+    const estadosSalud = new EstadosSalud();
+    estadosSalud.estado = estado;
+
+    const resultado = await estadosSalud.agregarEstadoSalud();
+    if (resultado.insertedId) {
+      return "Estado de salud creado correctamente";
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { agregarTipoAlimentacion, agregarAnimal, agregarEstadoSalud };
