@@ -2,6 +2,7 @@ import { Alimentacion } from "../collections/alimentacion.js";
 import { Animales } from "../collections/animales.js";
 import { Boletas } from "../collections/boletas.js";
 import { Capacitaciones } from "../collections/capacitaciones.js";
+import { CitasMedicas } from "../collections/citasMedicas.js";
 
 const actualizarTipoAlimentacion = async (id, tipo) => {
     const tipoAlimentacion = new Alimentacion();
@@ -82,5 +83,24 @@ const actualizarCapacitacion = async (id, id_seguimiento, nombre, fecha, descrip
         throw error;
     }
 };
+const actualizarCitaMedica = async (id, idHistorialSalud, fecha_cita, descripcion, id_veterinario) => {
+    try {
+        const citaMedica = new CitasMedicas();
+        citaMedica.id = id;
+        citaMedica.idHistorialSalud = idHistorialSalud;
+        citaMedica.fecha_cita = new Date(fecha_cita);
+        citaMedica.descripcion = descripcion;
+        citaMedica.id_veterinario = id_veterinario;
 
-export { actualizarTipoAlimentacion, actualizarAnimal, actualizarBoleta, actualizarCapacitacion };
+        const resultado = await citaMedica.actualizarCitaMedica();
+        if (resultado.modifiedCount > 0) {
+            return "Cita médica actualizada correctamente";
+        } else {
+            return "No se encontró la cita médica o no se realizaron cambios";
+        }
+    } catch (error) {
+        throw error;
+    }
+};
+
+export { actualizarTipoAlimentacion, actualizarAnimal, actualizarBoleta, actualizarCapacitacion, actualizarCitaMedica };
