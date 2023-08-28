@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { obtenerAlimentracionController, obtenerAnimalesController, obtenerBoletasController, obtenerCapacitacionesController, obtenerCitasMedicasController, obtenerEmpleadosController, obtenerEstadoHabitatController, obtenerEstadosSaludController, obtenerEvaluacionesDesempenoController, obtenerEventosController, obtenerFavturasEntradaController, obtenerHabitatsController, obtenerHistorialesEventoController, obtenerHistorialesSaludController } from "../controllers/getControllers.js";
+import { obtenerAlimentracionController, obtenerAnimalesController, obtenerBoletasController, obtenerCapacitacionesController, obtenerCitasMedicasController, obtenerEmpleadosController, obtenerEstadoHabitatController, obtenerEstadosSaludController, obtenerEvaluacionesDesempenoController, obtenerEventosController, obtenerFavturasEntradaController, obtenerHabitatsController, obtenerHistorialesEventoController, obtenerHistorialesSaludController, obtenerHorariosAlimentacionMantenimientoController } from "../controllers/getControllers.js";
 
 const getInitRoute = () => {
   const router = Router();
@@ -17,6 +17,7 @@ const getInitRoute = () => {
   router.get("/obtenerHabitats", obtenerHabitatsController);
   router.get("/obtenerHistorialesSalud", obtenerHistorialesSaludController);
   router.get("/obtenerHistorialesEvento", obtenerHistorialesEventoController);
+  router.get("/obtenerHorarAlMant", obtenerHorariosAlimentacionMantenimientoController);
   return router;
 };
 

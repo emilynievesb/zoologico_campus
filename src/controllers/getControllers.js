@@ -1,4 +1,4 @@
-import { obtenerTiposAlimentacionService, obtenerTipoAlimentacionService, obtenerAnimalesService, obtenerAnimalService, obtenerBoletaService, obtenerBoletasService, obtenerCapacitacionService, obtenerCapacitacionesService, obtenerCitasMedicaService, obtenerCitasMedicasService, obtenerEmpleadosService, obtenerEmpleadoService, obtenerEstadoHabitatService, obtenerEstadoHabitatsService, obtenerEstadoSaludService, obtenerEstadosSaludService, obtenerEvaluacionDesempenoService, obtenerEvaluacionesDesempenoService, obtenerEventoService, obtenerEventosService, obtenerFacturaEntradaService, obtenerFacturasEntradaService, obtenerHabitatService, obtenerHabitatsService, obtenerHistorialSaludService, obtenerHistorialesSaludService, obtenerHistorialesEventoService, obtenerHistorialEventoService } from "../services/getServices.js";
+import { obtenerTiposAlimentacionService, obtenerTipoAlimentacionService, obtenerAnimalesService, obtenerAnimalService, obtenerBoletaService, obtenerBoletasService, obtenerCapacitacionService, obtenerCapacitacionesService, obtenerCitasMedicaService, obtenerCitasMedicasService, obtenerEmpleadosService, obtenerEmpleadoService, obtenerEstadoHabitatService, obtenerEstadoHabitatsService, obtenerEstadoSaludService, obtenerEstadosSaludService, obtenerEvaluacionDesempenoService, obtenerEvaluacionesDesempenoService, obtenerEventoService, obtenerEventosService, obtenerFacturaEntradaService, obtenerFacturasEntradaService, obtenerHabitatService, obtenerHabitatsService, obtenerHistorialSaludService, obtenerHistorialesSaludService, obtenerHistorialesEventoService, obtenerHistorialEventoService, obtenerHorariosAlimentacionMantenimientoService, obtenerHorarioAlimentacionMantenimientoService } from "../services/getServices.js";
 
 const obtenerAlimentracionController = async (req, res, next) => {
     try {
@@ -239,6 +239,23 @@ const obtenerHistorialesEventoController = async (req, res, next) => {
     }
 };
 
+const obtenerHorariosAlimentacionMantenimientoController = async (req, res, next) => {
+    try {
+        const { id } = req.query
+        let result;
+        if (id) {
+            const consulta = await obtenerHorarioAlimentacionMantenimientoService(id);
+            result = consulta
+        } else {
+            const consulta = await obtenerHorariosAlimentacionMantenimientoService();
+            result = consulta
+        }
+        res.status(200).json({ message: `se han encontrado ${result.length} resultados`, result });
+    } catch (error) {
+        res.status(500).json(error.stack);
+    }
+};
+
 export {
     obtenerAlimentracionController,
     obtenerAnimalesController,
@@ -253,5 +270,6 @@ export {
     obtenerFavturasEntradaController,
     obtenerHabitatsController,
     obtenerHistorialesSaludController,
-    obtenerHistorialesEventoController
+    obtenerHistorialesEventoController,
+    obtenerHorariosAlimentacionMantenimientoController
 }

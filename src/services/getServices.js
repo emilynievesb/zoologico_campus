@@ -12,6 +12,7 @@ import { FacturaEntrada } from "../collections/facturaEntrada.js";
 import { Habitat } from "../collections/habitat.js";
 import { HistorialEventos } from "../collections/historialEventos.js";
 import { HistorialesSalud } from "../collections/historialesSalud.js";
+import { HorariosAlimentacionMantenimiento } from "../collections/horariosAlimentacionMantenimiento.js";
 
 const obtenerTiposAlimentacionService = async () => {
     const alimentacion = new Alimentacion();
@@ -153,6 +154,17 @@ const obtenerHistorialEventoService = async (id) => {
     return await historialEventos.obtenerHistorialEvento(id);
 };
 
+const obtenerHorariosAlimentacionMantenimientoService = async () => {
+    const horarios = new HorariosAlimentacionMantenimiento();
+    return await horarios.obtenerHorariosAlimentacionMantenimiento();
+};
+
+const obtenerHorarioAlimentacionMantenimientoService = async (id) => {
+    const horarios = new HorariosAlimentacionMantenimiento();
+    return await horarios.obtenerHorarioAlimentacionMantenimientoPorId(id);
+};
+
+
 
 export {
     obtenerTiposAlimentacionService,
@@ -182,5 +194,7 @@ export {
     obtenerHistorialesSaludService,
     obtenerHistorialSaludService,
     obtenerHistorialesEventoService,
-    obtenerHistorialEventoService
+    obtenerHistorialEventoService,
+    obtenerHorarioAlimentacionMantenimientoService,
+    obtenerHorariosAlimentacionMantenimientoService
 }
