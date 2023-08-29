@@ -10,6 +10,7 @@ import { HistorialEventos } from "../collections/historialEventos.js";
 import { HistorialesSalud } from "../collections/historialesSalud.js";
 import { HorariosAlimentacionMantenimiento } from "../collections/horariosAlimentacionMantenimiento.js";
 import { HorariosTrabajo } from "../collections/horariosTrabajo.js";
+import { ListaBoletas } from "../collections/lista_boletas.js";
 
 const agregarTipoAlimentacion = async (tipo) => {
   const tipoAlimentacion = new Alimentacion();
@@ -270,6 +271,20 @@ const agregarHorarioTrabajo = async (horaInicio, horaFin) => {
   }
 };
 
+const agregarListaBoletas = async (factura) => {
+  try {
+    const listaBoletas = new ListaBoletas();
+    listaBoletas.factura = Number(factura);
+
+    const resultado = await listaBoletas.agregarListaBoletas();
+    if (resultado.insertedId) {
+      return "Lista de boletas agregada correctamente";
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   agregarTipoAlimentacion,
   agregarAnimal,
@@ -284,4 +299,5 @@ export {
   agregarHistorialEvento,
   agregarHorario,
   agregarHorarioTrabajo,
+  agregarListaBoletas,
 };

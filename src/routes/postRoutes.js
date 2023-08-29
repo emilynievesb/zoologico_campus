@@ -10,6 +10,7 @@ import {
   agregarHistorialSaludController,
   agregarHorarioAlimentacionController,
   agregarHorarioTrabajoController,
+  agregarListaBoletasController,
   agregarTipoAlimentacionController,
 } from "../controllers/postControllers.js";
 
@@ -31,6 +32,7 @@ const postInitRoute = () => {
     agregarHorarioAlimentacionController
   );
   router.post("/agregarHorarioTrabajo", agregarHorarioTrabajoController);
+  router.post("/agregarListaBoletas", agregarListaBoletasController);
 
   return router;
 };
