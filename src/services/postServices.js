@@ -2,6 +2,7 @@ import { Alimentacion } from "../collections/alimentacion.js";
 import { Animales } from "../collections/animales.js";
 import { EstadosSalud } from "../collections/estadoSalud.js";
 import { Eventos } from "../collections/eventos.js";
+import { FacturaEntrada } from "../collections/facturaEntrada.js";
 
 const agregarTipoAlimentacion = async (tipo) => {
   const tipoAlimentacion = new Alimentacion();
@@ -71,6 +72,22 @@ const agregarEvento = async (historialId, empleadoId, fecha_evento, descripcion,
   }
 };
 
+const agregarFacturaEntrada = async (fecha, visitante, precio, evento, precioDescuento, listaBoletas) => {
+  try {
+    const factura = new FacturaEntrada();
+    factura.fecha = new Date(fecha);
+    factura.visitante = visitante;
+    factura.precio = Number(precio);
+    factura.evento = evento;
+    factura.precioDescuento = Number(precioDescuento);
+    factura.listaBoletas = Number(listaBoletas);
+    const resultado = await factura.agregarFacturaEntrada();
+    if (resultado.insertedId) {
+      return "Factura de entrada agregada correctamente";
+    }
+  } catch (error) {
+    throw error;
+  }
+};
 
-
-export { agregarTipoAlimentacion, agregarAnimal, agregarEstadoSalud, agregarEvento };
+export { agregarTipoAlimentacion, agregarAnimal, agregarEstadoSalud, agregarEvento, agregarFacturaEntrada };
