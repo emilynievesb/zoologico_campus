@@ -8,6 +8,7 @@ import { EstadosSalud } from "../collections/estadoSalud.js";
 import { EvaluacionDesempeno } from "../collections/evaluacion_desempeno.js"
 import { FacturaEntrada } from "../collections/facturaEntrada.js";
 import { Habitat } from "../collections/habitat.js";
+import { HistorialesSalud } from "../collections/historialesSalud.js";
 
 const actualizarTipoAlimentacion = async (id, tipo) => {
     const tipoAlimentacion = new Alimentacion();
@@ -206,4 +207,22 @@ const actualizarHabitat = async (id, tipo, descripcion, idHistorial, idZona) => 
     }
 };
 
-export { actualizarTipoAlimentacion, actualizarAnimal, actualizarBoleta, actualizarCapacitacion, actualizarCitaMedica, actualizarEmpleado, actualizarEstadoSalud, actualizarEvaluacionDesempeno, actualizarFacturaEntrada, actualizarHabitat };
+const actualizarHistorialSalud = async (id, idEstadoSalud, fecha_apertura, ultima_modificacion) => {
+    try {
+        const historialSalud = new HistorialesSalud();
+        historialSalud.id = Number(id);
+        historialSalud.idEstadoSalud = Number(idEstadoSalud);
+        historialSalud.fecha_apertura = new Date(fecha_apertura);
+        historialSalud.ultima_modificacion = new Date(ultima_modificacion);
+        const resultado = await historialSalud.actualizarHistorialSalud();
+        if (resultado.modifiedCount > 0) {
+            return "Historial de salud actualizado correctamente";
+        } else {
+            return "No se encontró el historial de salud o no se realizaron cambios";
+        }
+    } catch (error) {
+        throw error;
+    }
+};
+
+export { actualizarTipoAlimentacion, actualizarAnimal, actualizarBoleta, actualizarCapacitacion, actualizarCitaMedica, actualizarEmpleado, actualizarEstadoSalud, actualizarEvaluacionDesempeno, actualizarFacturaEntrada, actualizarHabitat, actualizarHistorialSalud };
