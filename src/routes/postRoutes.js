@@ -9,6 +9,7 @@ import {
   agregarHabitatController,
   agregarHistorialSaludController,
   agregarHorarioAlimentacionController,
+  agregarHorarioTrabajoController,
   agregarTipoAlimentacionController,
 } from "../controllers/postControllers.js";
 
@@ -29,6 +30,7 @@ const postInitRoute = () => {
     "/agregarHorariosAlimentacion",
     agregarHorarioAlimentacionController
   );
+  router.post("/agregarHorarioTrabajo", agregarHorarioTrabajoController);
 
   return router;
 };

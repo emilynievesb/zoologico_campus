@@ -7,6 +7,7 @@ import {
   agregarHabitat,
   agregarHistorialSalud,
   agregarHorario,
+  agregarHorarioTrabajo,
   agregarTipoAlimentacion,
 } from "../services/postServices.js";
 
@@ -212,6 +213,16 @@ const agregarHorarioAlimentacionController = async (req, res, next) => {
   }
 };
 
+const agregarHorarioTrabajoController = async (req, res, next) => {
+  try {
+    const { hora_inicio, hora_fin } = req.body;
+    const result = await agregarHorarioTrabajo(hora_inicio, hora_fin);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
 export {
   agregarTipoAlimentacionController,
   agregarAnimalController,
@@ -225,4 +236,5 @@ export {
   agregarEvaluacionDesempenoController,
   agregarHistorialEventoController,
   agregarHorarioAlimentacionController,
+  agregarHorarioTrabajoController,
 };
