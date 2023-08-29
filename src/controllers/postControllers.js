@@ -177,6 +177,20 @@ const agregarEvaluacionDesempenoController = async (req, res, next) => {
   }
 };
 
+const agregarHistorialEventoController = async (req, res, next) => {
+  try {
+    const { fecha_creacion, ultima_modificacion, idEstadohabitat } = req.body;
+    const result = await agregarHistorialEvento(
+      fecha_creacion,
+      ultima_modificacion,
+      idEstadohabitat
+    );
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
 export {
   agregarTipoAlimentacionController,
   agregarAnimalController,
@@ -188,4 +202,5 @@ export {
   agregarCapacitacionController,
   agregarEmpleadoController,
   agregarEvaluacionDesempenoController,
+  agregarHistorialEventoController,
 };

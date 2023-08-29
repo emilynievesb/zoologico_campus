@@ -6,6 +6,7 @@ import { EvaluacionDesempeno } from "../collections/evaluacion_desempeno.js";
 import { Eventos } from "../collections/eventos.js";
 import { FacturaEntrada } from "../collections/facturaEntrada.js";
 import { Habitat } from "../collections/habitat.js";
+import { HistorialEventos } from "../collections/historialEventos.js";
 import { HistorialesSalud } from "../collections/historialesSalud.js";
 
 const agregarTipoAlimentacion = async (tipo) => {
@@ -211,6 +212,25 @@ const agregarEvaluacionDesempeno = async (
   }
 };
 
+const agregarHistorialEvento = async (
+  fecha_creacion,
+  ultima_modificacion,
+  idEstadohabitat
+) => {
+  try {
+    const historialEventos = new HistorialEventos();
+    historialEventos.fecha_creacion = new Date(fecha_creacion);
+    historialEventos.ultima_modificacion = new Date(ultima_modificacion);
+    historialEventos.idEstadohabitat = idEstadohabitat;
+    const resultado = await historialEventos.agregarHistorialEvento();
+    if (resultado.insertedId) {
+      return "Historial de evento agregado correctamente";
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   agregarTipoAlimentacion,
   agregarAnimal,
@@ -222,4 +242,5 @@ export {
   agregarCapacitacion,
   agregarEmpleado,
   agregarEvaluacionDesempeno,
+  agregarHistorialEvento,
 };
