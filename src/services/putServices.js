@@ -6,6 +6,7 @@ import { CitasMedicas } from "../collections/citasMedicas.js";
 import { Empleado } from "../collections/empleado.js";
 import { EstadosSalud } from "../collections/estadoSalud.js";
 import { EvaluacionDesempeno } from "../collections/evaluacion_desempeno.js"
+import { FacturaEntrada } from "../collections/facturaEntrada.js";
 
 const actualizarTipoAlimentacion = async (id, tipo) => {
     const tipoAlimentacion = new Alimentacion();
@@ -164,5 +165,27 @@ const actualizarEvaluacionDesempeno = async (id, seguimiento, fecha, jefe, descr
     }
 };
 
+const actualizarFacturaEntrada = async (id, fecha, visitante, precio, evento, precioDescuento, listaBoletas) => {
+    try {
+        const factura = new FacturaEntrada();
+        factura.id = Number(id);
+        factura.fecha = new Date(fecha);
+        factura.visitante = visitante;
+        factura.precio = Number(precio);
+        factura.evento = evento;
+        factura.precioDescuento = Number(precioDescuento);
+        factura.listaBoletas = Number(listaBoletas);
+        const resultado = await factura.actualizarFacturaEntrada();
+        if (resultado.modifiedCount > 0) {
+            return "Factura de entrada actualizada correctamente";
+        } else {
+            return "No se encontró la factura de entrada o no se realizaron cambios";
+        }
+    } catch (error) {
+        throw error;
+    }
+};
 
-export { actualizarTipoAlimentacion, actualizarAnimal, actualizarBoleta, actualizarCapacitacion, actualizarCitaMedica, actualizarEmpleado, actualizarEstadoSalud, actualizarEvaluacionDesempeno };
+
+
+export { actualizarTipoAlimentacion, actualizarAnimal, actualizarBoleta, actualizarCapacitacion, actualizarCitaMedica, actualizarEmpleado, actualizarEstadoSalud, actualizarEvaluacionDesempeno, actualizarFacturaEntrada };
