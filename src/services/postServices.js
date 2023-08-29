@@ -8,6 +8,7 @@ import { FacturaEntrada } from "../collections/facturaEntrada.js";
 import { Habitat } from "../collections/habitat.js";
 import { HistorialEventos } from "../collections/historialEventos.js";
 import { HistorialesSalud } from "../collections/historialesSalud.js";
+import { HorariosAlimentacionMantenimiento } from "../collections/horariosAlimentacionMantenimiento.js";
 
 const agregarTipoAlimentacion = async (tipo) => {
   const tipoAlimentacion = new Alimentacion();
@@ -231,6 +232,28 @@ const agregarHistorialEvento = async (
   }
 };
 
+const agregarHorario = async (
+  id_habitat,
+  hora_alimentacionMantenimiento,
+  id_encargado,
+  descripcion
+) => {
+  try {
+    const horario = new HorariosAlimentacionMantenimiento();
+    horario.id_habitat = Number(id_habitat);
+    horario.hora_alimentacionMantenimiento = hora_alimentacionMantenimiento;
+    horario.id_encargado = id_encargado;
+    horario.descripcion = descripcion;
+
+    const resultado = await horario.agregarHorarioAlimentacionMantenimiento();
+    if (resultado.insertedId) {
+      return "Horario de alimentación/mantenimiento agregado correctamente";
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   agregarTipoAlimentacion,
   agregarAnimal,
@@ -243,4 +266,5 @@ export {
   agregarEmpleado,
   agregarEvaluacionDesempeno,
   agregarHistorialEvento,
+  agregarHorario,
 };
