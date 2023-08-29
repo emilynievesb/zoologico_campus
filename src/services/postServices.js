@@ -1,5 +1,6 @@
 import { Alimentacion } from "../collections/alimentacion.js";
 import { Animales } from "../collections/animales.js";
+import { Capacitaciones } from "../collections/capacitaciones.js";
 import { EstadosSalud } from "../collections/estadoSalud.js";
 import { Eventos } from "../collections/eventos.js";
 import { FacturaEntrada } from "../collections/facturaEntrada.js";
@@ -14,7 +15,6 @@ const agregarTipoAlimentacion = async (tipo) => {
     return "Tipo de alimentación creada correctamente";
   }
 };
-
 
 const agregarAnimal = async (
   nombre,
@@ -41,6 +41,27 @@ const agregarAnimal = async (
     throw error;
   }
 };
+const agregarCapacitacion = async (
+  id_seguimiento,
+  nombre,
+  fecha,
+  descripcion
+) => {
+  try {
+    const capacitacion = new Capacitaciones();
+    capacitacion.id_seguimiento = id_seguimiento;
+    capacitacion.nombre = nombre;
+    capacitacion.fecha = new Date(fecha);
+    capacitacion.descripcion = descripcion;
+
+    const resultado = await capacitacion.agregarCapacitacion();
+    if (resultado.insertedId) {
+      return "Capacitación creada correctamente";
+    }
+  } catch (error) {
+    throw error;
+  }
+};
 
 const agregarEstadoSalud = async (estado) => {
   try {
@@ -56,7 +77,13 @@ const agregarEstadoSalud = async (estado) => {
   }
 };
 
-const agregarEvento = async (historialId, empleadoId, fecha_evento, descripcion, recomendaciones) => {
+const agregarEvento = async (
+  historialId,
+  empleadoId,
+  fecha_evento,
+  descripcion,
+  recomendaciones
+) => {
   try {
     const evento = new Eventos();
     evento.historialId = historialId;
@@ -74,7 +101,14 @@ const agregarEvento = async (historialId, empleadoId, fecha_evento, descripcion,
   }
 };
 
-const agregarFacturaEntrada = async (fecha, visitante, precio, evento, precioDescuento, listaBoletas) => {
+const agregarFacturaEntrada = async (
+  fecha,
+  visitante,
+  precio,
+  evento,
+  precioDescuento,
+  listaBoletas
+) => {
   try {
     const factura = new FacturaEntrada();
     factura.fecha = new Date(fecha);
@@ -108,7 +142,11 @@ const agregarHabitat = async (tipo, descripcion, idHistoria, idZona) => {
   }
 };
 
-const agregarHistorialSalud = async (idEstadoSalud, fecha_apertura, ultima_modificacion) => {
+const agregarHistorialSalud = async (
+  idEstadoSalud,
+  fecha_apertura,
+  ultima_modificacion
+) => {
   try {
     const historialSalud = new HistorialesSalud();
     historialSalud.idEstadoSalud = idEstadoSalud;
@@ -124,4 +162,13 @@ const agregarHistorialSalud = async (idEstadoSalud, fecha_apertura, ultima_modif
   }
 };
 
-export { agregarTipoAlimentacion, agregarAnimal, agregarEstadoSalud, agregarEvento, agregarFacturaEntrada, agregarHabitat, agregarHistorialSalud };
+export {
+  agregarTipoAlimentacion,
+  agregarAnimal,
+  agregarEstadoSalud,
+  agregarEvento,
+  agregarFacturaEntrada,
+  agregarHabitat,
+  agregarHistorialSalud,
+  agregarCapacitacion,
+};
