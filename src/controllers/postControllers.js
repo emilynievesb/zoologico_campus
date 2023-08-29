@@ -1,4 +1,4 @@
-import { agregarAnimal, agregarEstadoSalud, agregarEvento, agregarFacturaEntrada, agregarTipoAlimentacion } from "../services/postServices.js";
+import { agregarAnimal, agregarEstadoSalud, agregarEvento, agregarFacturaEntrada, agregarHabitat, agregarTipoAlimentacion } from "../services/postServices.js";
 
 const agregarTipoAlimentacionController = async (req, res, next) => {
   try {
@@ -67,4 +67,14 @@ const agregarFacturaEntradaController = async (req, res, next) => {
   }
 };
 
-export { agregarTipoAlimentacionController, agregarAnimalController, agregarEstadoSaludController, agregarEventoController, agregarFacturaEntradaController };
+const agregarHabitatController = async (req, res, next) => {
+  try {
+    const { tipo, descripcion, idHistorial, idZona } = req.body;
+    const result = await agregarHabitat(tipo, descripcion, idHistorial, idZona);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
+export { agregarTipoAlimentacionController, agregarAnimalController, agregarEstadoSaludController, agregarEventoController, agregarFacturaEntradaController, agregarHabitatController };

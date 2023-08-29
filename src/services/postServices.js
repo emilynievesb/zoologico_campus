@@ -3,6 +3,7 @@ import { Animales } from "../collections/animales.js";
 import { EstadosSalud } from "../collections/estadoSalud.js";
 import { Eventos } from "../collections/eventos.js";
 import { FacturaEntrada } from "../collections/facturaEntrada.js";
+import { Habitat } from "../collections/habitat.js";
 
 const agregarTipoAlimentacion = async (tipo) => {
   const tipoAlimentacion = new Alimentacion();
@@ -90,4 +91,20 @@ const agregarFacturaEntrada = async (fecha, visitante, precio, evento, precioDes
   }
 };
 
-export { agregarTipoAlimentacion, agregarAnimal, agregarEstadoSalud, agregarEvento, agregarFacturaEntrada };
+const agregarHabitat = async (tipo, descripcion, idHistoria, idZona) => {
+  try {
+    const habitat = new Habitat();
+    habitat.tipo = tipo;
+    habitat.descripcion = descripcion;
+    habitat.idHistorial = Number(idHistoria);
+    habitat.idZona = Number(idZona);
+    const resultado = await habitat.agregarHabitat();
+    if (resultado.insertedId) {
+      return "Hábitat agregado correctamente";
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { agregarTipoAlimentacion, agregarAnimal, agregarEstadoSalud, agregarEvento, agregarFacturaEntrada, agregarHabitat };
