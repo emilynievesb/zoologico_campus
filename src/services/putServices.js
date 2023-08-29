@@ -10,6 +10,7 @@ import { FacturaEntrada } from "../collections/facturaEntrada.js";
 import { Habitat } from "../collections/habitat.js";
 import { HistorialEventos } from "../collections/historialEventos.js";
 import { HistorialesSalud } from "../collections/historialesSalud.js";
+import { HorariosAlimentacionMantenimiento } from "../collections/horariosAlimentacionMantenimiento.js";
 
 const actualizarTipoAlimentacion = async (id, tipo) => {
   const tipoAlimentacion = new Alimentacion();
@@ -292,6 +293,33 @@ const actualizarHistorialEvento = async (
   }
 };
 
+const actualizarHorarioAlimentacion = async (
+  id,
+  id_habitat,
+  hora_alimentacionMantenimiento,
+  id_encargado,
+  descripcion
+) => {
+  try {
+    const horario = new HorariosAlimentacionMantenimiento();
+    horario.id = Number(id);
+    horario.id_habitat = Number(id_habitat);
+    horario.hora_alimentacionMantenimiento = hora_alimentacionMantenimiento;
+    horario.id_encargado = id_encargado;
+    horario.descripcion = descripcion;
+
+    const resultado =
+      await horario.actualizarHorarioAlimentacionMantenimiento();
+    if (resultado.modifiedCount > 0) {
+      return "Horario de alimentación/mantenimiento actualizado correctamente";
+    } else {
+      throw new Error("No se pudo actualizar el horario");
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   actualizarTipoAlimentacion,
   actualizarAnimal,
@@ -305,4 +333,5 @@ export {
   actualizarHabitat,
   actualizarHistorialSalud,
   actualizarHistorialEvento,
+  actualizarHorarioAlimentacion,
 };
