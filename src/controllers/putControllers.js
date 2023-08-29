@@ -1,4 +1,4 @@
-import { actualizarAnimal, actualizarBoleta, actualizarCapacitacion, actualizarCitaMedica, actualizarEmpleado, actualizarEstadoSalud, actualizarEvaluacionDesempeno, actualizarFacturaEntrada, actualizarTipoAlimentacion } from "../services/putServices.js";
+import { actualizarAnimal, actualizarBoleta, actualizarCapacitacion, actualizarCitaMedica, actualizarEmpleado, actualizarEstadoSalud, actualizarEvaluacionDesempeno, actualizarFacturaEntrada, actualizarHabitat, actualizarTipoAlimentacion } from "../services/putServices.js";
 
 const actualizarTipoAlimentacionController = async (req, res, next) => {
     try {
@@ -112,4 +112,14 @@ const actualizarFacturaEntradaController = async (req, res, next) => {
 };
 
 
-export { actualizarTipoAlimentacionController, actualizarAnimalController, actualizarBoletaController, actualizarCapacitacionController, actualizarCitaMedicaController, actualizarEmpleadoController, actualizarEstadoSaludController, actualizarEvaluacionDesempenoController, actualizarFacturaEntradaController };
+const actualizarHabitatController = async (req, res, next) => {
+    try {
+        const { id, tipo, descripcion, idHistorial, idZona } = req.body;
+        const result = await actualizarHabitat(id, tipo, descripcion, idHistorial, idZona);
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json(error.message);
+    }
+};
+
+export { actualizarTipoAlimentacionController, actualizarAnimalController, actualizarBoletaController, actualizarCapacitacionController, actualizarCitaMedicaController, actualizarEmpleadoController, actualizarEstadoSaludController, actualizarEvaluacionDesempenoController, actualizarFacturaEntradaController, actualizarHabitatController };

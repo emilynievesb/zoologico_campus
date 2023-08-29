@@ -7,6 +7,7 @@ import { Empleado } from "../collections/empleado.js";
 import { EstadosSalud } from "../collections/estadoSalud.js";
 import { EvaluacionDesempeno } from "../collections/evaluacion_desempeno.js"
 import { FacturaEntrada } from "../collections/facturaEntrada.js";
+import { Habitat } from "../collections/habitat.js";
 
 const actualizarTipoAlimentacion = async (id, tipo) => {
     const tipoAlimentacion = new Alimentacion();
@@ -186,6 +187,23 @@ const actualizarFacturaEntrada = async (id, fecha, visitante, precio, evento, pr
     }
 };
 
+const actualizarHabitat = async (id, tipo, descripcion, idHistorial, idZona) => {
+    try {
+        const habitat = new Habitat();
+        habitat.id = Number(id);
+        habitat.tipo = tipo;
+        habitat.descripcion = descripcion;
+        habitat.idHistorial = idHistorial;
+        habitat.idZona = idZona;
+        const resultado = await habitat.actualizarHabitat();
+        if (resultado.modifiedCount > 0) {
+            return "Hábitat actualizado correctamente";
+        } else {
+            return "No se encontró el hábitat o no se realizaron cambios";
+        }
+    } catch (error) {
+        throw error;
+    }
+};
 
-
-export { actualizarTipoAlimentacion, actualizarAnimal, actualizarBoleta, actualizarCapacitacion, actualizarCitaMedica, actualizarEmpleado, actualizarEstadoSalud, actualizarEvaluacionDesempeno, actualizarFacturaEntrada };
+export { actualizarTipoAlimentacion, actualizarAnimal, actualizarBoleta, actualizarCapacitacion, actualizarCitaMedica, actualizarEmpleado, actualizarEstadoSalud, actualizarEvaluacionDesempeno, actualizarFacturaEntrada, actualizarHabitat };

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { actualizarAnimalController, actualizarBoletaController, actualizarCapacitacionController, actualizarCitaMedicaController, actualizarEmpleadoController, actualizarEstadoSaludController, actualizarEvaluacionDesempenoController, actualizarFacturaEntradaController, actualizarTipoAlimentacionController } from "../controllers/putControllers.js";
+import { actualizarAnimalController, actualizarBoletaController, actualizarCapacitacionController, actualizarCitaMedicaController, actualizarEmpleadoController, actualizarEstadoSaludController, actualizarEvaluacionDesempenoController, actualizarFacturaEntradaController, actualizarHabitatController, actualizarTipoAlimentacionController } from "../controllers/putControllers.js";
 import { actualizarEmpleado } from "../services/putServices.js";
 
 const putInitRoute = () => {
@@ -34,6 +34,9 @@ const putInitRoute = () => {
     );
     router.put(
         "/actualizarFactura", actualizarFacturaEntradaController
+    );
+    router.put(
+        "/actualizarHabitat", actualizarHabitatController
     );
     return router;
 };
