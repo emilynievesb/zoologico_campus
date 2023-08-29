@@ -22,6 +22,7 @@ const postInitRoute = () => {
   router.post("/agregarHistorialSalud", agregarHistorialSaludController);
   router.post("/agregarCapitacion", agregarCapacitacionController);
   router.post("/agregarEmpleado", agregarEmpleadoController);
+  router.post("/agregarEvaluacionDesempeno", agregarEmpleadoController);
 
   return router;
 };

@@ -161,6 +161,22 @@ const agregarHistorialSaludController = async (req, res, next) => {
   }
 };
 
+const agregarEvaluacionDesempenoController = async (req, res, next) => {
+  try {
+    const { id_seguimiento, fecha_reporte, id_empleado_reporte, descripcion } =
+      req.body;
+    const result = await agregarEvaluacionDesempeno(
+      id_seguimiento,
+      fecha_reporte,
+      id_empleado_reporte,
+      descripcion
+    );
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
 export {
   agregarTipoAlimentacionController,
   agregarAnimalController,
@@ -171,4 +187,5 @@ export {
   agregarHistorialSaludController,
   agregarCapacitacionController,
   agregarEmpleadoController,
+  agregarEvaluacionDesempenoController,
 };

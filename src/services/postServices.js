@@ -2,6 +2,7 @@ import { Alimentacion } from "../collections/alimentacion.js";
 import { Animales } from "../collections/animales.js";
 import { Capacitaciones } from "../collections/capacitaciones.js";
 import { EstadosSalud } from "../collections/estadoSalud.js";
+import { EvaluacionDesempeno } from "../collections/evaluacion_desempeno.js";
 import { Eventos } from "../collections/eventos.js";
 import { FacturaEntrada } from "../collections/facturaEntrada.js";
 import { Habitat } from "../collections/habitat.js";
@@ -188,6 +189,28 @@ const agregarHistorialSalud = async (
   }
 };
 
+const agregarEvaluacionDesempeno = async (
+  seguimiento,
+  fecha,
+  jefe,
+  descripcion
+) => {
+  try {
+    const evaluacionDesempeno = new EvaluacionDesempeno();
+    evaluacionDesempeno.seguimiento = seguimiento;
+    evaluacionDesempeno.fecha = fecha;
+    evaluacionDesempeno.jefe = jefe;
+    evaluacionDesempeno.descripcion = descripcion;
+
+    const resultado = await evaluacionDesempeno.agregarEvaluacionDesempeno();
+    if (resultado.insertedId) {
+      return "Evaluación de desempeño creada correctamente";
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   agregarTipoAlimentacion,
   agregarAnimal,
@@ -198,4 +221,5 @@ export {
   agregarHistorialSalud,
   agregarCapacitacion,
   agregarEmpleado,
+  agregarEvaluacionDesempeno,
 };
