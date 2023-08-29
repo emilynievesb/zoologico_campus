@@ -12,6 +12,7 @@ import {
   actualizarHistorialEventoController,
   actualizarHistorialSaludController,
   actualizarHorarioAlimentacionController,
+  actualizarHorarioTrabajoController,
   actualizarTipoAlimentacionController,
 } from "../controllers/putControllers.js";
 
@@ -36,6 +37,7 @@ const putInitRoute = () => {
     "/actualizarHorarioAlimentacion",
     actualizarHorarioAlimentacionController
   );
+  router.put("/actualizarHorarioTrabajo", actualizarHorarioTrabajoController);
   return router;
 };
 

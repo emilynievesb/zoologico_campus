@@ -11,6 +11,7 @@ import {
   actualizarHistorialEvento,
   actualizarHistorialSalud,
   actualizarHorarioAlimentacion,
+  actualizarHorarioTrabajo,
   actualizarTipoAlimentacion,
 } from "../services/putServices.js";
 
@@ -244,6 +245,16 @@ const actualizarHorarioAlimentacionController = async (req, res, next) => {
   }
 };
 
+const actualizarHorarioTrabajoController = async (req, res, next) => {
+  try {
+    const { id, hora_inicio, hora_fin } = req.body;
+    const result = await actualizarHorarioTrabajo(id, hora_inicio, hora_fin);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
 export {
   actualizarTipoAlimentacionController,
   actualizarAnimalController,
@@ -258,4 +269,5 @@ export {
   actualizarHistorialSaludController,
   actualizarHistorialEventoController,
   actualizarHorarioAlimentacionController,
+  actualizarHorarioTrabajoController,
 };

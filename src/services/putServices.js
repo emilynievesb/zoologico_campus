@@ -11,6 +11,7 @@ import { Habitat } from "../collections/habitat.js";
 import { HistorialEventos } from "../collections/historialEventos.js";
 import { HistorialesSalud } from "../collections/historialesSalud.js";
 import { HorariosAlimentacionMantenimiento } from "../collections/horariosAlimentacionMantenimiento.js";
+import { HorariosTrabajo } from "../collections/horariosTrabajo.js";
 
 const actualizarTipoAlimentacion = async (id, tipo) => {
   const tipoAlimentacion = new Alimentacion();
@@ -320,6 +321,24 @@ const actualizarHorarioAlimentacion = async (
   }
 };
 
+const actualizarHorarioTrabajo = async (id, horaInicio, horaFin) => {
+  try {
+    const horarioTrabajo = new HorariosTrabajo();
+    horarioTrabajo.id = Number(id);
+    horarioTrabajo.horaInicio = horaInicio;
+    horarioTrabajo.horaFin = horaFin;
+
+    const resultado = await horarioTrabajo.actualizarHorarioTrabajo();
+    if (resultado.modifiedCount > 0) {
+      return "Horario de trabajo actualizado correctamente";
+    } else {
+      throw new Error("No se pudo actualizar el horario de trabajo");
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   actualizarTipoAlimentacion,
   actualizarAnimal,
@@ -334,4 +353,5 @@ export {
   actualizarHistorialSalud,
   actualizarHistorialEvento,
   actualizarHorarioAlimentacion,
+  actualizarHorarioTrabajo,
 };
