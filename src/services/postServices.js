@@ -4,6 +4,7 @@ import { EstadosSalud } from "../collections/estadoSalud.js";
 import { Eventos } from "../collections/eventos.js";
 import { FacturaEntrada } from "../collections/facturaEntrada.js";
 import { Habitat } from "../collections/habitat.js";
+import { HistorialesSalud } from "../collections/historialesSalud.js";
 
 const agregarTipoAlimentacion = async (tipo) => {
   const tipoAlimentacion = new Alimentacion();
@@ -107,4 +108,20 @@ const agregarHabitat = async (tipo, descripcion, idHistoria, idZona) => {
   }
 };
 
-export { agregarTipoAlimentacion, agregarAnimal, agregarEstadoSalud, agregarEvento, agregarFacturaEntrada, agregarHabitat };
+const agregarHistorialSalud = async (idEstadoSalud, fecha_apertura, ultima_modificacion) => {
+  try {
+    const historialSalud = new HistorialesSalud();
+    historialSalud.idEstadoSalud = idEstadoSalud;
+    historialSalud.fecha_apertura = new Date(fecha_apertura);
+    historialSalud.ultima_modificacion = new Date(ultima_modificacion);
+
+    const resultado = await historialSalud.agregarHistorialSalud();
+    if (resultado.insertedId) {
+      return "Historial de salud agregado correctamente";
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { agregarTipoAlimentacion, agregarAnimal, agregarEstadoSalud, agregarEvento, agregarFacturaEntrada, agregarHabitat, agregarHistorialSalud };

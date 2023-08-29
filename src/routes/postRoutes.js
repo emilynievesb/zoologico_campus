@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { agregarAnimalController, agregarEstadoSaludController, agregarEventoController, agregarFacturaEntradaController, agregarHabitatController, agregarTipoAlimentacionController } from "../controllers/postControllers.js";
+import { agregarAnimalController, agregarEstadoSaludController, agregarEventoController, agregarFacturaEntradaController, agregarHabitatController, agregarHistorialSaludController, agregarTipoAlimentacionController } from "../controllers/postControllers.js";
 
 const postInitRoute = () => {
   const router = Router();
@@ -9,6 +9,7 @@ const postInitRoute = () => {
   router.post("/agregarEventos", agregarEventoController);
   router.post("/agregarFacturaEntrada", agregarFacturaEntradaController);
   router.post("/agregarHabitat", agregarHabitatController);
+  router.post("/agregarHistorialSalud", agregarHistorialSaludController);
 
   return router;
 };
