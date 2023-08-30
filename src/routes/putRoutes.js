@@ -25,10 +25,7 @@ import {
 
 const putInitRoute = () => {
   const router = Router();
-  router.put(
-    "/actualizarTipoAlimentacion",
-    actualizarTipoAlimentacionController
-  );
+  router.put("/actualizarTipoAlimentacion", actualizarTipoAlimentacionController);
   router.put("/actualizarAnimal", actualizarAnimalController);
   router.put("/actualizarBoleta", actualizarBoletaController);
   router.put("/actualizarCapacitacion", actualizarCapacitacionController);
@@ -40,22 +37,13 @@ const putInitRoute = () => {
   router.put("/actualizarHabitat", actualizarHabitatController);
   router.put("/actualizarHistorialSalud", actualizarHistorialSaludController);
   router.put("/actualizarHistorialEvento", actualizarHistorialEventoController);
-  router.put(
-    "/actualizarHorarioAlimentacion",
-    actualizarHorarioAlimentacionController
-  );
+  router.put("/actualizarHorarioAlimentacion", actualizarHorarioAlimentacionController);
   router.put("/actualizarHorarioTrabajo", actualizarHorarioTrabajoController);
   router.put("/actualizarListaBoletas", actualizarListaBoletasController);
-  router.put(
-    "/actualizarPlanificacionEventos",
-    actualizarPlanificacionEventosController
-  );
+  router.put("/actualizarPlanificacionEventos", actualizarPlanificacionEventosController);
   router.put("/actualizarPromociones", actualizarPromocionesController);
   router.put("/actualizarPuesto", actualizarPuestoController);
-  router.put(
-    "/actualizarSeguimientoEmpleado",
-    actualizarSeguimientoEmpleadoController
-  );
+  router.put("/actualizarSeguimientoEmpleado", actualizarSeguimientoEmpleadoController);
   router.put("/actualizarTipoBoleta", actualizarTipoBoletaController);
   router.put("/actualizarZona", actualizarZonaController);
 
