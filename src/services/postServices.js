@@ -4,6 +4,7 @@ import { Boletas } from "../collections/boletas.js";
 import { Capacitaciones } from "../collections/capacitaciones.js";
 import { CitasMedicas } from "../collections/citasMedicas.js";
 import { EstadosSalud } from "../collections/estadoSalud.js";
+import { EstadoHabitat } from "../collections/estadohabitad.js";
 import { EvaluacionDesempeno } from "../collections/evaluacion_desempeno.js";
 import { Eventos } from "../collections/eventos.js";
 import { FacturaEntrada } from "../collections/facturaEntrada.js";
@@ -135,6 +136,20 @@ const agregarEmpleado = async (
     const resultado = await empleado.agregarEmpleado();
     if (resultado.insertedId) {
       return "Empleado creado correctamente";
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+const agregarEstadoHabitat = async (descripcionEstado) => {
+  try {
+    const estadoHabitat = new EstadoHabitat();
+    estadoHabitat.descripcionEstado = descripcionEstado;
+
+    const resultado = await estadoHabitat.agregarEstadoHabitat();
+    if (resultado.insertedId) {
+      return "Estado de Habitat agregado correctamente";
     }
   } catch (error) {
     throw error;
@@ -463,5 +478,6 @@ export {
   agregarSeguimientoEmpleado,
   agregarTipoBoleta,
   agregarZona,
+  agregarEstadoHabitat,
   agregarBoleta,
 };
