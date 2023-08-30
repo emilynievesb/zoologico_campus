@@ -2,6 +2,7 @@ import { Alimentacion } from "../collections/alimentacion.js";
 import { Animales } from "../collections/animales.js";
 import { Boletas } from "../collections/boletas.js";
 import { Capacitaciones } from "../collections/capacitaciones.js";
+import { CitasMedicas } from "../collections/citasMedicas.js";
 import { EstadosSalud } from "../collections/estadoSalud.js";
 import { EvaluacionDesempeno } from "../collections/evaluacion_desempeno.js";
 import { Eventos } from "../collections/eventos.js";
@@ -86,6 +87,28 @@ const agregarCapacitacion = async (
     const resultado = await capacitacion.agregarCapacitacion();
     if (resultado.insertedId) {
       return "Capacitación creada correctamente";
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+const agregarCitaMedica = async (
+  idHistorialSalud,
+  fecha_cita,
+  descripcion,
+  id_veterinario
+) => {
+  try {
+    const citaMedica = new CitasMedicas();
+    citaMedica.idHistorialSalud = idHistorialSalud;
+    citaMedica.fecha_cita = new Date(fecha_cita);
+    citaMedica.descripcion = descripcion;
+    citaMedica.id_veterinario = id_veterinario;
+
+    const resultado = await citaMedica.agregarCitaMedica();
+    if (resultado.insertedId) {
+      return "Cita médica creada correctamente";
     }
   } catch (error) {
     throw error;
@@ -422,6 +445,7 @@ export {
   agregarTipoAlimentacion,
   agregarAnimal,
   agregarEstadoSalud,
+  agregarCitaMedica,
   agregarEvento,
   agregarFacturaEntrada,
   agregarHabitat,

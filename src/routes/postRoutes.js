@@ -3,6 +3,7 @@ import {
   agregarAnimalController,
   agregarBoletaController,
   agregarCapacitacionController,
+  agregarCitaMedicaController,
   agregarEmpleadoController,
   agregarEstadoSaludController,
   agregarEventoController,
@@ -27,6 +28,7 @@ const postInitRoute = () => {
   router.post("/agregarAnimal", agregarAnimalController);
   router.post("/agregarBoleta", agregarBoletaController);
   router.post("/agregarCapitacion", agregarCapacitacionController);
+  router.post("/agregarCitaMedica", agregarCitaMedicaController);
   router.post("/agregarEstadoSalud", agregarEstadoSaludController);
   router.post("/agregarEventos", agregarEventoController);
   router.post("/agregarFacturaEntrada", agregarFacturaEntradaController);

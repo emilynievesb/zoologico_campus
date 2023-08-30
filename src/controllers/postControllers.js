@@ -2,6 +2,7 @@ import {
   agregarAnimal,
   agregarBoleta,
   agregarCapacitacion,
+  agregarCitaMedica,
   agregarEstadoSalud,
   agregarEvento,
   agregarFacturaEntrada,
@@ -71,6 +72,22 @@ const agregarCapacitacionController = async (req, res, next) => {
       nombre,
       fecha,
       descripcion
+    );
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
+const agregarCitaMedicaController = async (req, res, next) => {
+  try {
+    const { idHistorialSalud, fecha_cita, descripcion, id_veterinario } =
+      req.body;
+    const result = await agregarCitaMedica(
+      idHistorialSalud,
+      fecha_cita,
+      descripcion,
+      id_veterinario
     );
     res.status(200).json(result);
   } catch (error) {
@@ -349,4 +366,5 @@ export {
   agregarTipoBoletaController,
   agregarZonaController,
   agregarBoletaController,
+  agregarCitaMedicaController,
 };
