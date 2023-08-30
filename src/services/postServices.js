@@ -12,6 +12,7 @@ import { HorariosAlimentacionMantenimiento } from "../collections/horariosAlimen
 import { HorariosTrabajo } from "../collections/horariosTrabajo.js";
 import { ListaBoletas } from "../collections/lista_boletas.js";
 import { PlanificacionEventos } from "../collections/planificacion_eventos.js";
+import { Promociones } from "../collections/promociones.js";
 
 const agregarTipoAlimentacion = async (tipo) => {
   const tipoAlimentacion = new Alimentacion();
@@ -310,6 +311,30 @@ const agregarPlanificacionEventos = async ({
   }
 };
 
+const agregarPromociones = async ({
+  nombre,
+  descripcion,
+  descuento,
+  inicio,
+  fin,
+}) => {
+  try {
+    const promociones = new Promociones();
+    promociones.nombre = nombre;
+    promociones.descripcion = descripcion;
+    promociones.descuento = Number(descuento);
+    promociones.inicio = new Date(inicio);
+    promociones.fin = new Date(fin);
+
+    const resultado = await promociones.agregarPromociones();
+    if (resultado.insertedId) {
+      return "Promoción agregada correctamente";
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   agregarTipoAlimentacion,
   agregarAnimal,
@@ -326,4 +351,5 @@ export {
   agregarHorarioTrabajo,
   agregarListaBoletas,
   agregarPlanificacionEventos,
+  agregarPromociones,
 };

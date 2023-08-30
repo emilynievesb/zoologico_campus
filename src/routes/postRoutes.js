@@ -12,6 +12,7 @@ import {
   agregarHorarioTrabajoController,
   agregarListaBoletasController,
   agregarPlanificacionEventosController,
+  agregarPromocionesController,
   agregarTipoAlimentacionController,
 } from "../controllers/postControllers.js";
 
@@ -38,6 +39,7 @@ const postInitRoute = () => {
     "/agregarPlanificacionEvento",
     agregarPlanificacionEventosController
   );
+  router.post("/agregarPromocion", agregarPromocionesController);
 
   return router;
 };
