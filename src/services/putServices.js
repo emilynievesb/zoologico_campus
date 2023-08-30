@@ -12,6 +12,7 @@ import { HistorialEventos } from "../collections/historialEventos.js";
 import { HistorialesSalud } from "../collections/historialesSalud.js";
 import { HorariosAlimentacionMantenimiento } from "../collections/horariosAlimentacionMantenimiento.js";
 import { HorariosTrabajo } from "../collections/horariosTrabajo.js";
+import { ListaBoletas } from "../collections/lista_boletas.js";
 
 const actualizarTipoAlimentacion = async (id, tipo) => {
   const tipoAlimentacion = new Alimentacion();
@@ -339,6 +340,23 @@ const actualizarHorarioTrabajo = async (id, horaInicio, horaFin) => {
   }
 };
 
+const actualizarListaBoletas = async (id, factura) => {
+  try {
+    const listaBoletas = new ListaBoletas();
+    listaBoletas.id = Number(id);
+    listaBoletas.factura = Number(factura);
+
+    const resultado = await listaBoletas.actualizarListaBoletas();
+    if (resultado.modifiedCount > 0) {
+      return "Lista de boletas actualizada correctamente";
+    } else {
+      throw new Error("No se pudo actualizar la lista de boletas");
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   actualizarTipoAlimentacion,
   actualizarAnimal,
@@ -354,4 +372,5 @@ export {
   actualizarHistorialEvento,
   actualizarHorarioAlimentacion,
   actualizarHorarioTrabajo,
+  actualizarListaBoletas,
 };
