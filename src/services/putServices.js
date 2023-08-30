@@ -15,6 +15,7 @@ import { HorariosTrabajo } from "../collections/horariosTrabajo.js";
 import { ListaBoletas } from "../collections/lista_boletas.js";
 import { PlanificacionEventos } from "../collections/planificacion_eventos.js";
 import { Promociones } from "../collections/promociones.js";
+import { Puestos } from "../collections/puestos.js";
 
 const actualizarTipoAlimentacion = async (id, tipo) => {
   const tipoAlimentacion = new Alimentacion();
@@ -416,6 +417,25 @@ const actualizarPromociones = async (
   }
 };
 
+const actualizarPuesto = async (id, nombre, salario, idHorario) => {
+  try {
+    const puestos = new Puestos();
+    puestos.id = id;
+    puestos.nombre = nombre;
+    puestos.salario = salario;
+    puestos.idHorario = idHorario;
+
+    const resultado = await puestos.actualizarPuesto();
+    if (resultado.modifiedCount > 0) {
+      return "Puesto actualizado correctamente";
+    } else {
+      throw new Error("No se pudo actualizar el puesto");
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   actualizarTipoAlimentacion,
   actualizarAnimal,
@@ -434,4 +454,5 @@ export {
   actualizarListaBoletas,
   actualizarPlanificacionEventos,
   actualizarPromociones,
+  actualizarPuesto,
 };
