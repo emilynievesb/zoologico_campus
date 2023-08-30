@@ -93,8 +93,8 @@ class Boletas {
             const connection = await this.connect();
             const resultado = await connection.insertOne({
                 id: Number(id),
-                lista: this.idLista,
-                tipo: this.idtipo,
+                idLista: this.idLista,
+                idtipo: this.idtipo,
                 cantidad: this.cantidad
             });
             await this.session.commitTransaction();
@@ -120,7 +120,7 @@ class Boletas {
                     {
                         id: Number(id)
                     }
-                );
+                ).toArray();
             await this.session.commitTransaction();
             return resultado;
         } catch (error) {
@@ -151,7 +151,7 @@ class Boletas {
                             cantidad: this.cantidad
                         }
                     }
-                ).toArray();
+                );
             await this.session.commitTransaction();
             return resultado;
         } catch (error) {

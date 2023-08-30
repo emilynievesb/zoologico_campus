@@ -5,9 +5,10 @@ class HistorialEventos {
   id;
   fecha_creacion;
   ultima_modificacion;
+  idEstadohabitat;
   session;
 
-  constructor() {}
+  constructor() { }
 
   async connect() {
     try {
@@ -89,10 +90,12 @@ class HistorialEventos {
       const { id, session: newSession } = incremental;
       this.session = newSession;
       const connection = await this.connect();
+      console.log(this.idEstadohabitat);
       const resultado = await connection.insertOne({
         id: Number(id),
-        fecha_creacion: new Date(),
-        ultima_modificacion: new Date(),
+        fecha_creacion: this.fecha_creacion,
+        ultima_modificacion: this.ultima_modificacion,
+        idEstadohabitat: Number(this.idEstadohabitat)
       });
       await this.session.commitTransaction();
       return resultado;

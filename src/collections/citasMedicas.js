@@ -53,7 +53,6 @@ class CitasMedicas {
 
   async obtenerCitaMedica(citaMedicaId) {
     try {
-      this.session = await startTransaction();
       const connection = await this.connect();
       const resultado = await connection
         .aggregate([
@@ -97,7 +96,7 @@ class CitasMedicas {
       const resultado = await connection.insertOne({
         id: Number(id),
         idHistorialSalud: Number(this.idHistorialSalud),
-        fecha_cita: this.fecha_cita,
+        fecha_cita: new Date(this.fecha_cita),
         descripcion: this.descripcion,
         id_veterinario: this.id_veterinario,
       });
