@@ -14,6 +14,7 @@ import { HorariosAlimentacionMantenimiento } from "../collections/horariosAlimen
 import { HorariosTrabajo } from "../collections/horariosTrabajo.js";
 import { ListaBoletas } from "../collections/lista_boletas.js";
 import { PlanificacionEventos } from "../collections/planificacion_eventos.js";
+import { Promociones } from "../collections/promociones.js";
 
 const actualizarTipoAlimentacion = async (id, tipo) => {
   const tipoAlimentacion = new Alimentacion();
@@ -387,6 +388,34 @@ const actualizarPlanificacionEventos = async (
   }
 };
 
+const actualizarPromociones = async (
+  id,
+  nombre,
+  descripcion,
+  descuento,
+  inicio,
+  fin
+) => {
+  try {
+    const promociones = new Promociones();
+    promociones.id = Number(id);
+    promociones.nombre = nombre;
+    promociones.descripcion = descripcion;
+    promociones.descuento = Number(descuento);
+    promociones.inicio = new Date(inicio);
+    promociones.fin = new Date(fin);
+
+    const resultado = await promociones.actualizarPromociones();
+    if (resultado.modifiedCount > 0) {
+      return "Promoción actualizada correctamente";
+    } else {
+      throw new Error("No se pudo actualizar la promoción");
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   actualizarTipoAlimentacion,
   actualizarAnimal,
@@ -404,4 +433,5 @@ export {
   actualizarHorarioTrabajo,
   actualizarListaBoletas,
   actualizarPlanificacionEventos,
+  actualizarPromociones,
 };
