@@ -14,6 +14,7 @@ import { ListaBoletas } from "../collections/lista_boletas.js";
 import { PlanificacionEventos } from "../collections/planificacion_eventos.js";
 import { Promociones } from "../collections/promociones.js";
 import { Puestos } from "../collections/puestos.js";
+import { SeguimientoEmpleado } from "../collections/seguimientoEmpleados.js";
 
 const agregarTipoAlimentacion = async (tipo) => {
   const tipoAlimentacion = new Alimentacion();
@@ -352,6 +353,21 @@ const agregarPuesto = async (nombre, salario, idHorario) => {
   }
 };
 
+const agregarSeguimientoEmpleado = async (creacion, actualizacion) => {
+  try {
+    const seguimiento = new SeguimientoEmpleado();
+    seguimiento.creacion = new Date(creacion);
+    seguimiento.actualizacion = new Date(actualizacion);
+
+    const resultado = await seguimiento.agregarSeguimientoEmpleado();
+    if (resultado.insertedId) {
+      return "Seguimiento de empleado agregado correctamente";
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   agregarTipoAlimentacion,
   agregarAnimal,
@@ -370,4 +386,5 @@ export {
   agregarPlanificacionEventos,
   agregarPromociones,
   agregarPuesto,
+  agregarSeguimientoEmpleado,
 };
