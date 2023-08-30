@@ -16,6 +16,7 @@ import { Promociones } from "../collections/promociones.js";
 import { Puestos } from "../collections/puestos.js";
 import { SeguimientoEmpleado } from "../collections/seguimientoEmpleados.js";
 import { TipoBoleta } from "../collections/tiposBoletas.js";
+import { Zona } from "../collections/zonas.js";
 
 const agregarTipoAlimentacion = async (tipo) => {
   const tipoAlimentacion = new Alimentacion();
@@ -384,6 +385,21 @@ const agregarTipoBoleta = async (tipo, precio) => {
   }
 };
 
+const agregarZona = async (nombre, descripcion) => {
+  try {
+    const zona = new Zona();
+    zona.nombre = nombre;
+    zona.descripcion = descripcion;
+
+    const resultado = await zona.agregarZona();
+    if (resultado.insertedId) {
+      return "Zona agregada correctamente";
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   agregarTipoAlimentacion,
   agregarAnimal,
@@ -404,4 +420,5 @@ export {
   agregarPuesto,
   agregarSeguimientoEmpleado,
   agregarTipoBoleta,
+  agregarZona,
 };

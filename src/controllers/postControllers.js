@@ -15,6 +15,7 @@ import {
   agregarSeguimientoEmpleado,
   agregarTipoAlimentacion,
   agregarTipoBoleta,
+  agregarZona,
 } from "../services/postServices.js";
 
 const agregarTipoAlimentacionController = async (req, res, next) => {
@@ -305,6 +306,16 @@ const agregarTipoBoletaController = async (req, res, next) => {
   }
 };
 
+const agregarZonaController = async (req, res, next) => {
+  try {
+    const { nombre, descripcion } = req.body;
+    const result = await agregarZona(nombre, descripcion);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
 export {
   agregarTipoAlimentacionController,
   agregarAnimalController,
@@ -325,4 +336,5 @@ export {
   agregarPuestoController,
   agregarSeguimientoEmpleadoController,
   agregarTipoBoletaController,
+  agregarZonaController,
 };
