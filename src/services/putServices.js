@@ -18,6 +18,7 @@ import { Promociones } from "../collections/promociones.js";
 import { Puestos } from "../collections/puestos.js";
 import { SeguimientoEmpleado } from "../collections/seguimientoEmpleados.js";
 import { TipoBoleta } from "../collections/tiposBoletas.js";
+import { Zona } from "../collections/zonas.js";
 
 const actualizarTipoAlimentacion = async (id, tipo) => {
   const tipoAlimentacion = new Alimentacion();
@@ -474,6 +475,24 @@ const actualizarTipoBoleta = async (id, tipo, precio) => {
   }
 };
 
+const actualizarZona = async (id, nombre, descripcion) => {
+  try {
+    const zona = new Zona();
+    zona.id = id;
+    zona.nombre = nombre;
+    zona.descripcion = descripcion;
+
+    const resultado = await zona.actualizarZona();
+    if (resultado.modifiedCount > 0) {
+      return "Zona actualizada correctamente";
+    } else {
+      throw new Error("No se pudo actualizar la zona");
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   actualizarTipoAlimentacion,
   actualizarAnimal,
@@ -495,4 +514,5 @@ export {
   actualizarPuesto,
   actualizarSeguimientoEmpleado,
   actualizarTipoBoleta,
+  actualizarZona,
 };
