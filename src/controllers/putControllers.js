@@ -4,6 +4,7 @@ import {
   actualizarCapacitacion,
   actualizarCitaMedica,
   actualizarEmpleado,
+  actualizarEstadoHabitat,
   actualizarEstadoSalud,
   actualizarEvaluacionDesempeno,
   actualizarFacturaEntrada,
@@ -129,6 +130,16 @@ const actualizarEstadoSaludController = async (req, res, next) => {
   try {
     const { id, estado } = req.body;
     const result = await actualizarEstadoSalud(id, estado);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
+const actualizarEstadoHabitatController = async (req, res, next) => {
+  try {
+    const { id, descripcionEstado } = req.body;
+    const result = await actualizarEstadoHabitat(id, descripcionEstado);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json(error.message);
@@ -374,4 +385,5 @@ export {
   actualizarSeguimientoEmpleadoController,
   actualizarTipoBoletaController,
   actualizarZonaController,
+  actualizarEstadoHabitatController,
 };
