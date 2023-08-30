@@ -13,6 +13,7 @@ import { HistorialesSalud } from "../collections/historialesSalud.js";
 import { HorariosAlimentacionMantenimiento } from "../collections/horariosAlimentacionMantenimiento.js";
 import { HorariosTrabajo } from "../collections/horariosTrabajo.js";
 import { ListaBoletas } from "../collections/lista_boletas.js";
+import { PlanificacionEventos } from "../collections/planificacion_eventos.js";
 
 const actualizarTipoAlimentacion = async (id, tipo) => {
   const tipoAlimentacion = new Alimentacion();
@@ -357,6 +358,35 @@ const actualizarListaBoletas = async (id, factura) => {
   }
 };
 
+const actualizarPlanificacionEventos = async (
+  id,
+  nombre,
+  inicio,
+  fin,
+  idZona,
+  descripcion
+) => {
+  try {
+    const planificacionEventos = new PlanificacionEventos();
+    planificacionEventos.id = Number(id);
+    planificacionEventos.nombre = nombre;
+    planificacionEventos.inicio = new Date(inicio);
+    planificacionEventos.fin = new Date(fin);
+    planificacionEventos.idZona = Number(idZona);
+    planificacionEventos.descripcion = descripcion;
+
+    const resultado =
+      await planificacionEventos.actualizarPlanificacionEventos();
+    if (resultado.modifiedCount > 0) {
+      return "Planificación de eventos actualizada correctamente";
+    } else {
+      throw new Error("No se pudo actualizar la planificación de eventos");
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   actualizarTipoAlimentacion,
   actualizarAnimal,
@@ -373,4 +403,5 @@ export {
   actualizarHorarioAlimentacion,
   actualizarHorarioTrabajo,
   actualizarListaBoletas,
+  actualizarPlanificacionEventos,
 };
