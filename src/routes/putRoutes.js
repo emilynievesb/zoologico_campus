@@ -8,6 +8,7 @@ import {
   actualizarEstadoHabitatController,
   actualizarEstadoSaludController,
   actualizarEvaluacionDesempenoController,
+  actualizarEventoController,
   actualizarFacturaEntradaController,
   actualizarHabitatController,
   actualizarHistorialEventoController,
@@ -60,6 +61,7 @@ const putInitRoute = () => {
   );
   router.put("/actualizarTipoBoleta", actualizarTipoBoletaController);
   router.put("/actualizarZona", actualizarZonaController);
+  router.put("/actualizarEvento", actualizarEventoController);
 
   return router;
 };

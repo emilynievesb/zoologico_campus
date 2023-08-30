@@ -33,11 +33,11 @@ const postInitRoute = () => {
   router.post("/agregarEmpleado", agregarEmpleadoController);
   router.post("/agregarEstadoHabitat", agregarEstadoHabitatController);
   router.post("/agregarEstadoSalud", agregarEstadoSaludController);
+  router.post("/agregarEvaluacionDesempeno", agregarEmpleadoController);
   router.post("/agregarEventos", agregarEventoController);
   router.post("/agregarFacturaEntrada", agregarFacturaEntradaController);
   router.post("/agregarHabitat", agregarHabitatController);
   router.post("/agregarHistorialSalud", agregarHistorialSaludController);
-  router.post("/agregarEvaluacionDesempeno", agregarEmpleadoController);
   router.post("/agregarHistorialEvento", agregarEmpleadoController);
   router.post(
     "/agregarHorariosAlimentacion",
