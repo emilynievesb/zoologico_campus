@@ -311,9 +311,9 @@ const actualizarHorarioAlimentacion = async (
   try {
     const horario = new HorariosAlimentacionMantenimiento();
     horario.id = Number(id);
-    horario.id_habitat = Number(id_habitat);
-    horario.hora_alimentacionMantenimiento = hora_alimentacionMantenimiento;
-    horario.id_encargado = id_encargado;
+    horario.habitat = Number(id_habitat);
+    horario.hora = hora_alimentacionMantenimiento;
+    horario.encargado = id_encargado;
     horario.descripcion = descripcion;
 
     const resultado =

@@ -97,7 +97,7 @@ class EvaluacionDesempeno {
             const resultado = await connection.insertOne({
                 id: Number(id),
                 id_seguimiento: this.seguimiento,
-                fecha_reporte: this.fecha,
+                fecha_reporte: new Date(this.fecha),
                 id_empleado_reporte: this.jefe,
                 descripcion: this.descripcion
             });
