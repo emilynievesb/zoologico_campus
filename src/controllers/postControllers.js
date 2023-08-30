@@ -11,6 +11,7 @@ import {
   agregarListaBoletas,
   agregarPlanificacionEventos,
   agregarPromociones,
+  agregarPuesto,
   agregarTipoAlimentacion,
 } from "../services/postServices.js";
 
@@ -269,6 +270,16 @@ const agregarPromocionesController = async (req, res, next) => {
   }
 };
 
+const agregarPuestoController = async (req, res, next) => {
+  try {
+    const { nombre, salario, idHorario } = req.body;
+    const result = await agregarPuesto(nombre, salario, idHorario);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
 export {
   agregarTipoAlimentacionController,
   agregarAnimalController,
@@ -286,4 +297,5 @@ export {
   agregarListaBoletasController,
   agregarPlanificacionEventosController,
   agregarPromocionesController,
+  agregarPuestoController,
 };
