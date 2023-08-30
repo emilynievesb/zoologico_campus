@@ -96,7 +96,7 @@ class Capacitaciones {
             const connection = await this.connect();
             const resultado = await connection.insertOne({
                 id: Number(id),
-                seguimiento: this.id_seguimiento,
+                id_seguimiento: this.id_seguimiento,
                 nombre: this.nombre,
                 fecha: this.fecha,
                 descripcion: this.descripcion
@@ -124,7 +124,7 @@ class Capacitaciones {
                     {
                         id: Number(id)
                     }
-                );
+                ).toArray();
             await this.session.commitTransaction();
             return resultado;
         } catch (error) {
