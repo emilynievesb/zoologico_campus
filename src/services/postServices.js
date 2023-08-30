@@ -11,6 +11,7 @@ import { HistorialesSalud } from "../collections/historialesSalud.js";
 import { HorariosAlimentacionMantenimiento } from "../collections/horariosAlimentacionMantenimiento.js";
 import { HorariosTrabajo } from "../collections/horariosTrabajo.js";
 import { ListaBoletas } from "../collections/lista_boletas.js";
+import { PlanificacionEventos } from "../collections/planificacion_eventos.js";
 
 const agregarTipoAlimentacion = async (tipo) => {
   const tipoAlimentacion = new Alimentacion();
@@ -285,6 +286,30 @@ const agregarListaBoletas = async (factura) => {
   }
 };
 
+const agregarPlanificacionEventos = async ({
+  nombre,
+  inicio,
+  fin,
+  idZona,
+  descripcion,
+}) => {
+  try {
+    const planificacionEventos = new PlanificacionEventos();
+    planificacionEventos.nombre = nombre;
+    planificacionEventos.inicio = new Date(inicio);
+    planificacionEventos.fin = new Date(fin);
+    planificacionEventos.idZona = Number(idZona);
+    planificacionEventos.descripcion = descripcion;
+
+    const resultado = await planificacionEventos.agregarPlanificacionEventos();
+    if (resultado.insertedId) {
+      return "Planificación de eventos agregada correctamente";
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   agregarTipoAlimentacion,
   agregarAnimal,
@@ -300,4 +325,5 @@ export {
   agregarHorario,
   agregarHorarioTrabajo,
   agregarListaBoletas,
+  agregarPlanificacionEventos,
 };
