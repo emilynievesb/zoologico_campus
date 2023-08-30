@@ -17,6 +17,7 @@ import { PlanificacionEventos } from "../collections/planificacion_eventos.js";
 import { Promociones } from "../collections/promociones.js";
 import { Puestos } from "../collections/puestos.js";
 import { SeguimientoEmpleado } from "../collections/seguimientoEmpleados.js";
+import { TipoBoleta } from "../collections/tiposBoletas.js";
 
 const actualizarTipoAlimentacion = async (id, tipo) => {
   const tipoAlimentacion = new Alimentacion();
@@ -455,6 +456,24 @@ const actualizarSeguimientoEmpleado = async (id, creacion, actualizacion) => {
   }
 };
 
+const actualizarTipoBoleta = async (id, tipo, precio) => {
+  try {
+    const tipoBoleta = new TipoBoleta();
+    tipoBoleta.id = id;
+    tipoBoleta.tipo = tipo;
+    tipoBoleta.precio = precio;
+
+    const resultado = await tipoBoleta.actualizarTipoBoleta();
+    if (resultado.modifiedCount > 0) {
+      return "Tipo de boleta actualizado correctamente";
+    } else {
+      throw new Error("No se pudo actualizar el tipo de boleta");
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   actualizarTipoAlimentacion,
   actualizarAnimal,
@@ -475,4 +494,5 @@ export {
   actualizarPromociones,
   actualizarPuesto,
   actualizarSeguimientoEmpleado,
+  actualizarTipoBoleta,
 };

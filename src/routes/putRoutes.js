@@ -19,6 +19,7 @@ import {
   actualizarPuestoController,
   actualizarSeguimientoEmpleadoController,
   actualizarTipoAlimentacionController,
+  actualizarTipoBoletaController,
 } from "../controllers/putControllers.js";
 
 const putInitRoute = () => {
@@ -54,6 +55,8 @@ const putInitRoute = () => {
     "/actualizarSeguimientoEmpleado",
     actualizarSeguimientoEmpleadoController
   );
+  router.put("/actualizarTipoBoleta", actualizarTipoBoletaController);
+
   return router;
 };
 
