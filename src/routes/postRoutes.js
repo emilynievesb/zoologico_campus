@@ -16,6 +16,7 @@ import {
   agregarPuestoController,
   agregarSeguimientoEmpleadoController,
   agregarTipoAlimentacionController,
+  agregarTipoBoletaController,
 } from "../controllers/postControllers.js";
 
 const postInitRoute = () => {
@@ -47,6 +48,7 @@ const postInitRoute = () => {
     "/agregarSeguimientoEmpleado",
     agregarSeguimientoEmpleadoController
   );
+  router.post("/agregarTipoBoleta", agregarTipoBoletaController);
   return router;
 };
 

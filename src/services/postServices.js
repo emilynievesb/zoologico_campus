@@ -15,6 +15,7 @@ import { PlanificacionEventos } from "../collections/planificacion_eventos.js";
 import { Promociones } from "../collections/promociones.js";
 import { Puestos } from "../collections/puestos.js";
 import { SeguimientoEmpleado } from "../collections/seguimientoEmpleados.js";
+import { TipoBoleta } from "../collections/tiposBoletas.js";
 
 const agregarTipoAlimentacion = async (tipo) => {
   const tipoAlimentacion = new Alimentacion();
@@ -368,6 +369,21 @@ const agregarSeguimientoEmpleado = async (creacion, actualizacion) => {
   }
 };
 
+const agregarTipoBoleta = async (tipo, precio) => {
+  try {
+    const tipoBoleta = new TipoBoleta();
+    tipoBoleta.tipo = tipo;
+    tipoBoleta.precio = Number(precio);
+
+    const resultado = await tipoBoleta.agregarTipoBoleta();
+    if (resultado.insertedId) {
+      return "Tipo de boleta agregado correctamente";
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   agregarTipoAlimentacion,
   agregarAnimal,
@@ -387,4 +403,5 @@ export {
   agregarPromociones,
   agregarPuesto,
   agregarSeguimientoEmpleado,
+  agregarTipoBoleta,
 };
