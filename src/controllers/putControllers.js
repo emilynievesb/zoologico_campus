@@ -16,6 +16,7 @@ import {
   actualizarPlanificacionEventos,
   actualizarPromociones,
   actualizarPuesto,
+  actualizarSeguimientoEmpleado,
   actualizarTipoAlimentacion,
 } from "../services/putServices.js";
 
@@ -315,6 +316,20 @@ const actualizarPuestoController = async (req, res, next) => {
   }
 };
 
+const actualizarSeguimientoEmpleadoController = async (req, res, next) => {
+  try {
+    const { id, fecha_creacion, fecha_actualizacion } = req.body;
+    const result = await actualizarSeguimientoEmpleado(
+      id,
+      fecha_creacion,
+      fecha_actualizacion
+    );
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
 export {
   actualizarTipoAlimentacionController,
   actualizarAnimalController,
@@ -334,4 +349,5 @@ export {
   actualizarPlanificacionEventosController,
   actualizarPromocionesController,
   actualizarPuestoController,
+  actualizarSeguimientoEmpleadoController,
 };

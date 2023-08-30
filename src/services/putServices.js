@@ -16,6 +16,7 @@ import { ListaBoletas } from "../collections/lista_boletas.js";
 import { PlanificacionEventos } from "../collections/planificacion_eventos.js";
 import { Promociones } from "../collections/promociones.js";
 import { Puestos } from "../collections/puestos.js";
+import { SeguimientoEmpleado } from "../collections/seguimientoEmpleados.js";
 
 const actualizarTipoAlimentacion = async (id, tipo) => {
   const tipoAlimentacion = new Alimentacion();
@@ -436,6 +437,24 @@ const actualizarPuesto = async (id, nombre, salario, idHorario) => {
   }
 };
 
+const actualizarSeguimientoEmpleado = async (id, creacion, actualizacion) => {
+  try {
+    const seguimiento = new SeguimientoEmpleado();
+    seguimiento.id = id;
+    seguimiento.creacion = new Date(creacion);
+    seguimiento.actualizacion = new Date(actualizacion);
+
+    const resultado = await seguimiento.actualizarSeguimientoEmpleado();
+    if (resultado.modifiedCount > 0) {
+      return "Seguimiento de empleado actualizado correctamente";
+    } else {
+      throw new Error("No se pudo actualizar el seguimiento de empleado");
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   actualizarTipoAlimentacion,
   actualizarAnimal,
@@ -455,4 +474,5 @@ export {
   actualizarPlanificacionEventos,
   actualizarPromociones,
   actualizarPuesto,
+  actualizarSeguimientoEmpleado,
 };
