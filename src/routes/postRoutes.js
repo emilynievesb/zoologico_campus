@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   agregarAnimalController,
+  agregarBoletaController,
   agregarCapacitacionController,
   agregarEmpleadoController,
   agregarEstadoSaludController,
@@ -24,12 +25,13 @@ const postInitRoute = () => {
   const router = Router();
   router.post("/agregarTipoAlimentacion", agregarTipoAlimentacionController);
   router.post("/agregarAnimal", agregarAnimalController);
+  router.post("/agregarBoleta", agregarBoletaController);
+  router.post("/agregarCapitacion", agregarCapacitacionController);
   router.post("/agregarEstadoSalud", agregarEstadoSaludController);
   router.post("/agregarEventos", agregarEventoController);
   router.post("/agregarFacturaEntrada", agregarFacturaEntradaController);
   router.post("/agregarHabitat", agregarHabitatController);
   router.post("/agregarHistorialSalud", agregarHistorialSaludController);
-  router.post("/agregarCapitacion", agregarCapacitacionController);
   router.post("/agregarEmpleado", agregarEmpleadoController);
   router.post("/agregarEvaluacionDesempeno", agregarEmpleadoController);
   router.post("/agregarHistorialEvento", agregarEmpleadoController);

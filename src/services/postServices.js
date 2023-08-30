@@ -1,5 +1,6 @@
 import { Alimentacion } from "../collections/alimentacion.js";
 import { Animales } from "../collections/animales.js";
+import { Boletas } from "../collections/boletas.js";
 import { Capacitaciones } from "../collections/capacitaciones.js";
 import { EstadosSalud } from "../collections/estadoSalud.js";
 import { EvaluacionDesempeno } from "../collections/evaluacion_desempeno.js";
@@ -52,6 +53,23 @@ const agregarAnimal = async (
     throw error;
   }
 };
+
+const agregarBoleta = async (idLista, idtipo, cantidad) => {
+  try {
+    const boleta = new Boletas();
+    boleta.idLista = idLista;
+    boleta.idtipo = idtipo;
+    boleta.cantidad = cantidad;
+
+    const resultado = await boleta.agregarBoletas();
+    if (resultado.insertedId) {
+      return "Boleta creada correctamente";
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 const agregarCapacitacion = async (
   id_seguimiento,
   nombre,
@@ -421,4 +439,5 @@ export {
   agregarSeguimientoEmpleado,
   agregarTipoBoleta,
   agregarZona,
+  agregarBoleta,
 };

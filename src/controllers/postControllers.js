@@ -1,5 +1,6 @@
 import {
   agregarAnimal,
+  agregarBoleta,
   agregarCapacitacion,
   agregarEstadoSalud,
   agregarEvento,
@@ -46,6 +47,16 @@ const agregarAnimalController = async (req, res, next) => {
       reproduccion,
       habitat
     );
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
+const agregarBoletaController = async (req, res, next) => {
+  try {
+    const { idLista, idtipo, cantidad } = req.body;
+    const result = await agregarBoleta(idLista, idtipo, cantidad);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json(error.message);
@@ -337,4 +348,5 @@ export {
   agregarSeguimientoEmpleadoController,
   agregarTipoBoletaController,
   agregarZonaController,
+  agregarBoletaController,
 };
