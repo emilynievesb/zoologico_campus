@@ -87,11 +87,21 @@ const postestadoSaludDTO = [
         .isString().withMessage("El estado es string")
 ]
 
+const putEstadoSaludDTO = [
+    check("id")
+        .notEmpty().withMessage("El id es obligatorio")
+        .isNumeric().withMessage("El id debe ser numerico"),
+    check("estado")
+        .notEmpty().withMessage("El estado es obligatorio")
+        .isString().withMessage("El estado es string")
+]
+
 
 export {
     postTipoAlimentacionDTO,
     putTipoAlimentacionDTO,
     postAnimalDTO,
     putAnimalDTO,
-    postestadoSaludDTO
+    postestadoSaludDTO,
+    putEstadoSaludDTO
 }
