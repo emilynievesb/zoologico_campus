@@ -155,6 +155,30 @@ const postFacturaEntradaDTO = [
         .isInt({ min: 1 }).withMessage("El ID de la lista de boletas debe ser un número entero positivo"),
 ];
 
+const putFacturaEntradaDTO = [
+    check("id")
+        .notEmpty().withMessage("El ID es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID debe ser un número entero positivo"),
+    check("fecha")
+        .notEmpty().withMessage("La fecha es obligatoria")
+        .matches(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/).withMessage("La fecha debe tener el formato 'YYYY-MM-DD HH:MM:SS'"),
+    check("visitante")
+        .notEmpty().withMessage("El documento del visitante es obligatorio")
+        .matches(/^[0-9]{10}$/).withMessage("El documento del visitante debe ser una cadena de 10 dígitos numéricos"),
+    check("precio")
+        .notEmpty().withMessage("El precio es obligatorio")
+        .isNumeric().withMessage("El precio debe ser un valor numérico"),
+    check("evento")
+        .notEmpty().withMessage("El campo evento es obligatorio")
+        .isBoolean().withMessage("El campo evento debe ser un valor booleano (true o false)"),
+    check("precioDescuento")
+        .notEmpty().withMessage("El precio con descuento es obligatorio")
+        .isNumeric().withMessage("El precio con descuento debe ser un valor numérico"),
+    check("listaBoletas")
+        .notEmpty().withMessage("El ID de la lista de boletas es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID de la lista de boletas debe ser un número entero positivo"),
+];
+
 
 export {
     postTipoAlimentacionDTO,
@@ -165,5 +189,6 @@ export {
     putEstadoSaludDTO,
     postEventoDTO,
     putEventoDTO,
-    postFacturaEntradaDTO
+    postFacturaEntradaDTO,
+    putFacturaEntradaDTO
 }

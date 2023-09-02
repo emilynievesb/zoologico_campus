@@ -1,7 +1,7 @@
 import { validationResult } from "express-validator";
 import { Router } from "express";
 import { deleteT1DTO, deleteT2DTO, getT1DTO, getT2DTO } from "../routes/DTO/getDeleteDTO.js";
-import { postAnimalDTO, postEventoDTO, postFacturaEntradaDTO, postTipoAlimentacionDTO, postestadoSaludDTO, putAnimalDTO, putEstadoSaludDTO, putEventoDTO, putTipoAlimentacionDTO } from "../routes/DTO/putPostDTO.js";
+import { postAnimalDTO, postEventoDTO, postFacturaEntradaDTO, postTipoAlimentacionDTO, postestadoSaludDTO, putAnimalDTO, putEstadoSaludDTO, putEventoDTO, putFacturaEntradaDTO, putTipoAlimentacionDTO } from "../routes/DTO/putPostDTO.js";
 
 function validador(req, res, next) {
     const errors = validationResult(req);
@@ -113,6 +113,26 @@ postFacturaEntradaDTOMiddleware.use(postFacturaEntradaDTO, (req, res, next) => {
     }
 });
 
+const putFacturaEntradaDTOMiddleware = Router()
+putFacturaEntradaDTOMiddleware.use(putFacturaEntradaDTO, (req, res, next) => {
+    const errFlag = validador2(req, res)
+    if (errFlag === false) {
+        const { id, fecha, visitante, precio, evento, precioDescuento, listaBoletas } = req.body
+        const nuevoBody = {
+            id: id,
+            fecha_compra: fecha,
+            documento_visitante: visitante,
+            precio: precio,
+            evento_especial: evento,
+            precio_descuento: precioDescuento,
+            idLista_boletas: listaBoletas
+
+        };
+        req.body = nuevoBody
+        next()
+    }
+});
+
 export {
     getT1DTOMiddleware,
     getT2DTOMiddleware,
@@ -126,5 +146,6 @@ export {
     putestadoSaludDTOMiddleware,
     postEventoDTOMiddleware,
     putEventoDTOMiddleware,
-    postFacturaEntradaDTOMiddleware
+    postFacturaEntradaDTOMiddleware,
+    putFacturaEntradaDTOMiddleware
 }
