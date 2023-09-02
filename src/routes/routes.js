@@ -5,13 +5,19 @@ import { deleteRoute } from "./deleteRoutes.js";
 import { middlewareRateLimit } from "../middlewares/middlewareRateLimit.js";
 import { putInitRoute } from "./putRoutes.js";
 
-const initAPIRoutes = () => {
+const v1Routes = () => {
   const router = Router();
   router.use("/get", middlewareRateLimit, getInitRoute());
   router.use("/post", middlewareRateLimit, postInitRoute());
+  return router;
+};
+
+const v2Routes = () => {
+  const router = Router();
+  router.use("/put", middlewareRateLimit, putInitRoute());
   router.use("/delete", middlewareRateLimit, deleteRoute());
   router.use("/put", middlewareRateLimit, putInitRoute());
   return router;
 };
 
-export { initAPIRoutes };
+export { v1Routes, v2Routes };
