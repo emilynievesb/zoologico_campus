@@ -19,10 +19,11 @@ import {
   agregarTipoBoletaController,
   agregarZonaController,
 } from "../controllers/postControllers.js";
+import { postTipoAlimentacionDTOMiddleware } from "../middlewares/middlewaresDTO.js";
 
 const postInitRoute = () => {
   const router = Router();
-  router.post("/agregarTipoAlimentacion", agregarTipoAlimentacionController);
+  router.post("/agregarTipoAlimentacion", postTipoAlimentacionDTOMiddleware, agregarTipoAlimentacionController);
   router.post("/agregarAnimal", agregarAnimalController);
   router.post("/agregarEstadoSalud", agregarEstadoSaludController);
   router.post("/agregarEventos", agregarEventoController);

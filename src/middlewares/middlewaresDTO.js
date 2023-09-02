@@ -1,6 +1,7 @@
 import { validationResult } from "express-validator";
 import { Router } from "express";
 import { deleteT1DTO, deleteT2DTO, getT1DTO, getT2DTO } from "../routes/DTO/getDeleteDTO.js";
+import { postTipoAlimentacionDTO, putTipoAlimentacionDTO } from "../routes/DTO/putPostDTO.js";
 
 function validador(req, res, next) {
     const errors = validationResult(req);
@@ -13,6 +14,7 @@ function validador(req, res, next) {
     } else next()
 }
 
+//get delete
 const getT1DTOMiddleware = Router()
 getT1DTOMiddleware.use(getT1DTO, (req, res, next) => {
     validador(req, res, next)
@@ -33,9 +35,23 @@ deleteT2DTOMiddleware.use(deleteT2DTO, (req, res, next) => {
     validador(req, res, next)
 })
 
+//post put
+//tipoAlimentacion
+const postTipoAlimentacionDTOMiddleware = Router()
+postTipoAlimentacionDTOMiddleware.use(postTipoAlimentacionDTO, (req, res, next) => {
+    validador(req, res, next)
+});
+
+const putTipoAlimentacionDTOMiddleware = Router()
+putTipoAlimentacionDTOMiddleware.use(putTipoAlimentacionDTO, (req, res, next) => {
+    validador(req, res, next)
+});
+
 export {
     getT1DTOMiddleware,
     getT2DTOMiddleware,
     deleteT1DTOMiddleware,
-    deleteT2DTOMiddleware
+    deleteT2DTOMiddleware,
+    postTipoAlimentacionDTOMiddleware,
+    putTipoAlimentacionDTOMiddleware
 }

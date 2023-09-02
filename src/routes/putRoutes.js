@@ -22,10 +22,11 @@ import {
   actualizarTipoBoletaController,
   actualizarZonaController,
 } from "../controllers/putControllers.js";
+import { putTipoAlimentacionDTOMiddleware } from "../middlewares/middlewaresDTO.js";
 
 const putInitRoute = () => {
   const router = Router();
-  router.put("/actualizarTipoAlimentacion", actualizarTipoAlimentacionController);
+  router.put("/actualizarTipoAlimentacion", putTipoAlimentacionDTOMiddleware, actualizarTipoAlimentacionController);
   router.put("/actualizarAnimal", actualizarAnimalController);
   router.put("/actualizarBoleta", actualizarBoletaController);
   router.put("/actualizarCapacitacion", actualizarCapacitacionController);
