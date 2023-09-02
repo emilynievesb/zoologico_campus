@@ -1,7 +1,7 @@
 import { validationResult } from "express-validator";
 import { Router } from "express";
 import { deleteT1DTO, deleteT2DTO, getT1DTO, getT2DTO } from "../routes/DTO/getDeleteDTO.js";
-import { postAnimalDTO, postTipoAlimentacionDTO, postestadoSaludDTO, putAnimalDTO, putEstadoSaludDTO, putTipoAlimentacionDTO } from "../routes/DTO/putPostDTO.js";
+import { postAnimalDTO, postEventoDTO, postTipoAlimentacionDTO, postestadoSaludDTO, putAnimalDTO, putEstadoSaludDTO, putTipoAlimentacionDTO } from "../routes/DTO/putPostDTO.js";
 
 function validador(req, res, next) {
     const errors = validationResult(req);
@@ -69,6 +69,12 @@ putestadoSaludDTOMiddleware.use(putEstadoSaludDTO, (req, res, next) => {
     validador(req, res, next)
 });
 
+//evento
+const postEventoDTOMiddleware = Router()
+postEventoDTOMiddleware.use(postEventoDTO, (req, res, next) => {
+    validador(req, res, next)
+});
+
 export {
     getT1DTOMiddleware,
     getT2DTOMiddleware,
@@ -79,5 +85,6 @@ export {
     postAnimalDTOMiddleware,
     putAnimalDTOMiddleware,
     postestadoSaludDTOMiddleware,
-    putestadoSaludDTOMiddleware
+    putestadoSaludDTOMiddleware,
+    postEventoDTOMiddleware
 }
