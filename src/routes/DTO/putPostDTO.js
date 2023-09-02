@@ -179,6 +179,21 @@ const putFacturaEntradaDTO = [
         .isInt({ min: 1 }).withMessage("El ID de la lista de boletas debe ser un número entero positivo"),
 ];
 
+//habitad
+const postHabitatDTO = [
+    check("tipo")
+        .notEmpty().withMessage("El tipo de hábitat es obligatorio")
+        .isString().withMessage("El tipo de hábitat debe ser una cadena de texto"),
+    check("descripcion")
+        .notEmpty().withMessage("La descripción del hábitat es obligatoria")
+        .isString().withMessage("La descripción del hábitat debe ser una cadena de texto"),
+    check("idHistorial")
+        .notEmpty().withMessage("El ID de historial es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID de historial debe ser un número entero positivo"),
+    check("idZona")
+        .notEmpty().withMessage("El ID de la zona es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID de la zona debe ser un número entero positivo"),
+];
 
 export {
     postTipoAlimentacionDTO,
@@ -190,5 +205,6 @@ export {
     postEventoDTO,
     putEventoDTO,
     postFacturaEntradaDTO,
-    putFacturaEntradaDTO
+    putFacturaEntradaDTO,
+    postHabitatDTO
 }
