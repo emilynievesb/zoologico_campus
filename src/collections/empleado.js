@@ -1,4 +1,3 @@
-import autoIncrementID from "../utils/autoIncrement.js";
 import { connection, startTransaction } from "../utils/connect.js";
 
 class Empleado {
@@ -10,7 +9,7 @@ class Empleado {
   salario;
   session;
 
-  constructor() { }
+  constructor() {}
 
   async connect() {
     try {
@@ -146,14 +145,12 @@ class Empleado {
 
   async agregarEmpleado() {
     try {
-      const incremental = await autoIncrementID("empleados");
-      const { id, session: newSession } = incremental;
-      this.session = newSession;
+      this.session = await startTransaction();
       const connection = await this.connect();
       const resultado = await connection.insertOne({
-        id: id,
+        id: this.id,
         nombre: this.nombre,
-        fecha_contratacion: this.fecha_contratacion,
+        fecha_contratacion: new Date(this.fecha_contratacion),
         id_seguimiento: Number(this.id_seguimiento),
         idPuesto: Number(this.idPuesto),
         salario: this.salario,
@@ -224,7 +221,6 @@ class Empleado {
       }
     }
   }
-
 }
 
 export { Empleado };
