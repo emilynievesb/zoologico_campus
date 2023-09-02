@@ -5,7 +5,7 @@ const postTipoAlimentacionDTO = [
     check("tipo")
         .notEmpty().withMessage("El tipo es obligatorio")
         .isString().withMessage("El tipo es string")
-]
+];
 
 const putTipoAlimentacionDTO = [
     check("id")
@@ -14,7 +14,7 @@ const putTipoAlimentacionDTO = [
     check("tipo")
         .notEmpty().withMessage("El tipo es obligatorio")
         .isString().withMessage("El tipo es string")
-]
+];
 
 //animalesDTO
 const postAnimalDTO = [
@@ -45,7 +45,7 @@ const postAnimalDTO = [
     check("reproduccion.promedio_crias")
         .notEmpty().withMessage("el promedio de crias es obligatorio")
         .isInt({ min: 0 }).withMessage("El promedio de crías debe ser un valor entero no negativo"),
-]
+];
 
 const putAnimalDTO = [
     check("id")
@@ -78,14 +78,14 @@ const putAnimalDTO = [
     check("reproduccion.promedio_crias")
         .notEmpty().withMessage("el promedio de crias es obligatorio")
         .isInt({ min: 0 }).withMessage("El promedio de crías debe ser un valor entero no negativo"),
-]
+];
 
 //estadoSaludDTO
 const postestadoSaludDTO = [
     check("estado")
         .notEmpty().withMessage("El estado es obligatorio")
         .isString().withMessage("El estado es string")
-]
+];
 
 const putEstadoSaludDTO = [
     check("id")
@@ -94,7 +94,7 @@ const putEstadoSaludDTO = [
     check("estado")
         .notEmpty().withMessage("El estado es obligatorio")
         .isString().withMessage("El estado es string")
-]
+];
 
 //eventos
 const postEventoDTO = [
@@ -133,6 +133,27 @@ const putEventoDTO = [
         .isString().withMessage("Las recomendaciones deben ser una cadena de texto"),
 ];
 
+//factura entrada
+const postFacturaEntradaDTO = [
+    check("fecha")
+        .notEmpty().withMessage("La fecha es obligatoria")
+        .matches(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/).withMessage("La fecha debe tener el formato 'YYYY-MM-DD HH:MM:SS'"),
+    check("visitante")
+        .notEmpty().withMessage("El documento del visitante es obligatorio")
+        .matches(/^[0-9]{10}$/).withMessage("El documento del visitante debe ser una cadena de 10 dígitos numéricos"),
+    check("precio")
+        .notEmpty().withMessage("El precio es obligatorio")
+        .isNumeric().withMessage("El precio debe ser un valor numérico"),
+    check("evento")
+        .notEmpty().withMessage("El campo evento es obligatorio")
+        .isBoolean().withMessage("El campo evento debe ser un valor booleano (true o false)"),
+    check("precioDescuento")
+        .notEmpty().withMessage("El precio con descuento es obligatorio")
+        .isNumeric().withMessage("El precio con descuento debe ser un valor numérico"),
+    check("listaBoletas")
+        .notEmpty().withMessage("El ID de la lista de boletas es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID de la lista de boletas debe ser un número entero positivo"),
+];
 
 
 export {
@@ -143,5 +164,6 @@ export {
     postestadoSaludDTO,
     putEstadoSaludDTO,
     postEventoDTO,
-    putEventoDTO
+    putEventoDTO,
+    postFacturaEntradaDTO
 }
