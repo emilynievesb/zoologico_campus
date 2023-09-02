@@ -80,9 +80,18 @@ const putAnimalDTO = [
         .isInt({ min: 0 }).withMessage("El promedio de crías debe ser un valor entero no negativo"),
 ]
 
+//estadoSaludDTO
+const postestadoSaludDTO = [
+    check("estado")
+        .notEmpty().withMessage("El estado es obligatorio")
+        .isString().withMessage("El estado es string")
+]
+
+
 export {
     postTipoAlimentacionDTO,
     putTipoAlimentacionDTO,
     postAnimalDTO,
-    putAnimalDTO
+    putAnimalDTO,
+    postestadoSaludDTO
 }
