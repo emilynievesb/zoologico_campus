@@ -115,6 +115,24 @@ const postEventoDTO = [
         .isString().withMessage("Las recomendaciones deben ser una cadena de texto"),
 ];
 
+const putEventoDTO = [
+    check("historialId")
+        .notEmpty().withMessage("El historialId es obligatorio")
+        .isInt({ min: 1 }).withMessage("El historialId debe ser un número entero positivo"),
+    check("empleadoId")
+        .notEmpty().withMessage("El empleadoId es obligatorio")
+        .matches(/^[0-9]{10}$/).withMessage("El empleadoId debe ser una cadena de 10 dígitos numéricos"),
+    check("fecha_evento")
+        .notEmpty().withMessage("La fecha_evento es obligatoria")
+        .matches(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/).withMessage("La fecha_evento debe tener el formato 'YYYY-MM-DD HH:MM:SS'"),
+    check("descripcion")
+        .notEmpty().withMessage("La descripción es obligatoria")
+        .isString().withMessage("La descripción debe ser una cadena de texto"),
+    check("recomendaciones")
+        .notEmpty().withMessage("Las recomendaciones son obligatorias")
+        .isString().withMessage("Las recomendaciones deben ser una cadena de texto"),
+];
+
 
 
 export {
@@ -124,5 +142,6 @@ export {
     putAnimalDTO,
     postestadoSaludDTO,
     putEstadoSaludDTO,
-    postEventoDTO
+    postEventoDTO,
+    putEventoDTO
 }
