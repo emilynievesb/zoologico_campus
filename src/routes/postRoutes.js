@@ -19,7 +19,7 @@ import {
   agregarTipoBoletaController,
   agregarZonaController,
 } from "../controllers/postControllers.js";
-import { postAnimalDTOMiddleware, postEventoDTOMiddleware, postFacturaEntradaDTOMiddleware, postHabitatDTOMiddleware, postTipoAlimentacionDTOMiddleware, postestadoSaludDTOMiddleware } from "../middlewares/middlewaresDTO.js";
+import { postAnimalDTOMiddleware, postEventoDTOMiddleware, postFacturaEntradaDTOMiddleware, postHabitatDTOMiddleware, postHistorialSaludDTOMiddleware, postTipoAlimentacionDTOMiddleware, postestadoSaludDTOMiddleware } from "../middlewares/middlewaresDTO.js";
 
 const postInitRoute = () => {
   const router = Router();
@@ -29,7 +29,7 @@ const postInitRoute = () => {
   router.post("/agregarEventos", postEventoDTOMiddleware, agregarEventoController);
   router.post("/agregarFacturaEntrada", postFacturaEntradaDTOMiddleware, agregarFacturaEntradaController);
   router.post("/agregarHabitat", postHabitatDTOMiddleware, agregarHabitatController);
-  router.post("/agregarHistorialSalud", agregarHistorialSaludController);
+  router.post("/agregarHistorialSalud", postHistorialSaludDTOMiddleware,agregarHistorialSaludController);
   router.post("/agregarCapitacion", agregarCapacitacionController);
   router.post("/agregarEmpleado", agregarEmpleadoController);
   router.post("/agregarEvaluacionDesempeno", agregarEmpleadoController);

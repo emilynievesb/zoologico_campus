@@ -213,6 +213,19 @@ const putHabitatDTO = [
         .isInt({ min: 1 }).withMessage("El ID de la zona debe ser un número entero positivo"),
 ];
 
+//historialSalud
+const postHistorialSaludDTO = [
+    check("idEstadoSalud")
+        .notEmpty().withMessage("El ID del estado de salud es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID del estado de salud debe ser un número entero positivo"),
+    check("fecha_apertura")
+        .notEmpty().withMessage("La fecha de apertura es obligatoria")
+        .matches(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/).withMessage("La fecha de apertura debe tener el formato 'YYYY-MM-DD HH:MM:SS'"),
+    check("ultima_modificacion")
+        .notEmpty().withMessage("La fecha de última modificación es obligatoria")
+        .matches(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/).withMessage("La fecha de última modificación debe tener el formato 'YYYY-MM-DD HH:MM:SS'"),
+];
+
 export {
     postTipoAlimentacionDTO,
     putTipoAlimentacionDTO,
@@ -225,5 +238,6 @@ export {
     postFacturaEntradaDTO,
     putFacturaEntradaDTO,
     postHabitatDTO,
-    putHabitatDTO
+    putHabitatDTO,
+    postHistorialSaludDTO
 }
