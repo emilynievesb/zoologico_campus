@@ -22,7 +22,7 @@ import {
   actualizarTipoBoletaController,
   actualizarZonaController,
 } from "../controllers/putControllers.js";
-import { putAnimalDTOMiddleware, putFacturaEntradaDTOMiddleware, putTipoAlimentacionDTOMiddleware, putestadoSaludDTOMiddleware } from "../middlewares/middlewaresDTO.js";
+import { putAnimalDTOMiddleware, putFacturaEntradaDTOMiddleware, putHabitatDTOMiddleware, putTipoAlimentacionDTOMiddleware, putestadoSaludDTOMiddleware } from "../middlewares/middlewaresDTO.js";
 
 const putInitRoute = () => {
   const router = Router();
@@ -35,7 +35,7 @@ const putInitRoute = () => {
   router.put("/actualizarEstadoSalud", putestadoSaludDTOMiddleware, actualizarEstadoSaludController);
   router.put("/actualizarEvaluacion", actualizarEvaluacionDesempenoController);
   router.put("/actualizarFactura", putFacturaEntradaDTOMiddleware, actualizarFacturaEntradaController);
-  router.put("/actualizarHabitat", actualizarHabitatController);
+  router.put("/actualizarHabitat", putHabitatDTOMiddleware, actualizarHabitatController);
   router.put("/actualizarHistorialSalud", actualizarHistorialSaludController);
   router.put("/actualizarHistorialEvento", actualizarHistorialEventoController);
   router.put("/actualizarHorarioAlimentacion", actualizarHorarioAlimentacionController);
