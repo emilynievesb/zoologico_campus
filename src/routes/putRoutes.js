@@ -5,8 +5,10 @@ import {
   actualizarCapacitacionController,
   actualizarCitaMedicaController,
   actualizarEmpleadoController,
+  actualizarEstadoHabitatController,
   actualizarEstadoSaludController,
   actualizarEvaluacionDesempenoController,
+  actualizarEventoController,
   actualizarFacturaEntradaController,
   actualizarHabitatController,
   actualizarHistorialEventoController,
@@ -31,6 +33,7 @@ const putInitRoute = () => {
   router.put("/actualizarCapacitacion", actualizarCapacitacionController);
   router.put("/actualizarCitaMedica", actualizarCitaMedicaController);
   router.put("/actualizarEmpleado", actualizarEmpleadoController);
+  router.put("/actualizarEstadoHabitat", actualizarEstadoHabitatController);
   router.put("/actualizarEstadoSalud", actualizarEstadoSaludController);
   router.put("/actualizarEvaluacion", actualizarEvaluacionDesempenoController);
   router.put("/actualizarFactura", actualizarFacturaEntradaController);
@@ -46,6 +49,7 @@ const putInitRoute = () => {
   router.put("/actualizarSeguimientoEmpleado", actualizarSeguimientoEmpleadoController);
   router.put("/actualizarTipoBoleta", actualizarTipoBoletaController);
   router.put("/actualizarZona", actualizarZonaController);
+  router.put("/actualizarEvento", actualizarEventoController);
 
   return router;
 };

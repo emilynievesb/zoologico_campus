@@ -1,8 +1,11 @@
 import { Router } from "express";
 import {
   agregarAnimalController,
+  agregarBoletaController,
   agregarCapacitacionController,
+  agregarCitaMedicaController,
   agregarEmpleadoController,
+  agregarEstadoHabitatController,
   agregarEstadoSaludController,
   agregarEventoController,
   agregarFacturaEntradaController,
@@ -24,14 +27,17 @@ const postInitRoute = () => {
   const router = Router();
   router.post("/agregarTipoAlimentacion", agregarTipoAlimentacionController);
   router.post("/agregarAnimal", agregarAnimalController);
+  router.post("/agregarBoleta", agregarBoletaController);
+  router.post("/agregarCapitacion", agregarCapacitacionController);
+  router.post("/agregarCitaMedica", agregarCitaMedicaController);
+  router.post("/agregarEmpleado", agregarEmpleadoController);
+  router.post("/agregarEstadoHabitat", agregarEstadoHabitatController);
   router.post("/agregarEstadoSalud", agregarEstadoSaludController);
+  router.post("/agregarEvaluacionDesempeno", agregarEmpleadoController);
   router.post("/agregarEventos", agregarEventoController);
   router.post("/agregarFacturaEntrada", agregarFacturaEntradaController);
   router.post("/agregarHabitat", agregarHabitatController);
   router.post("/agregarHistorialSalud", agregarHistorialSaludController);
-  router.post("/agregarCapitacion", agregarCapacitacionController);
-  router.post("/agregarEmpleado", agregarEmpleadoController);
-  router.post("/agregarEvaluacionDesempeno", agregarEmpleadoController);
   router.post("/agregarHistorialEvento", agregarEmpleadoController);
   router.post(
     "/agregarHorariosAlimentacion",

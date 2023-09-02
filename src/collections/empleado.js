@@ -1,4 +1,3 @@
-import autoIncrementID from "../utils/autoIncrement.js";
 import { connection, startTransaction } from "../utils/connect.js";
 
 class Empleado {
@@ -10,7 +9,7 @@ class Empleado {
   salario;
   session;
 
-  constructor() { }
+  constructor() {}
 
   async connect() {
     try {
@@ -222,7 +221,6 @@ class Empleado {
       }
     }
   }
-
 }
 
 export { Empleado };
