@@ -28,6 +28,7 @@ import {
   postCapacitacionDTOMiddleware,
   postCitasMedicasDTOMiddleware,
   postEmpleadoDTOMiddleware,
+  postEstadoHabitatDTOMiddleware,
   postEvaluacionDesempenoDTOMiddleware,
   postEventoDTOMiddleware,
   postFacturaEntradaDTOMiddleware,
@@ -105,6 +106,8 @@ const postInitRoute = () => {
   );
   router.post(
     "/agregarCitaMedica",
+    authorizationMiddleware,
+    contentMiddlewareCitasMedicas,
     postCitasMedicasDTOMiddleware,
     agregarCitaMedicaController
   );
@@ -117,8 +120,7 @@ const postInitRoute = () => {
   );
   router.post(
     "/agregarEstadoHabitat",
-    authorizationMiddleware,
-    contentMiddlewareEstadoHabitat,
+    postEstadoHabitatDTOMiddleware,
     agregarEstadoHabitatController
   );
   router.post(

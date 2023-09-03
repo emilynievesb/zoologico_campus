@@ -664,8 +664,15 @@ const putCitasMedicasDTO = [
         .matches(/^[0-9]{10}$/).withMessage("El ID del veterinario debe tener 10 dígitos numéricos"),
 ];
 
+//Estado habitat
+const postEstadoHabitatDTO = [
+    check("descripcionEstado")
+        .notEmpty().withMessage("La descripción del estado del habitat es obligatoria")
+        .isString().withMessage("La descripción del estado del habitat debe ser una cadena de texto"),
+];
 
 export {
+    postEstadoHabitatDTO,
     putCitasMedicasDTO,
     postCitasMedicasDTO,
     putBoletasDTO,
