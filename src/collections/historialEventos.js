@@ -8,7 +8,9 @@ class HistorialEventos {
   idEstadohabitat;
   session;
 
-  constructor() { }
+  constructor() {
+    id = "AUTORIZACIÓN TABLA HISTORIAL EVENTOS"
+  }
 
   async connect() {
     try {

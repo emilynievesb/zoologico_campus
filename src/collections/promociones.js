@@ -9,7 +9,9 @@ class Promociones {
     inicio;
     fin;
 
-    constructor() { }
+    constructor() {
+        id = "AUTORIZACIÓN TABLA PROMOCIONES"
+    }
 
     async connect() {
         try {

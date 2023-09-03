@@ -6,7 +6,9 @@ class Alimentacion {
   tipo;
   session;
 
-  constructor() { }
+  constructor() {
+    id = "AUTORIZACIÓN TABLA ALIMENTACION"
+  }
 
   async connect() {
     try {

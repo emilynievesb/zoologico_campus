@@ -5,7 +5,9 @@ class ListaBoletas {
     id;
     factura;
 
-    constructor() { }
+    constructor() {
+        id = "AUTORIZACIÓN TABLA LISTA BOLETAS"
+    }
 
     async connect() {
         try {

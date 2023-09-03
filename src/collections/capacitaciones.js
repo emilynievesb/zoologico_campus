@@ -8,7 +8,9 @@ class Capacitaciones {
     fecha;
     descripcion;
 
-    constructor() { }
+    constructor() {
+        id = "AUTORIZACIÓN TABLA CAPACITACIONES"
+    }
 
     async connect() {
         try {
@@ -124,7 +126,7 @@ class Capacitaciones {
                     {
                         id: Number(id)
                     }
-                ).toArray();
+                );
             await this.session.commitTransaction();
             return resultado;
         } catch (error) {
@@ -156,7 +158,7 @@ class Capacitaciones {
                             descripcion: this.descripcion
                         }
                     }
-                ).toArray();
+                );
             await this.session.commitTransaction();
             return resultado;
         } catch (error) {

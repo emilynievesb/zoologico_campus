@@ -8,7 +8,9 @@ class HistorialesSalud {
   ultima_modificacion;
   session;
 
-  constructor() {}
+  constructor() {
+    id = "AUTORIZACIÓN TABLA HISTORIAL SALUD"
+  }
 
   async connect() {
     try {

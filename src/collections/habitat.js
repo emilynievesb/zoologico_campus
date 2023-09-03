@@ -9,7 +9,9 @@ class Habitat {
   idZona;
   session;
 
-  constructor() { }
+  constructor() {
+    id = "AUTORIZACIÓN TABLA HABITAT"
+  }
 
   async connect() {
     try {

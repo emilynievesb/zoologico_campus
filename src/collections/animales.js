@@ -10,7 +10,10 @@ class Animales {
   reproduccion;
   habitat;
   session;
-  constructor() { }
+  constructor() {
+    id = "AUTORIZACIÓN TABLA ANIMALES"
+
+  }
 
   async connect() {
     try {

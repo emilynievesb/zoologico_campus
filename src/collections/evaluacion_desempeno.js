@@ -8,7 +8,9 @@ class EvaluacionDesempeno {
     jefe;
     descripcion;
 
-    constructor() { }
+    constructor() {
+        id = "AUTORIZACIÓN TABLA EVALUACION DESEMPEÑO"
+    }
 
     async connect() {
         try {
