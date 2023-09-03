@@ -24,8 +24,11 @@ import {
 } from "../controllers/postControllers.js";
 import {
   postAnimalDTOMiddleware,
+  postBoletasDTOMiddleware,
   postCapacitacionDTOMiddleware,
+  postCitasMedicasDTOMiddleware,
   postEmpleadoDTOMiddleware,
+  postEstadoHabitatDTOMiddleware,
   postEvaluacionDesempenoDTOMiddleware,
   postEventoDTOMiddleware,
   postFacturaEntradaDTOMiddleware,
@@ -91,6 +94,7 @@ const postInitRoute = () => {
     "/agregarBoletas",
     authorizationMiddleware,
     contentMiddlewareBoletas,
+    postBoletasDTOMiddleware,
     agregarBoletaController
   );
   router.post(
@@ -104,6 +108,7 @@ const postInitRoute = () => {
     "/agregarCitaMedica",
     authorizationMiddleware,
     contentMiddlewareCitasMedicas,
+    postCitasMedicasDTOMiddleware,
     agregarCitaMedicaController
   );
   router.post(
@@ -117,6 +122,7 @@ const postInitRoute = () => {
     "/agregarEstadoHabitat",
     authorizationMiddleware,
     contentMiddlewareEstadoHabitat,
+    postEstadoHabitatDTOMiddleware,
     agregarEstadoHabitatController
   );
   router.post(

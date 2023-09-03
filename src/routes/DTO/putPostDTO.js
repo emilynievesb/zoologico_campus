@@ -116,6 +116,9 @@ const postEventoDTO = [
 ];
 
 const putEventoDTO = [
+    check("id")
+        .notEmpty().withMessage("El ID es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID debe ser un número entero positivo"),
     check("historialId")
         .notEmpty().withMessage("El historialId es obligatorio")
         .isInt({ min: 1 }).withMessage("El historialId debe ser un número entero positivo"),
@@ -602,8 +605,91 @@ const putZonasDTO = [
         .isString().withMessage("La descripción de la zona debe ser una cadena de texto"),
 ];
 
+//Boleta
+const postBoletasDTO = [
+    check("lista")
+        .notEmpty().withMessage("El ID de la lista es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID de la lista debe ser un número entero positivo"),
+    check("tipo")
+        .notEmpty().withMessage("El ID del tipo es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID del tipo debe ser un número entero positivo"),
+    check("cantidad")
+        .notEmpty().withMessage("La cantidad es obligatoria")
+        .isInt({ min: 1 }).withMessage("La cantidad debe ser un número entero positivo"),
+];
+
+const putBoletasDTO = [
+    check("id")
+        .notEmpty().withMessage("El ID es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID debe ser un número entero positivo"),
+    check("lista")
+        .notEmpty().withMessage("El ID de la lista es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID de la lista debe ser un número entero positivo"),
+    check("tipo")
+        .notEmpty().withMessage("El ID del tipo es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID del tipo debe ser un número entero positivo"),
+    check("cantidad")
+        .notEmpty().withMessage("La cantidad es obligatoria")
+        .isInt({ min: 1 }).withMessage("La cantidad debe ser un número entero positivo"),
+];
+
+//Cita medica
+const postCitasMedicasDTO = [
+    check("idHistorialSalud")
+        .notEmpty().withMessage("El ID del historial médico es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID del historial médico debe ser un número entero positivo"),
+    check("fecha_cita")
+        .notEmpty().withMessage("La fecha de la cita médica es obligatoria")
+        .matches(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/).withMessage("La fecha de la cita médica debe tener el formato 'YYYY-MM-DD HH:MM:SS'"),
+    check("descripcion")
+        .notEmpty().withMessage("La descripción de la cita médica es obligatoria")
+        .isString().withMessage("La descripción de la cita médica debe ser una cadena de texto"),
+    check("id_veterinario")
+        .notEmpty().withMessage("El ID del veterinario es obligatorio")
+        .matches(/^[0-9]{10}$/).withMessage("El ID del veterinario debe tener 10 dígitos numéricos"),
+];
+
+const putCitasMedicasDTO = [
+    check("id")
+        .notEmpty().withMessage("El ID es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID debe ser un número entero positivo"),
+    check("idHistorialSalud")
+        .notEmpty().withMessage("El ID del historial médico es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID del historial médico debe ser un número entero positivo"),
+    check("fecha_cita")
+        .notEmpty().withMessage("La fecha de la cita médica es obligatoria")
+        .matches(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/).withMessage("La fecha de la cita médica debe tener el formato 'YYYY-MM-DD HH:MM:SS'"),
+    check("descripcion")
+        .notEmpty().withMessage("La descripción de la cita médica es obligatoria")
+        .isString().withMessage("La descripción de la cita médica debe ser una cadena de texto"),
+    check("id_veterinario")
+        .notEmpty().withMessage("El ID del veterinario es obligatorio")
+        .matches(/^[0-9]{10}$/).withMessage("El ID del veterinario debe tener 10 dígitos numéricos"),
+];
+
+//Estado habitat
+const postEstadoHabitatDTO = [
+    check("descripcionEstado")
+        .notEmpty().withMessage("La descripción del estado del habitat es obligatoria")
+        .isString().withMessage("La descripción del estado del habitat debe ser una cadena de texto"),
+];
+
+const putEstadoHabitatDTO = [
+    check("id")
+        .notEmpty().withMessage("El ID es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID debe ser un número entero positivo"),
+    check("descripcionEstado")
+        .notEmpty().withMessage("La descripción del estado del habitat es obligatoria")
+        .isString().withMessage("La descripción del estado del habitat debe ser una cadena de texto"),
+];
 
 export {
+    putEstadoHabitatDTO,
+    postEstadoHabitatDTO,
+    putCitasMedicasDTO,
+    postCitasMedicasDTO,
+    putBoletasDTO,
+    postBoletasDTO,
     putZonasDTO,
     postZonasDTO,
     putTiposBoletasDTO,

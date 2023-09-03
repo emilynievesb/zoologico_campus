@@ -27,8 +27,12 @@ import {
 import {
   postEmpleadoDTOMiddleware,
   putAnimalDTOMiddleware,
+  putBoletasDTOMiddleware,
   putCapacitacionDTOMiddleware,
+  putCitasMedicasDTOMiddleware,
+  putEstadoHabitatDTOMiddleware,
   putEvaluacionDesempenoDTOMiddleware,
+  putEventoDTOMiddleware,
   putFacturaEntradaDTOMiddleware,
   putHabitatDTOMiddleware,
   putHistorialEventosDTOMiddleware,
@@ -92,6 +96,7 @@ const putInitRoute = () => {
     "/actualizarBoleta",
     authorizationMiddleware,
     contentMiddlewareBoletas,
+    putBoletasDTOMiddleware,
     actualizarBoletaController
   );
   router.put(
@@ -105,6 +110,7 @@ const putInitRoute = () => {
     "/actualizarCitaMedica",
     authorizationMiddleware,
     contentMiddlewareCitasMedicas,
+    putCitasMedicasDTOMiddleware,
     actualizarCitaMedicaController
   );
   router.put(
@@ -118,6 +124,7 @@ const putInitRoute = () => {
     "/actualizarEstadoHabitat",
     authorizationMiddleware,
     contentMiddlewareEstadoHabitat,
+    putEstadoHabitatDTOMiddleware,
     actualizarEstadoHabitatController
   );
   router.put(
@@ -138,6 +145,7 @@ const putInitRoute = () => {
     "/actualizarEvento",
     authorizationMiddleware,
     contentMiddlewareEventos,
+    putEventoDTOMiddleware,
     actualizarEventoController
   );
   router.put(
