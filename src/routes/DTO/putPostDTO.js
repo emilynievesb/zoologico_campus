@@ -568,7 +568,20 @@ const postTiposBoletasDTO = [
         .isNumeric().withMessage("El precio debe ser un número"),
 ];
 
+const putTiposBoletasDTO = [
+    check("id")
+        .notEmpty().withMessage("El ID es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID debe ser un número entero positivo"),
+    check("tipo")
+        .notEmpty().withMessage("El tipo de entrada es obligatorio")
+        .isString().withMessage("El tipo de entrada debe ser una cadena de texto"),
+    check("precio")
+        .notEmpty().withMessage("El precio es obligatorio")
+        .isNumeric().withMessage("El precio debe ser un número"),
+];
+
 export {
+    putTiposBoletasDTO,
     postTiposBoletasDTO,
     putSeguimientoEmpleadoDTO,
     postSeguimientoEmpleadoDTO,
