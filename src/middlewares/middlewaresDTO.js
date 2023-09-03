@@ -1,7 +1,7 @@
 import { validationResult } from "express-validator";
 import { Router } from "express";
 import { deleteT1DTO, deleteT2DTO, getT1DTO, getT2DTO } from "../routes/DTO/getDeleteDTO.js";
-import { postAnimalDTO, postCapacitacionDTO, postEventoDTO, postFacturaEntradaDTO, postHabitatDTO, postHistorialSaludDTO, postTipoAlimentacionDTO, postestadoSaludDTO, putAnimalDTO, putEstadoSaludDTO, putEventoDTO, putFacturaEntradaDTO, putHabitatDTO, putHistorialSaludDTO, putTipoAlimentacionDTO } from "../routes/DTO/putPostDTO.js";
+import { postAnimalDTO, postCapacitacionDTO, postEventoDTO, postFacturaEntradaDTO, postHabitatDTO, postHistorialSaludDTO, postTipoAlimentacionDTO, postestadoSaludDTO, putAnimalDTO, putCapacitacionDTO, putEstadoSaludDTO, putEventoDTO, putFacturaEntradaDTO, putHabitatDTO, putHistorialSaludDTO, putTipoAlimentacionDTO } from "../routes/DTO/putPostDTO.js";
 
 function validador(req, res, next) {
     const errors = validationResult(req);
@@ -172,6 +172,23 @@ postCapacitacionDTOMiddleware.use(postCapacitacionDTO, (req, res, next) => {
     }
 });
 
+const putCapacitacionDTOMiddleware = Router()
+putCapacitacionDTOMiddleware.use(putCapacitacionDTO, (req, res, next) => {
+    const errFlag = validador2(req, res)
+    if (errFlag === false) {
+        const { id, seguimiento, nombre, fecha, descripcion } = req.body
+        const nuevoBody = {
+            id: id,
+            id_seguimiento: seguimiento,
+            nombre: nombre,
+            fecha: fecha,
+            descripcion: descripcion
+        };
+        req.body = nuevoBody
+        next()
+    }
+});
+
 export {
     getT1DTOMiddleware,
     getT2DTOMiddleware,
@@ -191,5 +208,6 @@ export {
     putHabitatDTOMiddleware,
     postHistorialSaludDTOMiddleware,
     putHistorialSaludDTOMiddleware,
-    postCapacitacionDTOMiddleware
+    postCapacitacionDTOMiddleware,
+    putCapacitacionDTOMiddleware
 }

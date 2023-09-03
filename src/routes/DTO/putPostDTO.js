@@ -257,6 +257,24 @@ const postCapacitacionDTO = [
         .isString().withMessage("La descripción de la capacitación debe ser una cadena de texto"),
 ];
 
+const putCapacitacionDTO = [
+    check("id")
+        .notEmpty().withMessage("El ID es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID debe ser un número entero positivo"),
+    check("seguimiento")
+        .notEmpty().withMessage("El ID de seguimiento es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID de seguimiento debe ser un número entero positivo"),
+    check("nombre")
+        .notEmpty().withMessage("El nombre de la capacitación es obligatorio")
+        .isString().withMessage("El nombre de la capacitación debe ser una cadena de texto"),
+    check("fecha")
+        .notEmpty().withMessage("La fecha de la capacitación es obligatoria")
+        .matches(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/).withMessage("La fecha de la capacitación debe tener el formato 'YYYY-MM-DD HH:MM:SS'"),
+    check("descripcion")
+        .notEmpty().withMessage("La descripción de la capacitación es obligatoria")
+        .isString().withMessage("La descripción de la capacitación debe ser una cadena de texto"),
+];
+
 
 export {
     postTipoAlimentacionDTO,
@@ -273,5 +291,6 @@ export {
     putHabitatDTO,
     postHistorialSaludDTO,
     putHistorialSaludDTO,
-    postCapacitacionDTO
+    postCapacitacionDTO,
+    putCapacitacionDTO
 }
