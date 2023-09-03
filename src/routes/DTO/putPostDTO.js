@@ -580,7 +580,18 @@ const putTiposBoletasDTO = [
         .isNumeric().withMessage("El precio debe ser un número"),
 ];
 
+//zona
+const postZonasDTO = [
+    check("nombre")
+        .notEmpty().withMessage("El nombre de la zona es obligatorio")
+        .isString().withMessage("El nombre de la zona debe ser una cadena de texto"),
+    check("descripcion")
+        .notEmpty().withMessage("La descripción de la zona es obligatoria")
+        .isString().withMessage("La descripción de la zona debe ser una cadena de texto"),
+];
+
 export {
+    postZonasDTO,
     putTiposBoletasDTO,
     postTiposBoletasDTO,
     putSeguimientoEmpleadoDTO,

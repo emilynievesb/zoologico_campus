@@ -1,7 +1,7 @@
 import { validationResult } from "express-validator";
 import { Router } from "express";
 import { deleteT1DTO, deleteT2DTO, getT1DTO, getT2DTO } from "../routes/DTO/getDeleteDTO.js";
-import { postAnimalDTO, postCapacitacionDTO, postEmpleadoDTO, postEvaluacionDesempenoDTO, postEventoDTO, postFacturaEntradaDTO, postHabitatDTO, postHistorialEventosDTO, postHistorialSaludDTO, postHorarioAlimentacionDTO, postHorarioTrabajoDTO, postListaBoletasDTO, postPlanificacionEventosDTO, postPromocionesDTO, postPuestosDTO, postSeguimientoEmpleadoDTO, postTipoAlimentacionDTO, postTiposBoletasDTO, postestadoSaludDTO, putAnimalDTO, putCapacitacionDTO, putEstadoSaludDTO, putEvaluacionDesempenoDTO, putEventoDTO, putFacturaEntradaDTO, putHabitatDTO, putHistorialEventosDTO, putHistorialSaludDTO, putHorarioAlimentacionDTO, putHorarioTrabajoDTO, putListaBoletasDTO, putPlanificacionEventosDTO, putPromocionesDTO, putPuestosDTO, putSeguimientoEmpleadoDTO, putTipoAlimentacionDTO, putTiposBoletasDTO } from "../routes/DTO/putPostDTO.js";
+import { postAnimalDTO, postCapacitacionDTO, postEmpleadoDTO, postEvaluacionDesempenoDTO, postEventoDTO, postFacturaEntradaDTO, postHabitatDTO, postHistorialEventosDTO, postHistorialSaludDTO, postHorarioAlimentacionDTO, postHorarioTrabajoDTO, postListaBoletasDTO, postPlanificacionEventosDTO, postPromocionesDTO, postPuestosDTO, postSeguimientoEmpleadoDTO, postTipoAlimentacionDTO, postTiposBoletasDTO, postZonasDTO, postestadoSaludDTO, putAnimalDTO, putCapacitacionDTO, putEstadoSaludDTO, putEvaluacionDesempenoDTO, putEventoDTO, putFacturaEntradaDTO, putHabitatDTO, putHistorialEventosDTO, putHistorialSaludDTO, putHorarioAlimentacionDTO, putHorarioTrabajoDTO, putListaBoletasDTO, putPlanificacionEventosDTO, putPromocionesDTO, putPuestosDTO, putSeguimientoEmpleadoDTO, putTipoAlimentacionDTO, putTiposBoletasDTO } from "../routes/DTO/putPostDTO.js";
 
 function validador(req, res, next) {
     const errors = validationResult(req);
@@ -456,8 +456,14 @@ putTiposBoletasDTOMiddleware.use(putTiposBoletasDTO, (req, res, next) => {
     validador(req, res, next)
 });
 
+//zonas
+const postZonasDTOMiddleware = Router()
+postZonasDTOMiddleware.use(postZonasDTO, (req, res, next) => {
+    validador(req, res, next)
+});
 
 export {
+    postZonasDTOMiddleware,
     putTiposBoletasDTOMiddleware,
     postTiposBoletasDTOMiddleware,
     putSeguimientoEmpleadoDTOMiddleware,
