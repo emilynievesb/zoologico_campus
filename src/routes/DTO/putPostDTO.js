@@ -390,6 +390,16 @@ const putHorarioAlimentacionDTO = [
         .isString().withMessage("La descripción debe ser una cadena de texto"),
 ];
 
+//horarios trabajo
+const postHorarioTrabajoDTO = [
+    check("horaInicio")
+        .notEmpty().withMessage("La hora de inicio es obligatoria")
+        .matches(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/).withMessage("La hora de inicio debe tener el formato 'HH:MM'"),
+    check("horaFin")
+        .notEmpty().withMessage("La hora de fin es obligatoria")
+        .matches(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/).withMessage("La hora de fin debe tener el formato 'HH:MM'"),
+];
+
 export {
     putHorarioAlimentacionDTO,
     postHorarioAlimentacionDTO,
@@ -413,5 +423,6 @@ export {
     postEvaluacionDesempenoDTO,
     putEvaluacionDesempenoDTO,
     postHistorialEventosDTO,
-    putHistorialEventosDTO
+    putHistorialEventosDTO,
+    postHorarioTrabajoDTO
 }
