@@ -412,6 +412,13 @@ const putHorarioTrabajoDTO = [
         .matches(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/).withMessage("La hora de fin debe tener el formato 'HH:MM'"),
 ];
 
+//lista boletas
+const postListaBoletasDTO = [
+    check("factura")
+        .notEmpty().withMessage("El ID de la factura es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID de la factura debe ser un número entero positivo"),
+];
+
 export {
     putHorarioTrabajoDTO,
     putHorarioAlimentacionDTO,
@@ -437,5 +444,6 @@ export {
     putEvaluacionDesempenoDTO,
     postHistorialEventosDTO,
     putHistorialEventosDTO,
-    postHorarioTrabajoDTO
+    postHorarioTrabajoDTO,
+    postListaBoletasDTO
 }
