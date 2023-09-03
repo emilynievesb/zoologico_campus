@@ -22,41 +22,30 @@ import {
   agregarTipoBoletaController,
   agregarZonaController,
 } from "../controllers/postControllers.js";
+import { postAnimalDTOMiddleware, postCapacitacionDTOMiddleware, postEmpleadoDTOMiddleware, postEvaluacionDesempenoDTOMiddleware, postEventoDTOMiddleware, postFacturaEntradaDTOMiddleware, postHabitatDTOMiddleware, postHistorialEventosDTOMiddleware, postHistorialSaludDTOMiddleware, postHorarioAlimentacionDTOMiddleware, postHorarioTrabajoDTOMiddleware, postListaBoletasDTOMiddleware, postPlanificacionEventosDTOMiddleware, postPromocionesDTOMiddleware, postPuestosDTOMiddleware, postSeguimientoEmpleadoDTOMiddleware, postTipoAlimentacionDTOMiddleware, postTiposBoletasDTOMiddleware, postZonasDTOMiddleware, postestadoSaludDTOMiddleware } from "../middlewares/middlewaresDTO.js";
 
 const postInitRoute = () => {
   const router = Router();
-  router.post("/agregarTipoAlimentacion", agregarTipoAlimentacionController);
-  router.post("/agregarAnimal", agregarAnimalController);
-  router.post("/agregarBoleta", agregarBoletaController);
-  router.post("/agregarCapitacion", agregarCapacitacionController);
-  router.post("/agregarCitaMedica", agregarCitaMedicaController);
-  router.post("/agregarEmpleado", agregarEmpleadoController);
-  router.post("/agregarEstadoHabitat", agregarEstadoHabitatController);
-  router.post("/agregarEstadoSalud", agregarEstadoSaludController);
-  router.post("/agregarEvaluacionDesempeno", agregarEmpleadoController);
-  router.post("/agregarEventos", agregarEventoController);
-  router.post("/agregarFacturaEntrada", agregarFacturaEntradaController);
-  router.post("/agregarHabitat", agregarHabitatController);
-  router.post("/agregarHistorialSalud", agregarHistorialSaludController);
-  router.post("/agregarHistorialEvento", agregarEmpleadoController);
-  router.post(
-    "/agregarHorariosAlimentacion",
-    agregarHorarioAlimentacionController
-  );
-  router.post("/agregarHorarioTrabajo", agregarHorarioTrabajoController);
-  router.post("/agregarListaBoletas", agregarListaBoletasController);
-  router.post(
-    "/agregarPlanificacionEvento",
-    agregarPlanificacionEventosController
-  );
-  router.post("/agregarPromocion", agregarPromocionesController);
-  router.post("/agregarPuesto", agregarPuestoController);
-  router.post(
-    "/agregarSeguimientoEmpleado",
-    agregarSeguimientoEmpleadoController
-  );
-  router.post("/agregarTipoBoleta", agregarTipoBoletaController);
-  router.post("/agregarZona", agregarZonaController);
+  router.post("/agregarTipoAlimentacion", postTipoAlimentacionDTOMiddleware, agregarTipoAlimentacionController);
+  router.post("/agregarAnimal", postAnimalDTOMiddleware, agregarAnimalController);
+  router.post("/agregarEstadoSalud", postestadoSaludDTOMiddleware, agregarEstadoSaludController);
+  router.post("/agregarEventos", postEventoDTOMiddleware, agregarEventoController);
+  router.post("/agregarFacturaEntrada", postFacturaEntradaDTOMiddleware, agregarFacturaEntradaController);
+  router.post("/agregarHabitat", postHabitatDTOMiddleware, agregarHabitatController);
+  router.post("/agregarHistorialSalud", postHistorialSaludDTOMiddleware, agregarHistorialSaludController);
+  router.post("/agregarCapitacion", postCapacitacionDTOMiddleware, agregarCapacitacionController);
+  router.post("/agregarEmpleado", postEmpleadoDTOMiddleware, agregarEmpleadoController);
+  router.post("/agregarEvaluacionDesempeno", postEvaluacionDesempenoDTOMiddleware, agregarEmpleadoController);
+  router.post("/agregarHistorialEvento", postHistorialEventosDTOMiddleware, agregarEmpleadoController);
+  router.post("/agregarHorariosAlimentacion", postHorarioAlimentacionDTOMiddleware, agregarHorarioAlimentacionController);
+  router.post("/agregarHorarioTrabajo", postHorarioTrabajoDTOMiddleware, agregarHorarioTrabajoController);
+  router.post("/agregarListaBoletas", postListaBoletasDTOMiddleware, agregarListaBoletasController);
+  router.post("/agregarPlanificacionEvento", postPlanificacionEventosDTOMiddleware, agregarPlanificacionEventosController);
+  router.post("/agregarPromocion", postPromocionesDTOMiddleware, agregarPromocionesController);
+  router.post("/agregarPuesto", postPuestosDTOMiddleware, agregarPuestoController);
+  router.post("/agregarSeguimientoEmpleado", postSeguimientoEmpleadoDTOMiddleware, agregarSeguimientoEmpleadoController);
+  router.post("/agregarTipoBoleta", postTiposBoletasDTOMiddleware, agregarTipoBoletaController);
+  router.post("/agregarZona", postZonasDTOMiddleware, agregarZonaController);
   return router;
 };
 

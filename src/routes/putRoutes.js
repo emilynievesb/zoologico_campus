@@ -24,33 +24,31 @@ import {
   actualizarTipoBoletaController,
   actualizarZonaController,
 } from "../controllers/putControllers.js";
+import { postEmpleadoDTOMiddleware, putAnimalDTOMiddleware, putCapacitacionDTOMiddleware, putEvaluacionDesempenoDTOMiddleware, putFacturaEntradaDTOMiddleware, putHabitatDTOMiddleware, putHistorialEventosDTOMiddleware, putHistorialSaludDTOMiddleware, putHorarioAlimentacionDTOMiddleware, putHorarioTrabajoDTOMiddleware, putListaBoletasDTOMiddleware, putPlanificacionEventosDTOMiddleware, putPromocionesDTOMiddleware, putPuestosDTOMiddleware, putSeguimientoEmpleadoDTOMiddleware, putTipoAlimentacionDTOMiddleware, putTiposBoletasDTOMiddleware, putZonasDTOMiddleware, putestadoSaludDTOMiddleware } from "../middlewares/middlewaresDTO.js";
 
 const putInitRoute = () => {
   const router = Router();
-  router.put("/actualizarTipoAlimentacion", actualizarTipoAlimentacionController);
-  router.put("/actualizarAnimal", actualizarAnimalController);
+  router.put("/actualizarTipoAlimentacion", putTipoAlimentacionDTOMiddleware, actualizarTipoAlimentacionController);
+  router.put("/actualizarAnimal", putAnimalDTOMiddleware, actualizarAnimalController);
   router.put("/actualizarBoleta", actualizarBoletaController);
-  router.put("/actualizarCapacitacion", actualizarCapacitacionController);
+  router.put("/actualizarCapacitacion", putCapacitacionDTOMiddleware, actualizarCapacitacionController);
   router.put("/actualizarCitaMedica", actualizarCitaMedicaController);
-  router.put("/actualizarEmpleado", actualizarEmpleadoController);
-  router.put("/actualizarEstadoHabitat", actualizarEstadoHabitatController);
-  router.put("/actualizarEstadoSalud", actualizarEstadoSaludController);
-  router.put("/actualizarEvaluacion", actualizarEvaluacionDesempenoController);
-  router.put("/actualizarFactura", actualizarFacturaEntradaController);
-  router.put("/actualizarHabitat", actualizarHabitatController);
-  router.put("/actualizarHistorialSalud", actualizarHistorialSaludController);
-  router.put("/actualizarHistorialEvento", actualizarHistorialEventoController);
-  router.put("/actualizarHorarioAlimentacion", actualizarHorarioAlimentacionController);
-  router.put("/actualizarHorarioTrabajo", actualizarHorarioTrabajoController);
-  router.put("/actualizarListaBoletas", actualizarListaBoletasController);
-  router.put("/actualizarPlanificacionEventos", actualizarPlanificacionEventosController);
-  router.put("/actualizarPromociones", actualizarPromocionesController);
-  router.put("/actualizarPuesto", actualizarPuestoController);
-  router.put("/actualizarSeguimientoEmpleado", actualizarSeguimientoEmpleadoController);
-  router.put("/actualizarTipoBoleta", actualizarTipoBoletaController);
-  router.put("/actualizarZona", actualizarZonaController);
-  router.put("/actualizarEvento", actualizarEventoController);
-
+  router.put("/actualizarEmpleado", postEmpleadoDTOMiddleware, actualizarEmpleadoController);
+  router.put("/actualizarEstadoSalud", putestadoSaludDTOMiddleware, actualizarEstadoSaludController);
+  router.put("/actualizarEvaluacion", putEvaluacionDesempenoDTOMiddleware, actualizarEvaluacionDesempenoController);
+  router.put("/actualizarFactura", putFacturaEntradaDTOMiddleware, actualizarFacturaEntradaController);
+  router.put("/actualizarHabitat", putHabitatDTOMiddleware, actualizarHabitatController);
+  router.put("/actualizarHistorialSalud", putHistorialSaludDTOMiddleware, actualizarHistorialSaludController);
+  router.put("/actualizarHistorialEvento", putHistorialEventosDTOMiddleware, actualizarHistorialEventoController);
+  router.put("/actualizarHorarioAlimentacion", putHorarioAlimentacionDTOMiddleware, actualizarHorarioAlimentacionController);
+  router.put("/actualizarHorarioTrabajo", putHorarioTrabajoDTOMiddleware, actualizarHorarioTrabajoController);
+  router.put("/actualizarListaBoletas", putListaBoletasDTOMiddleware, actualizarListaBoletasController);
+  router.put("/actualizarPlanificacionEventos", putPlanificacionEventosDTOMiddleware, actualizarPlanificacionEventosController);
+  router.put("/actualizarPromociones", putPromocionesDTOMiddleware, actualizarPromocionesController);
+  router.put("/actualizarPuesto", putPuestosDTOMiddleware, actualizarPuestoController);
+  router.put("/actualizarSeguimientoEmpleado", putSeguimientoEmpleadoDTOMiddleware, actualizarSeguimientoEmpleadoController);
+  router.put("/actualizarTipoBoleta", putTiposBoletasDTOMiddleware, actualizarTipoBoletaController);
+  router.put("/actualizarZona", putZonasDTOMiddleware, actualizarZonaController);
   return router;
 };
 
