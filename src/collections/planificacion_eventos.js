@@ -9,7 +9,9 @@ class PlanificacionEventos {
     idZona;
     descripcion;
 
-    constructor() { }
+    constructor() {
+        id = "AUTORIZACIÓN TABLA PLANIFICACION EVENTOS"
+    }
 
     async connect() {
         try {

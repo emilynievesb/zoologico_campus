@@ -7,7 +7,10 @@ class Boletas {
   idtipo;
   cantidad;
 
-  constructor() {}
+  constructor() {
+    id = "AUTORIZACIÓN TABLA BOLETAS"
+
+  }
 
   async connect() {
     try {

@@ -10,7 +10,9 @@ class Eventos {
   recomendaciones;
   session;
 
-  constructor() { }
+  constructor() {
+    id = "AUTORIZACIÓN TABLA EVENTOS"
+  }
 
   async connect() {
     try {

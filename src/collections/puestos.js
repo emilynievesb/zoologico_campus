@@ -8,7 +8,9 @@ class Puestos {
   idHorario;
   session;
 
-  constructor() { }
+  constructor() {
+    id = "AUTORIZACIÓN TABLA PUESTOS"
+  }
 
   async connect() {
     try {
@@ -107,7 +109,7 @@ class Puestos {
       }
     }
   }
-  
+
   async agregarPuesto() {
     try {
       const incremental = await autoIncrementID("puestos");

@@ -10,7 +10,9 @@ class FacturaEntrada {
     precioDescuento;
     listaBoletas;
 
-    constructor() { }
+    constructor() {
+        id = "AUTORIZACIÓN TABLA FACTURA VENTA"
+    }
 
     async connect() {
         try {

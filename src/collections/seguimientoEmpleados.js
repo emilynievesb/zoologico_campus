@@ -6,7 +6,9 @@ class SeguimientoEmpleado {
     creacion;
     actualizacion;
 
-    constructor() { }
+    constructor() {
+        id = "AUTORIZACIÓN TABLA SEGUIMIENTO EMPLEADO"
+    }
 
     async connect() {
         try {

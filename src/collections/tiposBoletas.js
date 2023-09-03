@@ -6,7 +6,9 @@ class TipoBoleta {
     tipo;
     precio;
 
-    constructor() { }
+    constructor() {
+        id = "AUTORIZACIÓN TABLA TIPO BOLETAS"
+    }
 
     async connect() {
         try {

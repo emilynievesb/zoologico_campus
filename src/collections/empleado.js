@@ -9,7 +9,9 @@ class Empleado {
   salario;
   session;
 
-  constructor() {}
+  constructor() {
+    id = "AUTORIZACIÓN TABLA EMPLEADO"
+  }
 
   async connect() {
     try {
@@ -87,7 +89,7 @@ class Empleado {
         .aggregate([
           {
             $match: {
-              id: Number(empleadoId),
+              id: empleadoId,
             },
           },
           {
@@ -206,7 +208,7 @@ class Empleado {
       this.session = await startTransaction();
       const connection = await this.connect();
       const resultado = await connection.deleteOne({
-        id: Number(empleadoId),
+        id: empleadoId,
       });
       await this.session.commitTransaction();
       return resultado;
@@ -221,6 +223,7 @@ class Empleado {
       }
     }
   }
+
 }
 
 export { Empleado };

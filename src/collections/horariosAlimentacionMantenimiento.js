@@ -8,7 +8,9 @@ class HorariosAlimentacionMantenimiento {
     encargado;
     descripcion;
 
-    constructor() { }
+    constructor() {
+        id = "AUTORIZACIÓN TABLA HORARIOS ALIMENTACION MANTENIMIENTO"
+    }
 
     async connect() {
         try {
