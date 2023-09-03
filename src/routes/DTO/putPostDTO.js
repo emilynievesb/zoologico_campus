@@ -470,6 +470,24 @@ const putPlanificacionEventosDTO = [
 
 //promocion
 const postPromocionesDTO = [
+    check("nombre")
+        .notEmpty().withMessage("El nombre de la promoción es obligatorio")
+        .isString().withMessage("El nombre de la promoción debe ser una cadena de texto"),
+    check("descripcion")
+        .notEmpty().withMessage("La descripción de la promoción es obligatoria")
+        .isString().withMessage("La descripción de la promoción debe ser una cadena de texto"),
+    check("descuento")
+        .notEmpty().withMessage("El descuento es obligatorio")
+        .isNumeric().withMessage("El descuento debe ser un número"),
+    check("inicio")
+        .notEmpty().withMessage("La fecha de inicio de la promoción es obligatoria")
+        .matches(/^\d{4}-\d{2}-\d{2}$/).withMessage("La fecha de inicio debe tener el formato 'YYYY-MM-DD HH:MM:SS'"),
+    check("fin")
+        .notEmpty().withMessage("La fecha de finalización de la promoción es obligatoria")
+        .matches(/^\d{4}-\d{2}-\d{2}$/).withMessage("La fecha de finalización debe tener el formato 'YYYY-MM-DD HH:MM:SS'"),
+];
+
+const putPromocionesDTO = [
     check("id")
         .notEmpty().withMessage("El ID es obligatorio")
         .isInt({ min: 1 }).withMessage("El ID debe ser un número entero positivo"),
@@ -491,6 +509,7 @@ const postPromocionesDTO = [
 ];
 
 export {
+    putPromocionesDTO,
     postPromocionesDTO,
     putPlanificacionEventosDTO,
     postPlanificacionEventosDTO,
