@@ -11,7 +11,7 @@ class Animales {
   habitat;
   session;
   constructor() {
-    id = "AUTORIZACIÓN TABLA ANIMALES"
+    this.id = "AUTORIZACIÓN TABLA ANIMALES"
 
   }
 

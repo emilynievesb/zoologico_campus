@@ -9,7 +9,7 @@ class Capacitaciones {
     descripcion;
 
     constructor() {
-        id = "AUTORIZACIÓN TABLA CAPACITACIONES"
+        this.id = "AUTORIZACIÓN TABLA CAPACITACIONES"
     }
 
     async connect() {

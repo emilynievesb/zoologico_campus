@@ -9,7 +9,7 @@ class HistorialEventos {
   session;
 
   constructor() {
-    id = "AUTORIZACIÓN TABLA HISTORIAL EVENTOS"
+    this.id = "AUTORIZACIÓN TABLA HISTORIAL EVENTOS"
   }
 
   async connect() {

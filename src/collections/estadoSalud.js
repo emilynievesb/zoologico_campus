@@ -6,7 +6,7 @@ class EstadosSalud {
   estado;
   session;
   constructor() {
-    id = "AUTORIZACIÓN TABLA ESTADO SALUD"
+    this.id = "AUTORIZACIÓN TABLA ESTADO SALUD"
   }
 
   async connect() {

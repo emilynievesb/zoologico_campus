@@ -10,7 +10,7 @@ class Empleado {
   session;
 
   constructor() {
-    id = "AUTORIZACIÓN TABLA EMPLEADO"
+    this.id = "AUTORIZACIÓN TABLA EMPLEADO"
   }
 
   async connect() {

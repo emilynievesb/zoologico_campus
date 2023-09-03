@@ -10,7 +10,7 @@ class Promociones {
     fin;
 
     constructor() {
-        id = "AUTORIZACIÓN TABLA PROMOCIONES"
+        this.id = "AUTORIZACIÓN TABLA PROMOCIONES"
     }
 
     async connect() {

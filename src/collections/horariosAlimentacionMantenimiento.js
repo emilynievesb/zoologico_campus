@@ -9,7 +9,7 @@ class HorariosAlimentacionMantenimiento {
     descripcion;
 
     constructor() {
-        id = "AUTORIZACIÓN TABLA HORARIOS ALIMENTACION MANTENIMIENTO"
+        this.id = "AUTORIZACIÓN TABLA HORARIOS ALIMENTACION MANTENIMIENTO"
     }
 
     async connect() {

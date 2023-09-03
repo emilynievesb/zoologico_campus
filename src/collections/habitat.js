@@ -10,7 +10,7 @@ class Habitat {
   session;
 
   constructor() {
-    id = "AUTORIZACIÓN TABLA HABITAT"
+    this.id = "AUTORIZACIÓN TABLA HABITAT"
   }
 
   async connect() {

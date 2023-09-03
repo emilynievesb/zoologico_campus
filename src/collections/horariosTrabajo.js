@@ -7,7 +7,7 @@ class HorariosTrabajo {
     horaFin;
 
     constructor() {
-        id = "AUTORIZACIÓN TABLA HORARIOS TRABAJO"
+        this.id = "AUTORIZACIÓN TABLA HORARIOS TRABAJO"
     }
 
     async connect() {

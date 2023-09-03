@@ -10,7 +10,7 @@ class PlanificacionEventos {
     descripcion;
 
     constructor() {
-        id = "AUTORIZACIÓN TABLA PLANIFICACION EVENTOS"
+        this.id = "AUTORIZACIÓN TABLA PLANIFICACION EVENTOS"
     }
 
     async connect() {

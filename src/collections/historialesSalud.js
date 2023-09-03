@@ -9,7 +9,7 @@ class HistorialesSalud {
   session;
 
   constructor() {
-    id = "AUTORIZACIÓN TABLA HISTORIAL SALUD"
+    this.id = "AUTORIZACIÓN TABLA HISTORIAL SALUD"
   }
 
   async connect() {

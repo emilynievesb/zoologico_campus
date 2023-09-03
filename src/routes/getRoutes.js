@@ -1,33 +1,222 @@
 import { Router } from "express";
-import { obtenerAlimentracionController, obtenerAnimalesController, obtenerBoletasController, obtenerCapacitacionesController, obtenerCitasMedicasController, obtenerEmpleadosController, obtenerEstadoHabitatController, obtenerEstadosSaludController, obtenerEvaluacionesDesempenoController, obtenerEventosController, obtenerFavturasEntradaController, obtenerHabitatsController, obtenerHistorialesEventoController, obtenerHistorialesSaludController, obtenerHorariosAlimentacionMantenimientoController, obtenerHorariosTrabajoController, obtenerListasBoletasController, obtenerPlanificacionesEventosController, obtenerPromocionesController, obtenerPuestosController, obtenerSeguimientosEmpleadoController, obtenerTiposBoletasController, obtenerZonasController } from "../controllers/getControllers.js";
-import { getT1DTOMiddleware, getT2DTOMiddleware } from "../middlewares/middlewaresDTO.js";
-import { contentMiddlewareAlimentacion, contentMiddlewareAnimales, contentMiddlewareBoletas, contentMiddlewareCapacitaciones, contentMiddlewareCitasMedicas, contentMiddlewareEmpleados, contentMiddlewareEstadoHabitat, contentMiddlewareEstadoSalud, contentMiddlewareEvaluacionDesempeno, contentMiddlewareEventos, contentMiddlewareFacturaEntrada, contentMiddlewareHabitat, contentMiddlewareHistorialEventos, contentMiddlewareHistorialesSalud, contentMiddlewareHorariosAlimentacion, contentMiddlewareHorariosTrabajo, contentMiddlewareListaBoletas, contentMiddlewarePlanificacionEventos, contentMiddlewarePromociones, contentMiddlewarePuestos, contentMiddlewareSeguimientoEmpleados, contentMiddlewareTipoBoleta, contentMiddlewareZonas } from "../middlewares/middlewareContent.js";
+import {
+  obtenerAlimentracionController,
+  obtenerAnimalesController,
+  obtenerBoletasController,
+  obtenerCapacitacionesController,
+  obtenerCitasMedicasController,
+  obtenerEmpleadosController,
+  obtenerEstadoHabitatController,
+  obtenerEstadosSaludController,
+  obtenerEvaluacionesDesempenoController,
+  obtenerEventosController,
+  obtenerFavturasEntradaController,
+  obtenerHabitatsController,
+  obtenerHistorialesEventoController,
+  obtenerHistorialesSaludController,
+  obtenerHorariosAlimentacionMantenimientoController,
+  obtenerHorariosTrabajoController,
+  obtenerListasBoletasController,
+  obtenerPlanificacionesEventosController,
+  obtenerPromocionesController,
+  obtenerPuestosController,
+  obtenerSeguimientosEmpleadoController,
+  obtenerTiposBoletasController,
+  obtenerZonasController,
+} from "../controllers/getControllers.js";
+import {
+  getT1DTOMiddleware,
+  getT2DTOMiddleware,
+} from "../middlewares/middlewaresDTO.js";
+import {
+  authorizationMiddleware,
+  contentMiddlewareAlimentacion,
+  contentMiddlewareAnimales,
+  contentMiddlewareBoletas,
+  contentMiddlewareCapacitaciones,
+  contentMiddlewareCitasMedicas,
+  contentMiddlewareEmpleados,
+  contentMiddlewareEstadoHabitat,
+  contentMiddlewareEstadoSalud,
+  contentMiddlewareEvaluacionDesempeno,
+  contentMiddlewareEventos,
+  contentMiddlewareFacturaEntrada,
+  contentMiddlewareHabitat,
+  contentMiddlewareHistorialEventos,
+  contentMiddlewareHistorialesSalud,
+  contentMiddlewareHorariosAlimentacion,
+  contentMiddlewareHorariosTrabajo,
+  contentMiddlewareListaBoletas,
+  contentMiddlewarePlanificacionEventos,
+  contentMiddlewarePromociones,
+  contentMiddlewarePuestos,
+  contentMiddlewareSeguimientoEmpleados,
+  contentMiddlewareTipoBoleta,
+  contentMiddlewareZonas,
+} from "../middlewares/middlewareContent.js";
 
 const getInitRoute = () => {
   const router = Router();
-  router.get("/obtenerTiposAlimentacion", contentMiddlewareAlimentacion, getT1DTOMiddleware, obtenerAlimentracionController);
-  router.get("/obtenerAnimales", contentMiddlewareAnimales, getT1DTOMiddleware, obtenerAnimalesController);
-  router.get("/obtenerBoletas", contentMiddlewareBoletas, getT1DTOMiddleware, obtenerBoletasController);
-  router.get("/obtenerCapacitaciones", contentMiddlewareCapacitaciones, getT1DTOMiddleware, obtenerCapacitacionesController);
-  router.get("/obtenerCitasMedicas", contentMiddlewareCitasMedicas, getT1DTOMiddleware, obtenerCitasMedicasController);
-  router.get("/obtenerEmpleados", contentMiddlewareEmpleados, getT2DTOMiddleware, obtenerEmpleadosController);
-  router.get("/obtenerEstadoHabitat", contentMiddlewareEstadoHabitat, obtenerEstadoHabitatController);
-  router.get("/obtenerEstadosSalud", contentMiddlewareEstadoSalud, getT1DTOMiddleware, obtenerEstadosSaludController);
-  router.get("/obtenerEvaluacionesDesempeno", contentMiddlewareEvaluacionDesempeno, getT1DTOMiddleware, obtenerEvaluacionesDesempenoController);
-  router.get("/obtenerEventos", contentMiddlewareEventos, getT1DTOMiddleware, obtenerEventosController);
-  router.get("/obtenerFacturasEntrada", contentMiddlewareFacturaEntrada, getT1DTOMiddleware, obtenerFavturasEntradaController);
-  router.get("/obtenerHabitats", contentMiddlewareHabitat, getT1DTOMiddleware, obtenerHabitatsController);
-  router.get("/obtenerHistorialesSalud", contentMiddlewareHistorialesSalud, getT1DTOMiddleware, obtenerHistorialesSaludController);
-  router.get("/obtenerHistorialesEvento", contentMiddlewareHistorialEventos, getT1DTOMiddleware, obtenerHistorialesEventoController);
-  router.get("/obtenerHorarAlMant", contentMiddlewareHorariosAlimentacion, getT1DTOMiddleware, obtenerHorariosAlimentacionMantenimientoController);
-  router.get("/obtenerHorariosTrabajo", contentMiddlewareHorariosTrabajo, getT1DTOMiddleware, obtenerHorariosTrabajoController);
-  router.get("/obtenerListasBoletas", contentMiddlewareListaBoletas, getT1DTOMiddleware, obtenerListasBoletasController);
-  router.get("/obtenerPlanificacionesEventos", contentMiddlewarePlanificacionEventos, getT1DTOMiddleware, obtenerPlanificacionesEventosController);
-  router.get("/obtenerPromociones", contentMiddlewarePromociones, getT1DTOMiddleware, obtenerPromocionesController);
-  router.get("/obtenerPuestos", contentMiddlewarePuestos, getT1DTOMiddleware, obtenerPuestosController);
-  router.get("/obtenerSeguimientoEmpleados", contentMiddlewareSeguimientoEmpleados, getT1DTOMiddleware, obtenerSeguimientosEmpleadoController);
-  router.get("/obtenerTiposBoleta", contentMiddlewareTipoBoleta, getT1DTOMiddleware, obtenerTiposBoletasController);
-  router.get("/obtenerZonas", contentMiddlewareZonas, getT1DTOMiddleware, obtenerZonasController);
+  router.get(
+    "/obtenerTiposAlimentacion",
+    authorizationMiddleware,
+    contentMiddlewareAlimentacion,
+    getT1DTOMiddleware,
+    obtenerAlimentracionController
+  );
+  router.get(
+    "/obtenerAnimales",
+    authorizationMiddleware,
+    contentMiddlewareAnimales,
+    getT1DTOMiddleware,
+    obtenerAnimalesController
+  );
+  router.get(
+    "/obtenerBoletas",
+    authorizationMiddleware,
+    contentMiddlewareBoletas,
+    getT1DTOMiddleware,
+    obtenerBoletasController
+  );
+  router.get(
+    "/obtenerCapacitaciones",
+    authorizationMiddleware,
+    contentMiddlewareCapacitaciones,
+    getT1DTOMiddleware,
+    obtenerCapacitacionesController
+  );
+  router.get(
+    "/obtenerCitasMedicas",
+    authorizationMiddleware,
+    contentMiddlewareCitasMedicas,
+    getT1DTOMiddleware,
+    obtenerCitasMedicasController
+  );
+  router.get(
+    "/obtenerEmpleados",
+    authorizationMiddleware,
+    contentMiddlewareEmpleados,
+    getT2DTOMiddleware,
+    obtenerEmpleadosController
+  );
+  router.get(
+    "/obtenerEstadoHabitat",
+    authorizationMiddleware,
+    contentMiddlewareEstadoHabitat,
+    obtenerEstadoHabitatController
+  );
+  router.get(
+    "/obtenerEstadosSalud",
+    authorizationMiddleware,
+    contentMiddlewareEstadoSalud,
+    getT1DTOMiddleware,
+    obtenerEstadosSaludController
+  );
+  router.get(
+    "/obtenerEvaluacionesDesempeno",
+    authorizationMiddleware,
+    contentMiddlewareEvaluacionDesempeno,
+    getT1DTOMiddleware,
+    obtenerEvaluacionesDesempenoController
+  );
+  router.get(
+    "/obtenerEventos",
+    authorizationMiddleware,
+    contentMiddlewareEventos,
+    getT1DTOMiddleware,
+    obtenerEventosController
+  );
+  router.get(
+    "/obtenerFacturasEntrada",
+    authorizationMiddleware,
+    contentMiddlewareFacturaEntrada,
+    getT1DTOMiddleware,
+    obtenerFavturasEntradaController
+  );
+  router.get(
+    "/obtenerHabitats",
+    authorizationMiddleware,
+    contentMiddlewareHabitat,
+    getT1DTOMiddleware,
+    obtenerHabitatsController
+  );
+  router.get(
+    "/obtenerHistorialesSalud",
+    authorizationMiddleware,
+    contentMiddlewareHistorialesSalud,
+    getT1DTOMiddleware,
+    obtenerHistorialesSaludController
+  );
+  router.get(
+    "/obtenerHistorialesEvento",
+    authorizationMiddleware,
+    contentMiddlewareHistorialEventos,
+    getT1DTOMiddleware,
+    obtenerHistorialesEventoController
+  );
+  router.get(
+    "/obtenerHorarAlMant",
+    authorizationMiddleware,
+    contentMiddlewareHorariosAlimentacion,
+    getT1DTOMiddleware,
+    obtenerHorariosAlimentacionMantenimientoController
+  );
+  router.get(
+    "/obtenerHorariosTrabajo",
+    authorizationMiddleware,
+    contentMiddlewareHorariosTrabajo,
+    getT1DTOMiddleware,
+    obtenerHorariosTrabajoController
+  );
+  router.get(
+    "/obtenerListasBoletas",
+    authorizationMiddleware,
+    contentMiddlewareListaBoletas,
+    getT1DTOMiddleware,
+    obtenerListasBoletasController
+  );
+  router.get(
+    "/obtenerPlanificacionesEventos",
+    authorizationMiddleware,
+    contentMiddlewarePlanificacionEventos,
+    getT1DTOMiddleware,
+    obtenerPlanificacionesEventosController
+  );
+  router.get(
+    "/obtenerPromociones",
+    authorizationMiddleware,
+    contentMiddlewarePromociones,
+    getT1DTOMiddleware,
+    obtenerPromocionesController
+  );
+  router.get(
+    "/obtenerPuestos",
+    authorizationMiddleware,
+    contentMiddlewarePuestos,
+    getT1DTOMiddleware,
+    obtenerPuestosController
+  );
+  router.get(
+    "/obtenerSeguimientoEmpleados",
+    authorizationMiddleware,
+    contentMiddlewareSeguimientoEmpleados,
+    getT1DTOMiddleware,
+    obtenerSeguimientosEmpleadoController
+  );
+  router.get(
+    "/obtenerTiposBoleta",
+    authorizationMiddleware,
+    contentMiddlewareTipoBoleta,
+    getT1DTOMiddleware,
+    obtenerTiposBoletasController
+  );
+  router.get(
+    "/obtenerZonas",
+    authorizationMiddleware,
+    contentMiddlewareZonas,
+    getT1DTOMiddleware,
+    obtenerZonasController
+  );
   return router;
 };
 
