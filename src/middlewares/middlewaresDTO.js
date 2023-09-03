@@ -1,7 +1,7 @@
 import { validationResult } from "express-validator";
 import { Router } from "express";
 import { deleteT1DTO, deleteT2DTO, getT1DTO, getT2DTO } from "../routes/DTO/getDeleteDTO.js";
-import { postAnimalDTO, postCapacitacionDTO, postEmpleadoDTO, postEvaluacionDesempenoDTO, postEventoDTO, postFacturaEntradaDTO, postHabitatDTO, postHistorialEventosDTO, postHistorialSaludDTO, postHorarioAlimentacionDTO, postTipoAlimentacionDTO, postestadoSaludDTO, putAnimalDTO, putCapacitacionDTO, putEstadoSaludDTO, putEvaluacionDesempenoDTO, putEventoDTO, putFacturaEntradaDTO, putHabitatDTO, putHistorialEventosDTO, putHistorialSaludDTO, putTipoAlimentacionDTO } from "../routes/DTO/putPostDTO.js";
+import { postAnimalDTO, postCapacitacionDTO, postEmpleadoDTO, postEvaluacionDesempenoDTO, postEventoDTO, postFacturaEntradaDTO, postHabitatDTO, postHistorialEventosDTO, postHistorialSaludDTO, postHorarioAlimentacionDTO, postTipoAlimentacionDTO, postestadoSaludDTO, putAnimalDTO, putCapacitacionDTO, putEstadoSaludDTO, putEvaluacionDesempenoDTO, putEventoDTO, putFacturaEntradaDTO, putHabitatDTO, putHistorialEventosDTO, putHistorialSaludDTO, putHorarioAlimentacionDTO, putTipoAlimentacionDTO } from "../routes/DTO/putPostDTO.js";
 
 function validador(req, res, next) {
     const errors = validationResult(req);
@@ -257,7 +257,25 @@ postHorarioAlimentacionDTOMiddleware.use(postHorarioAlimentacionDTO, (req, res, 
     }
 });
 
+const putHorarioAlimentacionDTOMiddleware = Router()
+putHorarioAlimentacionDTOMiddleware.use(putHorarioAlimentacionDTO, (req, res, next) => {
+    const errFlag = validador2(req, res)
+    if (errFlag === false) {
+        const { id, habitat, hora, encargado, descripcion } = req.body
+        const nuevoBody = {
+            id: id,
+            id_habitat: habitat,
+            hora_alimentacionMantenimiento: hora,
+            id_encargado: encargado,
+            descripcion: descripcion
+        };
+        req.body = nuevoBody
+        next()
+    }
+});
+
 export {
+    putHorarioAlimentacionDTOMiddleware,
     postHorarioAlimentacionDTOMiddleware,
     getT1DTOMiddleware,
     getT2DTOMiddleware,
