@@ -1,8 +1,11 @@
 import { Router } from "express";
 import {
   agregarAnimalController,
+  agregarBoletaController,
   agregarCapacitacionController,
+  agregarCitaMedicaController,
   agregarEmpleadoController,
+  agregarEstadoHabitatController,
   agregarEstadoSaludController,
   agregarEventoController,
   agregarFacturaEntradaController,

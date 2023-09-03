@@ -1,7 +1,10 @@
 import { Alimentacion } from "../collections/alimentacion.js";
 import { Animales } from "../collections/animales.js";
+import { Boletas } from "../collections/boletas.js";
 import { Capacitaciones } from "../collections/capacitaciones.js";
+import { CitasMedicas } from "../collections/citasMedicas.js";
 import { EstadosSalud } from "../collections/estadoSalud.js";
+import { EstadoHabitat } from "../collections/estadohabitad.js";
 import { EvaluacionDesempeno } from "../collections/evaluacion_desempeno.js";
 import { Eventos } from "../collections/eventos.js";
 import { FacturaEntrada } from "../collections/facturaEntrada.js";
@@ -52,6 +55,23 @@ const agregarAnimal = async (
     throw error;
   }
 };
+
+const agregarBoleta = async (idLista, idtipo, cantidad) => {
+  try {
+    const boleta = new Boletas();
+    boleta.idLista = idLista;
+    boleta.idtipo = idtipo;
+    boleta.cantidad = cantidad;
+
+    const resultado = await boleta.agregarBoletas();
+    if (resultado.insertedId) {
+      return "Boleta creada correctamente";
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 const agregarCapacitacion = async (
   id_seguimiento,
   nombre,
@@ -68,6 +88,28 @@ const agregarCapacitacion = async (
     const resultado = await capacitacion.agregarCapacitacion();
     if (resultado.insertedId) {
       return "Capacitación creada correctamente";
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+const agregarCitaMedica = async (
+  idHistorialSalud,
+  fecha_cita,
+  descripcion,
+  id_veterinario
+) => {
+  try {
+    const citaMedica = new CitasMedicas();
+    citaMedica.idHistorialSalud = idHistorialSalud;
+    citaMedica.fecha_cita = new Date(fecha_cita);
+    citaMedica.descripcion = descripcion;
+    citaMedica.id_veterinario = id_veterinario;
+
+    const resultado = await citaMedica.agregarCitaMedica();
+    if (resultado.insertedId) {
+      return "Cita médica creada correctamente";
     }
   } catch (error) {
     throw error;
@@ -94,6 +136,20 @@ const agregarEmpleado = async (
     const resultado = await empleado.agregarEmpleado();
     if (resultado.insertedId) {
       return "Empleado creado correctamente";
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+const agregarEstadoHabitat = async (descripcionEstado) => {
+  try {
+    const estadoHabitat = new EstadoHabitat();
+    estadoHabitat.descripcionEstado = descripcionEstado;
+
+    const resultado = await estadoHabitat.agregarEstadoHabitat();
+    if (resultado.insertedId) {
+      return "Estado de Habitat agregado correctamente";
     }
   } catch (error) {
     throw error;
@@ -404,6 +460,7 @@ export {
   agregarTipoAlimentacion,
   agregarAnimal,
   agregarEstadoSalud,
+  agregarCitaMedica,
   agregarEvento,
   agregarFacturaEntrada,
   agregarHabitat,
@@ -421,4 +478,6 @@ export {
   agregarSeguimientoEmpleado,
   agregarTipoBoleta,
   agregarZona,
+  agregarEstadoHabitat,
+  agregarBoleta,
 };

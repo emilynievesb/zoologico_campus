@@ -5,7 +5,9 @@ import { Capacitaciones } from "../collections/capacitaciones.js";
 import { CitasMedicas } from "../collections/citasMedicas.js";
 import { Empleado } from "../collections/empleado.js";
 import { EstadosSalud } from "../collections/estadoSalud.js";
+import { EstadoHabitat } from "../collections/estadohabitad.js";
 import { EvaluacionDesempeno } from "../collections/evaluacion_desempeno.js";
+import { Eventos } from "../collections/eventos.js";
 import { FacturaEntrada } from "../collections/facturaEntrada.js";
 import { Habitat } from "../collections/habitat.js";
 import { HistorialEventos } from "../collections/historialEventos.js";
@@ -152,6 +154,50 @@ const actualizarEmpleado = async (
       return "Empleado actualizado correctamente";
     } else {
       return "No se encontró el empleado o no se realizaron cambios";
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+const actualizarEstadoHabitat = async (id, descripcionEstado) => {
+  try {
+    const estadoHabitat = new EstadoHabitat();
+    estadoHabitat.id = id;
+    estadoHabitat.descripcionEstado = descripcionEstado;
+
+    const resultado = await estadoHabitat.actualizarEstadoHabitat();
+    if (resultado.modifiedCount > 0) {
+      return "Estado de Habitat actualizado correctamente";
+    } else {
+      throw new Error("No se pudo actualizar el estado de habitat");
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+const actualizarEvento = async (
+  id,
+  historialId,
+  fecha_evento,
+  empleadoId,
+  descripcion,
+  recomendaciones
+) => {
+  try {
+    const evento = new Eventos();
+    evento.id = id;
+    evento.historialId = historialId;
+    evento.fecha_evento = new Date(fecha_evento);
+    evento.empleadoId = empleadoId;
+    evento.descripcion = descripcion;
+    evento.recomendaciones = recomendaciones;
+
+    const resultado = await evento.actualizarEvento();
+    if (resultado.modifiedCount > 0) {
+      return "Evento actualizado correctamente";
+    } else {
+      return "No se encontró el evento o no se realizaron cambios";
     }
   } catch (error) {
     throw error;
@@ -515,4 +561,6 @@ export {
   actualizarSeguimientoEmpleado,
   actualizarTipoBoleta,
   actualizarZona,
+  actualizarEstadoHabitat,
+  actualizarEvento,
 };

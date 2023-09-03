@@ -1,6 +1,9 @@
 import {
   agregarAnimal,
+  agregarBoleta,
   agregarCapacitacion,
+  agregarCitaMedica,
+  agregarEstadoHabitat,
   agregarEstadoSalud,
   agregarEvento,
   agregarFacturaEntrada,
@@ -52,6 +55,16 @@ const agregarAnimalController = async (req, res, next) => {
   }
 };
 
+const agregarBoletaController = async (req, res, next) => {
+  try {
+    const { idLista, idtipo, cantidad } = req.body;
+    const result = await agregarBoleta(idLista, idtipo, cantidad);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
 const agregarCapacitacionController = async (req, res, next) => {
   try {
     const { id_seguimiento, nombre, fecha, descripcion } = req.body;
@@ -61,6 +74,32 @@ const agregarCapacitacionController = async (req, res, next) => {
       fecha,
       descripcion
     );
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
+const agregarCitaMedicaController = async (req, res, next) => {
+  try {
+    const { idHistorialSalud, fecha_cita, descripcion, id_veterinario } =
+      req.body;
+    const result = await agregarCitaMedica(
+      idHistorialSalud,
+      fecha_cita,
+      descripcion,
+      id_veterinario
+    );
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
+const agregarEstadoHabitatController = async (req, res, next) => {
+  try {
+    const { descripcionEstado } = req.body;
+    const result = await agregarEstadoHabitat(descripcionEstado);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json(error.message);
@@ -337,4 +376,7 @@ export {
   agregarSeguimientoEmpleadoController,
   agregarTipoBoletaController,
   agregarZonaController,
+  agregarBoletaController,
+  agregarCitaMedicaController,
+  agregarEstadoHabitatController,
 };

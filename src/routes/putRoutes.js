@@ -5,8 +5,10 @@ import {
   actualizarCapacitacionController,
   actualizarCitaMedicaController,
   actualizarEmpleadoController,
+  actualizarEstadoHabitatController,
   actualizarEstadoSaludController,
   actualizarEvaluacionDesempenoController,
+  actualizarEventoController,
   actualizarFacturaEntradaController,
   actualizarHabitatController,
   actualizarHistorialEventoController,
@@ -47,7 +49,6 @@ const putInitRoute = () => {
   router.put("/actualizarSeguimientoEmpleado", putSeguimientoEmpleadoDTOMiddleware, actualizarSeguimientoEmpleadoController);
   router.put("/actualizarTipoBoleta", putTiposBoletasDTOMiddleware, actualizarTipoBoletaController);
   router.put("/actualizarZona", putZonasDTOMiddleware, actualizarZonaController);
-
   return router;
 };
 
