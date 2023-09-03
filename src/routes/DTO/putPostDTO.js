@@ -674,7 +674,17 @@ const postEstadoHabitatDTO = [
         .isString().withMessage("La descripción del estado del habitat debe ser una cadena de texto"),
 ];
 
+const putEstadoHabitatDTO = [
+    check("id")
+        .notEmpty().withMessage("El ID es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID debe ser un número entero positivo"),
+    check("descripcionEstado")
+        .notEmpty().withMessage("La descripción del estado del habitat es obligatoria")
+        .isString().withMessage("La descripción del estado del habitat debe ser una cadena de texto"),
+];
+
 export {
+    putEstadoHabitatDTO,
     postEstadoHabitatDTO,
     putCitasMedicasDTO,
     postCitasMedicasDTO,

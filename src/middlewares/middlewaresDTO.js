@@ -1,7 +1,7 @@
 import { validationResult } from "express-validator";
 import { Router } from "express";
 import { deleteT1DTO, deleteT2DTO, getT1DTO, getT2DTO } from "../routes/DTO/getDeleteDTO.js";
-import { postAnimalDTO, postBoletasDTO, postCapacitacionDTO, postCitasMedicasDTO, postEmpleadoDTO, postEstadoHabitatDTO, postEvaluacionDesempenoDTO, postEventoDTO, postFacturaEntradaDTO, postHabitatDTO, postHistorialEventosDTO, postHistorialSaludDTO, postHorarioAlimentacionDTO, postHorarioTrabajoDTO, postListaBoletasDTO, postPlanificacionEventosDTO, postPromocionesDTO, postPuestosDTO, postSeguimientoEmpleadoDTO, postTipoAlimentacionDTO, postTiposBoletasDTO, postZonasDTO, postestadoSaludDTO, putAnimalDTO, putBoletasDTO, putCapacitacionDTO, putCitasMedicasDTO, putEstadoSaludDTO, putEvaluacionDesempenoDTO, putEventoDTO, putFacturaEntradaDTO, putHabitatDTO, putHistorialEventosDTO, putHistorialSaludDTO, putHorarioAlimentacionDTO, putHorarioTrabajoDTO, putListaBoletasDTO, putPlanificacionEventosDTO, putPromocionesDTO, putPuestosDTO, putSeguimientoEmpleadoDTO, putTipoAlimentacionDTO, putTiposBoletasDTO, putZonasDTO } from "../routes/DTO/putPostDTO.js";
+import { postAnimalDTO, postBoletasDTO, postCapacitacionDTO, postCitasMedicasDTO, postEmpleadoDTO, postEstadoHabitatDTO, postEvaluacionDesempenoDTO, postEventoDTO, postFacturaEntradaDTO, postHabitatDTO, postHistorialEventosDTO, postHistorialSaludDTO, postHorarioAlimentacionDTO, postHorarioTrabajoDTO, postListaBoletasDTO, postPlanificacionEventosDTO, postPromocionesDTO, postPuestosDTO, postSeguimientoEmpleadoDTO, postTipoAlimentacionDTO, postTiposBoletasDTO, postZonasDTO, postestadoSaludDTO, putAnimalDTO, putBoletasDTO, putCapacitacionDTO, putCitasMedicasDTO, putEstadoHabitatDTO, putEstadoSaludDTO, putEvaluacionDesempenoDTO, putEventoDTO, putFacturaEntradaDTO, putHabitatDTO, putHistorialEventosDTO, putHistorialSaludDTO, putHorarioAlimentacionDTO, putHorarioTrabajoDTO, putListaBoletasDTO, putPlanificacionEventosDTO, putPromocionesDTO, putPuestosDTO, putSeguimientoEmpleadoDTO, putTipoAlimentacionDTO, putTiposBoletasDTO, putZonasDTO } from "../routes/DTO/putPostDTO.js";
 
 function validador(req, res, next) {
     const errors = validationResult(req);
@@ -515,8 +515,14 @@ postEstadoHabitatDTOMiddleware.use(postEstadoHabitatDTO, (req, res, next) => {
     validador(req, res, next)
 });
 
+const putEstadoHabitatDTOMiddleware = Router()
+putEstadoHabitatDTOMiddleware.use(putEstadoHabitatDTO, (req, res, next) => {
+    validador(req, res, next)
+});
+
 
 export {
+    putEstadoHabitatDTOMiddleware,
     postEstadoHabitatDTOMiddleware,
     putCitasMedicasDTOMiddleware,
     postCitasMedicasDTOMiddleware,
