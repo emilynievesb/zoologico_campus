@@ -27,6 +27,45 @@ db.counters.insertMany([
     { _id: "promocionesId", sequence_value: 0 },
 
 ]);
+db.createCollection("usuarios", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["usuario", "contraseña"],
+            properties: {
+                usuario: {
+                    bsonType: "string",
+                    description: "usuario requerido"
+                },
+                contraseña: {
+                    bsonType: "string",
+                    description: "contraseña requerida"
+                }
+            }
+        }
+    }
+})
+db.usuarios.insertMany([
+    {
+        usuario: "superAdmin",
+        contraseña: "superAdmin123"
+    },
+    {
+        usuario: "jefepersonal",
+        contraseña: "jefepersonal123"
+    },
+    {
+        usuario: "taquillero",
+        contraseña: "taquillero123"
+    },
+    {
+        usuario: "medico",
+        contraseña: "medico123"
+    }
+
+])
+
+
 function siguienteId(coleccion) {
     const sequenceDocument = db.counters.findOneAndUpdate(
         { _id: `${coleccion}Id` },
