@@ -22,16 +22,16 @@ import {
   actualizarTipoBoletaController,
   actualizarZonaController,
 } from "../controllers/putControllers.js";
-import { putAnimalDTOMiddleware, putCapacitacionDTOMiddleware, putFacturaEntradaDTOMiddleware, putHabitatDTOMiddleware, putHistorialSaludDTOMiddleware, putTipoAlimentacionDTOMiddleware, putestadoSaludDTOMiddleware } from "../middlewares/middlewaresDTO.js";
+import { postEmpleadoDTOMiddleware, putAnimalDTOMiddleware, putCapacitacionDTOMiddleware, putFacturaEntradaDTOMiddleware, putHabitatDTOMiddleware, putHistorialSaludDTOMiddleware, putTipoAlimentacionDTOMiddleware, putestadoSaludDTOMiddleware } from "../middlewares/middlewaresDTO.js";
 
 const putInitRoute = () => {
   const router = Router();
   router.put("/actualizarTipoAlimentacion", putTipoAlimentacionDTOMiddleware, actualizarTipoAlimentacionController);
   router.put("/actualizarAnimal", putAnimalDTOMiddleware, actualizarAnimalController);
   router.put("/actualizarBoleta", actualizarBoletaController);
-  router.put("/actualizarCapacitacion",putCapacitacionDTOMiddleware, actualizarCapacitacionController);
+  router.put("/actualizarCapacitacion", putCapacitacionDTOMiddleware, actualizarCapacitacionController);
   router.put("/actualizarCitaMedica", actualizarCitaMedicaController);
-  router.put("/actualizarEmpleado", actualizarEmpleadoController);
+  router.put("/actualizarEmpleado", postEmpleadoDTOMiddleware, actualizarEmpleadoController);
   router.put("/actualizarEstadoSalud", putestadoSaludDTOMiddleware, actualizarEstadoSaludController);
   router.put("/actualizarEvaluacion", actualizarEvaluacionDesempenoController);
   router.put("/actualizarFactura", putFacturaEntradaDTOMiddleware, actualizarFacturaEntradaController);
