@@ -521,7 +521,23 @@ const postPuestosDTO = [
         .isInt({ min: 1 }).withMessage("El ID del horario de trabajo debe ser un número entero positivo"),
 ];
 
+const putPuestosDTO = [
+    check("id")
+        .notEmpty().withMessage("El ID es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID debe ser un número entero positivo"),
+    check("nombre")
+        .notEmpty().withMessage("El nombre del puesto es obligatorio")
+        .isString().withMessage("El nombre del puesto debe ser una cadena de texto"),
+    check("salario")
+        .notEmpty().withMessage("El salario es obligatorio")
+        .isNumeric().withMessage("El salario debe ser un número"),
+    check("idHorario")
+        .notEmpty().withMessage("El ID del horario de trabajo es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID del horario de trabajo debe ser un número entero positivo"),
+];
+
 export {
+    putPuestosDTO,
     postPuestosDTO,
     putPromocionesDTO,
     postPromocionesDTO,
