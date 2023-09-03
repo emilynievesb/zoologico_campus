@@ -19,7 +19,7 @@ import {
   agregarTipoBoletaController,
   agregarZonaController,
 } from "../controllers/postControllers.js";
-import { postAnimalDTOMiddleware, postCapacitacionDTOMiddleware, postEmpleadoDTOMiddleware, postEvaluacionDesempenoDTOMiddleware, postEventoDTOMiddleware, postFacturaEntradaDTOMiddleware, postHabitatDTOMiddleware, postHistorialEventosDTOMiddleware, postHistorialSaludDTOMiddleware, postHorarioAlimentacionDTOMiddleware, postHorarioTrabajoDTOMiddleware, postListaBoletasDTOMiddleware, postPlanificacionEventosDTOMiddleware, postPromocionesDTOMiddleware, postTipoAlimentacionDTOMiddleware, postestadoSaludDTOMiddleware } from "../middlewares/middlewaresDTO.js";
+import { postAnimalDTOMiddleware, postCapacitacionDTOMiddleware, postEmpleadoDTOMiddleware, postEvaluacionDesempenoDTOMiddleware, postEventoDTOMiddleware, postFacturaEntradaDTOMiddleware, postHabitatDTOMiddleware, postHistorialEventosDTOMiddleware, postHistorialSaludDTOMiddleware, postHorarioAlimentacionDTOMiddleware, postHorarioTrabajoDTOMiddleware, postListaBoletasDTOMiddleware, postPlanificacionEventosDTOMiddleware, postPromocionesDTOMiddleware, postPuestosDTOMiddleware, postTipoAlimentacionDTOMiddleware, postestadoSaludDTOMiddleware } from "../middlewares/middlewaresDTO.js";
 
 const postInitRoute = () => {
   const router = Router();
@@ -39,7 +39,7 @@ const postInitRoute = () => {
   router.post("/agregarListaBoletas", postListaBoletasDTOMiddleware, agregarListaBoletasController);
   router.post("/agregarPlanificacionEvento", postPlanificacionEventosDTOMiddleware, agregarPlanificacionEventosController);
   router.post("/agregarPromocion", postPromocionesDTOMiddleware, agregarPromocionesController);
-  router.post("/agregarPuesto", agregarPuestoController);
+  router.post("/agregarPuesto", postPuestosDTOMiddleware, agregarPuestoController);
   router.post("/agregarSeguimientoEmpleado", agregarSeguimientoEmpleadoController);
   router.post("/agregarTipoBoleta", agregarTipoBoletaController);
   router.post("/agregarZona", agregarZonaController);

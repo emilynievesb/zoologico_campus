@@ -508,7 +508,21 @@ const putPromocionesDTO = [
         .matches(/^\d{4}-\d{2}-\d{2}$/).withMessage("La fecha de finalización debe tener el formato 'YYYY-MM-DD HH:MM:SS'"),
 ];
 
+//puesto
+const postPuestosDTO = [
+    check("nombre")
+        .notEmpty().withMessage("El nombre del puesto es obligatorio")
+        .isString().withMessage("El nombre del puesto debe ser una cadena de texto"),
+    check("salario")
+        .notEmpty().withMessage("El salario es obligatorio")
+        .isNumeric().withMessage("El salario debe ser un número"),
+    check("idHorario")
+        .notEmpty().withMessage("El ID del horario de trabajo es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID del horario de trabajo debe ser un número entero positivo"),
+];
+
 export {
+    postPuestosDTO,
     putPromocionesDTO,
     postPromocionesDTO,
     putPlanificacionEventosDTO,
