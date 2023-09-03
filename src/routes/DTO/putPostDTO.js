@@ -116,6 +116,9 @@ const postEventoDTO = [
 ];
 
 const putEventoDTO = [
+    check("id")
+        .notEmpty().withMessage("El ID es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID debe ser un número entero positivo"),
     check("historialId")
         .notEmpty().withMessage("El historialId es obligatorio")
         .isInt({ min: 1 }).withMessage("El historialId debe ser un número entero positivo"),

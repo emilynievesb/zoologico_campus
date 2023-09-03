@@ -31,6 +31,7 @@ import {
   putCapacitacionDTOMiddleware,
   putCitasMedicasDTOMiddleware,
   putEvaluacionDesempenoDTOMiddleware,
+  putEventoDTOMiddleware,
   putFacturaEntradaDTOMiddleware,
   putHabitatDTOMiddleware,
   putHistorialEventosDTOMiddleware,
@@ -140,8 +141,7 @@ const putInitRoute = () => {
   );
   router.put(
     "/actualizarEvento",
-    authorizationMiddleware,
-    contentMiddlewareEventos,
+    putEventoDTOMiddleware,
     actualizarEventoController
   );
   router.put(
