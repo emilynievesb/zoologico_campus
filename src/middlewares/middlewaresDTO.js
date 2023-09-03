@@ -1,7 +1,7 @@
 import { validationResult } from "express-validator";
 import { Router } from "express";
 import { deleteT1DTO, deleteT2DTO, getT1DTO, getT2DTO } from "../routes/DTO/getDeleteDTO.js";
-import { postAnimalDTO, postCapacitacionDTO, postEventoDTO, postFacturaEntradaDTO, postHabitatDTO, postHistorialSaludDTO, postTipoAlimentacionDTO, postestadoSaludDTO, putAnimalDTO, putCapacitacionDTO, putEstadoSaludDTO, putEventoDTO, putFacturaEntradaDTO, putHabitatDTO, putHistorialSaludDTO, putTipoAlimentacionDTO } from "../routes/DTO/putPostDTO.js";
+import { postAnimalDTO, postCapacitacionDTO, postEmpleadoDTO, postEventoDTO, postFacturaEntradaDTO, postHabitatDTO, postHistorialSaludDTO, postTipoAlimentacionDTO, postestadoSaludDTO, putAnimalDTO, putCapacitacionDTO, putEstadoSaludDTO, putEventoDTO, putFacturaEntradaDTO, putHabitatDTO, putHistorialSaludDTO, putTipoAlimentacionDTO } from "../routes/DTO/putPostDTO.js";
 
 function validador(req, res, next) {
     const errors = validationResult(req);
@@ -189,6 +189,13 @@ putCapacitacionDTOMiddleware.use(putCapacitacionDTO, (req, res, next) => {
     }
 });
 
+//empleado
+const postEmpleadoDTOMiddleware = Router()
+postEmpleadoDTOMiddleware.use(postEmpleadoDTO, (req, res, next) => {
+    validador(req, res, next)
+});
+
+
 export {
     getT1DTOMiddleware,
     getT2DTOMiddleware,
@@ -209,5 +216,6 @@ export {
     postHistorialSaludDTOMiddleware,
     putHistorialSaludDTOMiddleware,
     postCapacitacionDTOMiddleware,
-    putCapacitacionDTOMiddleware
+    putCapacitacionDTOMiddleware,
+    postEmpleadoDTOMiddleware
 }
