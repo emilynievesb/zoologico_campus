@@ -1,7 +1,7 @@
 import { validationResult } from "express-validator";
 import { Router } from "express";
 import { deleteT1DTO, deleteT2DTO, getT1DTO, getT2DTO } from "../routes/DTO/getDeleteDTO.js";
-import { postAnimalDTO, postCapacitacionDTO, postEmpleadoDTO, postEvaluacionDesempenoDTO, postEventoDTO, postFacturaEntradaDTO, postHabitatDTO, postHistorialEventosDTO, postHistorialSaludDTO, postTipoAlimentacionDTO, postestadoSaludDTO, putAnimalDTO, putCapacitacionDTO, putEstadoSaludDTO, putEvaluacionDesempenoDTO, putEventoDTO, putFacturaEntradaDTO, putHabitatDTO, putHistorialSaludDTO, putTipoAlimentacionDTO } from "../routes/DTO/putPostDTO.js";
+import { postAnimalDTO, postCapacitacionDTO, postEmpleadoDTO, postEvaluacionDesempenoDTO, postEventoDTO, postFacturaEntradaDTO, postHabitatDTO, postHistorialEventosDTO, postHistorialSaludDTO, postTipoAlimentacionDTO, postestadoSaludDTO, putAnimalDTO, putCapacitacionDTO, putEstadoSaludDTO, putEvaluacionDesempenoDTO, putEventoDTO, putFacturaEntradaDTO, putHabitatDTO, putHistorialEventosDTO, putHistorialSaludDTO, putTipoAlimentacionDTO } from "../routes/DTO/putPostDTO.js";
 
 function validador(req, res, next) {
     const errors = validationResult(req);
@@ -234,6 +234,10 @@ const postHistorialEventosDTOMiddleware = Router()
 postHistorialEventosDTOMiddleware.use(postHistorialEventosDTO, (req, res, next) => {
     validador(req, res, next)
 });
+const putHistorialEventosDTOMiddleware = Router()
+putHistorialEventosDTOMiddleware.use(putHistorialEventosDTO, (req, res, next) => {
+    validador(req, res, next)
+});
 
 
 export {
@@ -260,5 +264,6 @@ export {
     postEmpleadoDTOMiddleware,
     postEvaluacionDesempenoDTOMiddleware,
     putEvaluacionDesempenoDTOMiddleware,
-    postHistorialEventosDTOMiddleware
+    postHistorialEventosDTOMiddleware,
+    putHistorialEventosDTOMiddleware
 }

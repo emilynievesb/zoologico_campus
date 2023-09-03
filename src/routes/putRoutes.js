@@ -22,7 +22,7 @@ import {
   actualizarTipoBoletaController,
   actualizarZonaController,
 } from "../controllers/putControllers.js";
-import { postEmpleadoDTOMiddleware, putAnimalDTOMiddleware, putCapacitacionDTOMiddleware, putEvaluacionDesempenoDTOMiddleware, putFacturaEntradaDTOMiddleware, putHabitatDTOMiddleware, putHistorialSaludDTOMiddleware, putTipoAlimentacionDTOMiddleware, putestadoSaludDTOMiddleware } from "../middlewares/middlewaresDTO.js";
+import { postEmpleadoDTOMiddleware, putAnimalDTOMiddleware, putCapacitacionDTOMiddleware, putEvaluacionDesempenoDTOMiddleware, putFacturaEntradaDTOMiddleware, putHabitatDTOMiddleware, putHistorialEventosDTOMiddleware, putHistorialSaludDTOMiddleware, putTipoAlimentacionDTOMiddleware, putestadoSaludDTOMiddleware } from "../middlewares/middlewaresDTO.js";
 
 const putInitRoute = () => {
   const router = Router();
@@ -37,7 +37,7 @@ const putInitRoute = () => {
   router.put("/actualizarFactura", putFacturaEntradaDTOMiddleware, actualizarFacturaEntradaController);
   router.put("/actualizarHabitat", putHabitatDTOMiddleware, actualizarHabitatController);
   router.put("/actualizarHistorialSalud", putHistorialSaludDTOMiddleware, actualizarHistorialSaludController);
-  router.put("/actualizarHistorialEvento", actualizarHistorialEventoController);
+  router.put("/actualizarHistorialEvento", putHistorialEventosDTOMiddleware, actualizarHistorialEventoController);
   router.put("/actualizarHorarioAlimentacion", actualizarHorarioAlimentacionController);
   router.put("/actualizarHorarioTrabajo", actualizarHorarioTrabajoController);
   router.put("/actualizarListaBoletas", actualizarListaBoletasController);

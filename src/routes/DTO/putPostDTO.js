@@ -341,6 +341,21 @@ const postHistorialEventosDTO = [
         .isInt({ min: 1 }).withMessage("El ID del estado del hábitat debe ser un número entero positivo"),
 ];
 
+const putHistorialEventosDTO = [
+    check("id")
+        .notEmpty().withMessage("El ID es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID debe ser un número entero positivo"),
+    check("fecha_creacion")
+        .notEmpty().withMessage("La fecha de creación es obligatoria")
+        .matches(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/).withMessage("La fecha de creación debe tener el formato 'YYYY-MM-DD HH:MM:SS'"),
+    check("ultima_modificacion")
+        .notEmpty().withMessage("La fecha de última modificación es obligatoria")
+        .matches(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/).withMessage("La fecha de última modificación debe tener el formato 'YYYY-MM-DD HH:MM:SS'"),
+    check("idEstadohabitat")
+        .notEmpty().withMessage("El ID del estado del hábitat es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID del estado del hábitat debe ser un número entero positivo"),
+];
+
 export {
     postTipoAlimentacionDTO,
     putTipoAlimentacionDTO,
@@ -361,5 +376,6 @@ export {
     postEmpleadoDTO,
     postEvaluacionDesempenoDTO,
     putEvaluacionDesempenoDTO,
-    postHistorialEventosDTO
+    postHistorialEventosDTO,
+    putHistorialEventosDTO
 }
