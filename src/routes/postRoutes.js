@@ -24,6 +24,7 @@ import {
 } from "../controllers/postControllers.js";
 import {
   postAnimalDTOMiddleware,
+  postBoletasDTOMiddleware,
   postCapacitacionDTOMiddleware,
   postEmpleadoDTOMiddleware,
   postEvaluacionDesempenoDTOMiddleware,
@@ -91,6 +92,7 @@ const postInitRoute = () => {
     "/agregarBoletas",
     authorizationMiddleware,
     contentMiddlewareBoletas,
+    postBoletasDTOMiddleware,
     agregarBoletaController
   );
   router.post(

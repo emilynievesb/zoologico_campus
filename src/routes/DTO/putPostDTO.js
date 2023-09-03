@@ -602,8 +602,22 @@ const putZonasDTO = [
         .isString().withMessage("La descripción de la zona debe ser una cadena de texto"),
 ];
 
+//Boleta
+const postBoletasDTO = [
+    check("lista")
+        .notEmpty().withMessage("El ID de la lista es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID de la lista debe ser un número entero positivo"),
+    check("tipo")
+        .notEmpty().withMessage("El ID del tipo es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID del tipo debe ser un número entero positivo"),
+    check("cantidad")
+        .notEmpty().withMessage("La cantidad es obligatoria")
+        .isInt({ min: 1 }).withMessage("La cantidad debe ser un número entero positivo"),
+];
+
 
 export {
+    postBoletasDTO,
     putZonasDTO,
     postZonasDTO,
     putTiposBoletasDTO,
