@@ -546,7 +546,21 @@ const postSeguimientoEmpleadoDTO = [
         .matches(/^\d{4}-\d{2}-\d{2}$/).withMessage("La fecha de actualización debe tener el formato 'YYYY-MM-DD'"),
 ];
 
+const putSeguimientoEmpleadoDTO = [
+    check("id")
+        .notEmpty().withMessage("El ID es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID debe ser un número entero positivo"),
+    check("creacion")
+        .notEmpty().withMessage("La fecha de creación es obligatoria")
+        .matches(/^\d{4}-\d{2}-\d{2}$/).withMessage("La fecha de creación debe tener el formato 'YYYY-MM-DD'"),
+    check("actualizacion")
+        .notEmpty().withMessage("La fecha de actualización es obligatoria")
+        .matches(/^\d{4}-\d{2}-\d{2}$/).withMessage("La fecha de actualización debe tener el formato 'YYYY-MM-DD'"),
+];
+
+
 export {
+    putSeguimientoEmpleadoDTO,
     postSeguimientoEmpleadoDTO,
     putPuestosDTO,
     postPuestosDTO,
