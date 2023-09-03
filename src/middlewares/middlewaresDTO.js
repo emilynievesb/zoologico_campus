@@ -1,7 +1,7 @@
 import { validationResult } from "express-validator";
 import { Router } from "express";
 import { deleteT1DTO, deleteT2DTO, getT1DTO, getT2DTO } from "../routes/DTO/getDeleteDTO.js";
-import { postAnimalDTO, postCapacitacionDTO, postEmpleadoDTO, postEvaluacionDesempenoDTO, postEventoDTO, postFacturaEntradaDTO, postHabitatDTO, postHistorialEventosDTO, postHistorialSaludDTO, postHorarioAlimentacionDTO, postHorarioTrabajoDTO, postListaBoletasDTO, postPlanificacionEventosDTO, postTipoAlimentacionDTO, postestadoSaludDTO, putAnimalDTO, putCapacitacionDTO, putEstadoSaludDTO, putEvaluacionDesempenoDTO, putEventoDTO, putFacturaEntradaDTO, putHabitatDTO, putHistorialEventosDTO, putHistorialSaludDTO, putHorarioAlimentacionDTO, putHorarioTrabajoDTO, putListaBoletasDTO, putPlanificacionEventosDTO, putTipoAlimentacionDTO } from "../routes/DTO/putPostDTO.js";
+import { postAnimalDTO, postCapacitacionDTO, postEmpleadoDTO, postEvaluacionDesempenoDTO, postEventoDTO, postFacturaEntradaDTO, postHabitatDTO, postHistorialEventosDTO, postHistorialSaludDTO, postHorarioAlimentacionDTO, postHorarioTrabajoDTO, postListaBoletasDTO, postPlanificacionEventosDTO, postPromocionesDTO, postTipoAlimentacionDTO, postestadoSaludDTO, putAnimalDTO, putCapacitacionDTO, putEstadoSaludDTO, putEvaluacionDesempenoDTO, putEventoDTO, putFacturaEntradaDTO, putHabitatDTO, putHistorialEventosDTO, putHistorialSaludDTO, putHorarioAlimentacionDTO, putHorarioTrabajoDTO, putListaBoletasDTO, putPlanificacionEventosDTO, putTipoAlimentacionDTO } from "../routes/DTO/putPostDTO.js";
 
 function validador(req, res, next) {
     const errors = validationResult(req);
@@ -368,7 +368,26 @@ putPlanificacionEventosDTOMiddleware.use(putPlanificacionEventosDTO, (req, res, 
     }
 });
 
+//promociones
+const postPromocionesDTOMiddleware = Router()
+postPromocionesDTOMiddleware.use(postPromocionesDTO, (req, res, next) => {
+    const errFlag = validador2(req, res)
+    if (errFlag === false) {
+        const { nombre, descuento, fin, inicio, descripcion } = req.body
+        const nuevoBody = {
+            nombre,
+            fecha_inicio: inicio,
+            fecha_fin: fin,
+            descuento,
+            descripcion,
+        };
+        req.body = nuevoBody
+        next()
+    }
+})
+
 export {
+    postPromocionesDTOMiddleware,
     putPlanificacionEventosDTOMiddleware,
     postPlanificacionEventosDTOMiddleware,
     putListaBoletasDTOMiddleware,
