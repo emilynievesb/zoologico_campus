@@ -630,8 +630,25 @@ const putBoletasDTO = [
         .isInt({ min: 1 }).withMessage("La cantidad debe ser un número entero positivo"),
 ];
 
+//Cita medica
+const postCitasMedicasDTO = [
+    check("idHistorialSalud")
+        .notEmpty().withMessage("El ID del historial médico es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID del historial médico debe ser un número entero positivo"),
+    check("fecha_cita")
+        .notEmpty().withMessage("La fecha de la cita médica es obligatoria")
+        .matches(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/).withMessage("La fecha de la cita médica debe tener el formato 'YYYY-MM-DD HH:MM:SS'"),
+    check("descripcion")
+        .notEmpty().withMessage("La descripción de la cita médica es obligatoria")
+        .isString().withMessage("La descripción de la cita médica debe ser una cadena de texto"),
+    check("id_veterinario")
+        .notEmpty().withMessage("El ID del veterinario es obligatorio")
+        .matches(/^[0-9]{10}$/).withMessage("El ID del veterinario debe tener 10 dígitos numéricos"),
+];
+
 
 export {
+    postCitasMedicasDTO,
     putBoletasDTO,
     postBoletasDTO,
     putZonasDTO,
