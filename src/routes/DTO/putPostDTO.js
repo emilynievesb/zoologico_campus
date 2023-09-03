@@ -558,8 +558,18 @@ const putSeguimientoEmpleadoDTO = [
         .matches(/^\d{4}-\d{2}-\d{2}$/).withMessage("La fecha de actualización debe tener el formato 'YYYY-MM-DD'"),
 ];
 
+//tipo boleta
+const postTiposBoletasDTO = [
+    check("tipo")
+        .notEmpty().withMessage("El tipo de entrada es obligatorio")
+        .isString().withMessage("El tipo de entrada debe ser una cadena de texto"),
+    check("precio")
+        .notEmpty().withMessage("El precio es obligatorio")
+        .isNumeric().withMessage("El precio debe ser un número"),
+];
 
 export {
+    postTiposBoletasDTO,
     putSeguimientoEmpleadoDTO,
     postSeguimientoEmpleadoDTO,
     putPuestosDTO,

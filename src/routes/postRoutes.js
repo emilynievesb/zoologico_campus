@@ -19,7 +19,7 @@ import {
   agregarTipoBoletaController,
   agregarZonaController,
 } from "../controllers/postControllers.js";
-import { postAnimalDTOMiddleware, postCapacitacionDTOMiddleware, postEmpleadoDTOMiddleware, postEvaluacionDesempenoDTOMiddleware, postEventoDTOMiddleware, postFacturaEntradaDTOMiddleware, postHabitatDTOMiddleware, postHistorialEventosDTOMiddleware, postHistorialSaludDTOMiddleware, postHorarioAlimentacionDTOMiddleware, postHorarioTrabajoDTOMiddleware, postListaBoletasDTOMiddleware, postPlanificacionEventosDTOMiddleware, postPromocionesDTOMiddleware, postPuestosDTOMiddleware, postSeguimientoEmpleadoDTOMiddleware, postTipoAlimentacionDTOMiddleware, postestadoSaludDTOMiddleware } from "../middlewares/middlewaresDTO.js";
+import { postAnimalDTOMiddleware, postCapacitacionDTOMiddleware, postEmpleadoDTOMiddleware, postEvaluacionDesempenoDTOMiddleware, postEventoDTOMiddleware, postFacturaEntradaDTOMiddleware, postHabitatDTOMiddleware, postHistorialEventosDTOMiddleware, postHistorialSaludDTOMiddleware, postHorarioAlimentacionDTOMiddleware, postHorarioTrabajoDTOMiddleware, postListaBoletasDTOMiddleware, postPlanificacionEventosDTOMiddleware, postPromocionesDTOMiddleware, postPuestosDTOMiddleware, postSeguimientoEmpleadoDTOMiddleware, postTipoAlimentacionDTOMiddleware, postTiposBoletasDTOMiddleware, postestadoSaludDTOMiddleware } from "../middlewares/middlewaresDTO.js";
 
 const postInitRoute = () => {
   const router = Router();
@@ -41,7 +41,7 @@ const postInitRoute = () => {
   router.post("/agregarPromocion", postPromocionesDTOMiddleware, agregarPromocionesController);
   router.post("/agregarPuesto", postPuestosDTOMiddleware, agregarPuestoController);
   router.post("/agregarSeguimientoEmpleado", postSeguimientoEmpleadoDTOMiddleware, agregarSeguimientoEmpleadoController);
-  router.post("/agregarTipoBoleta", agregarTipoBoletaController);
+  router.post("/agregarTipoBoleta",postTiposBoletasDTOMiddleware, agregarTipoBoletaController);
   router.post("/agregarZona", agregarZonaController);
   return router;
 };
