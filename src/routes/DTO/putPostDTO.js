@@ -590,7 +590,21 @@ const postZonasDTO = [
         .isString().withMessage("La descripción de la zona debe ser una cadena de texto"),
 ];
 
+const putZonasDTO = [
+    check("id")
+        .notEmpty().withMessage("El ID es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID debe ser un número entero positivo"),
+    check("nombre")
+        .notEmpty().withMessage("El nombre de la zona es obligatorio")
+        .isString().withMessage("El nombre de la zona debe ser una cadena de texto"),
+    check("descripcion")
+        .notEmpty().withMessage("La descripción de la zona es obligatoria")
+        .isString().withMessage("La descripción de la zona debe ser una cadena de texto"),
+];
+
+
 export {
+    putZonasDTO,
     postZonasDTO,
     putTiposBoletasDTO,
     postTiposBoletasDTO,

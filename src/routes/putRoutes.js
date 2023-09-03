@@ -22,7 +22,7 @@ import {
   actualizarTipoBoletaController,
   actualizarZonaController,
 } from "../controllers/putControllers.js";
-import { postEmpleadoDTOMiddleware, putAnimalDTOMiddleware, putCapacitacionDTOMiddleware, putEvaluacionDesempenoDTOMiddleware, putFacturaEntradaDTOMiddleware, putHabitatDTOMiddleware, putHistorialEventosDTOMiddleware, putHistorialSaludDTOMiddleware, putHorarioAlimentacionDTOMiddleware, putHorarioTrabajoDTOMiddleware, putListaBoletasDTOMiddleware, putPlanificacionEventosDTOMiddleware, putPromocionesDTOMiddleware, putPuestosDTOMiddleware, putSeguimientoEmpleadoDTOMiddleware, putTipoAlimentacionDTOMiddleware, putTiposBoletasDTOMiddleware, putestadoSaludDTOMiddleware } from "../middlewares/middlewaresDTO.js";
+import { postEmpleadoDTOMiddleware, putAnimalDTOMiddleware, putCapacitacionDTOMiddleware, putEvaluacionDesempenoDTOMiddleware, putFacturaEntradaDTOMiddleware, putHabitatDTOMiddleware, putHistorialEventosDTOMiddleware, putHistorialSaludDTOMiddleware, putHorarioAlimentacionDTOMiddleware, putHorarioTrabajoDTOMiddleware, putListaBoletasDTOMiddleware, putPlanificacionEventosDTOMiddleware, putPromocionesDTOMiddleware, putPuestosDTOMiddleware, putSeguimientoEmpleadoDTOMiddleware, putTipoAlimentacionDTOMiddleware, putTiposBoletasDTOMiddleware, putZonasDTOMiddleware, putestadoSaludDTOMiddleware } from "../middlewares/middlewaresDTO.js";
 
 const putInitRoute = () => {
   const router = Router();
@@ -46,7 +46,7 @@ const putInitRoute = () => {
   router.put("/actualizarPuesto", putPuestosDTOMiddleware, actualizarPuestoController);
   router.put("/actualizarSeguimientoEmpleado", putSeguimientoEmpleadoDTOMiddleware, actualizarSeguimientoEmpleadoController);
   router.put("/actualizarTipoBoleta", putTiposBoletasDTOMiddleware, actualizarTipoBoletaController);
-  router.put("/actualizarZona", actualizarZonaController);
+  router.put("/actualizarZona", putZonasDTOMiddleware, actualizarZonaController);
 
   return router;
 };
