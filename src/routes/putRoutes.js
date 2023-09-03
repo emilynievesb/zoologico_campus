@@ -27,6 +27,7 @@ import {
 import {
   postEmpleadoDTOMiddleware,
   putAnimalDTOMiddleware,
+  putBoletasDTOMiddleware,
   putCapacitacionDTOMiddleware,
   putEvaluacionDesempenoDTOMiddleware,
   putFacturaEntradaDTOMiddleware,
@@ -92,6 +93,7 @@ const putInitRoute = () => {
     "/actualizarBoleta",
     authorizationMiddleware,
     contentMiddlewareBoletas,
+    putBoletasDTOMiddleware,
     actualizarBoletaController
   );
   router.put(
