@@ -1,7 +1,7 @@
 import { validationResult } from "express-validator";
 import { Router } from "express";
 import { deleteT1DTO, deleteT2DTO, getT1DTO, getT2DTO } from "../routes/DTO/getDeleteDTO.js";
-import { postAnimalDTO, postCapacitacionDTO, postEmpleadoDTO, postEvaluacionDesempenoDTO, postEventoDTO, postFacturaEntradaDTO, postHabitatDTO, postHistorialEventosDTO, postHistorialSaludDTO, postHorarioAlimentacionDTO, postHorarioTrabajoDTO, postTipoAlimentacionDTO, postestadoSaludDTO, putAnimalDTO, putCapacitacionDTO, putEstadoSaludDTO, putEvaluacionDesempenoDTO, putEventoDTO, putFacturaEntradaDTO, putHabitatDTO, putHistorialEventosDTO, putHistorialSaludDTO, putHorarioAlimentacionDTO, putTipoAlimentacionDTO } from "../routes/DTO/putPostDTO.js";
+import { postAnimalDTO, postCapacitacionDTO, postEmpleadoDTO, postEvaluacionDesempenoDTO, postEventoDTO, postFacturaEntradaDTO, postHabitatDTO, postHistorialEventosDTO, postHistorialSaludDTO, postHorarioAlimentacionDTO, postHorarioTrabajoDTO, postTipoAlimentacionDTO, postestadoSaludDTO, putAnimalDTO, putCapacitacionDTO, putEstadoSaludDTO, putEvaluacionDesempenoDTO, putEventoDTO, putFacturaEntradaDTO, putHabitatDTO, putHistorialEventosDTO, putHistorialSaludDTO, putHorarioAlimentacionDTO, putHorarioTrabajoDTO, putTipoAlimentacionDTO } from "../routes/DTO/putPostDTO.js";
 
 function validador(req, res, next) {
     const errors = validationResult(req);
@@ -289,7 +289,23 @@ postHorarioTrabajoDTOMiddleware.use(postHorarioTrabajoDTO, (req, res, next) => {
     }
 });
 
+const putHorarioTrabajoDTOMiddleware = Router()
+putHorarioTrabajoDTOMiddleware.use(putHorarioTrabajoDTO, (req, res, next) => {
+    const errFlag = validador2(req, res)
+    if (errFlag === false) {
+        const { id, horaInicio, horaFin } = req.body
+        const nuevoBody = {
+            id: id,
+            hora_inicio: horaInicio,
+            hora_fin: horaFin,
+        };
+        req.body = nuevoBody
+        next()
+    }
+});
+
 export {
+    putHorarioTrabajoDTOMiddleware,
     postHorarioTrabajoDTOMiddleware,
     putHorarioAlimentacionDTOMiddleware,
     postHorarioAlimentacionDTOMiddleware,

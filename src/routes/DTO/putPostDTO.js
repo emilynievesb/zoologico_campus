@@ -400,7 +400,20 @@ const postHorarioTrabajoDTO = [
         .matches(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/).withMessage("La hora de fin debe tener el formato 'HH:MM'"),
 ];
 
+const putHorarioTrabajoDTO = [
+    check("id")
+        .notEmpty().withMessage("El ID es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID debe ser un número entero positivo"),
+    check("horaInicio")
+        .notEmpty().withMessage("La hora de inicio es obligatoria")
+        .matches(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/).withMessage("La hora de inicio debe tener el formato 'HH:MM'"),
+    check("horaFin")
+        .notEmpty().withMessage("La hora de fin es obligatoria")
+        .matches(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/).withMessage("La hora de fin debe tener el formato 'HH:MM'"),
+];
+
 export {
+    putHorarioTrabajoDTO,
     putHorarioAlimentacionDTO,
     postHorarioAlimentacionDTO,
     postTipoAlimentacionDTO,
