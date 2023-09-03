@@ -356,7 +356,24 @@ const putHistorialEventosDTO = [
         .isInt({ min: 1 }).withMessage("El ID del estado del hábitat debe ser un número entero positivo"),
 ];
 
+//horarios de alimentacion
+const postHorarioAlimentacionDTO = [
+    check("habitat")
+        .notEmpty().withMessage("El ID del hábitat es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID del hábitat debe ser un número entero positivo"),
+    check("hora")
+        .notEmpty().withMessage("La hora de alimentación y mantenimiento es obligatoria")
+        .matches(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/).withMessage("La hora debe tener el formato 'HH:MM'"),
+    check("encargado")
+        .notEmpty().withMessage("El ID del encargado es obligatorio")
+        .matches(/^[0-9]{10}$/).withMessage("El ID del encargado debe ser una cadena de 10 dígitos numéricos"),
+    check("descripcion")
+        .notEmpty().withMessage("La descripción del trabajo realizado es obligatoria")
+        .isString().withMessage("La descripción debe ser una cadena de texto"),
+];
+
 export {
+    postHorarioAlimentacionDTO,
     postTipoAlimentacionDTO,
     putTipoAlimentacionDTO,
     postAnimalDTO,

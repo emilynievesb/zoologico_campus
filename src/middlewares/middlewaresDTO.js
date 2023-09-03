@@ -1,7 +1,7 @@
 import { validationResult } from "express-validator";
 import { Router } from "express";
 import { deleteT1DTO, deleteT2DTO, getT1DTO, getT2DTO } from "../routes/DTO/getDeleteDTO.js";
-import { postAnimalDTO, postCapacitacionDTO, postEmpleadoDTO, postEvaluacionDesempenoDTO, postEventoDTO, postFacturaEntradaDTO, postHabitatDTO, postHistorialEventosDTO, postHistorialSaludDTO, postTipoAlimentacionDTO, postestadoSaludDTO, putAnimalDTO, putCapacitacionDTO, putEstadoSaludDTO, putEvaluacionDesempenoDTO, putEventoDTO, putFacturaEntradaDTO, putHabitatDTO, putHistorialEventosDTO, putHistorialSaludDTO, putTipoAlimentacionDTO } from "../routes/DTO/putPostDTO.js";
+import { postAnimalDTO, postCapacitacionDTO, postEmpleadoDTO, postEvaluacionDesempenoDTO, postEventoDTO, postFacturaEntradaDTO, postHabitatDTO, postHistorialEventosDTO, postHistorialSaludDTO, postHorarioAlimentacionDTO, postTipoAlimentacionDTO, postestadoSaludDTO, putAnimalDTO, putCapacitacionDTO, putEstadoSaludDTO, putEvaluacionDesempenoDTO, putEventoDTO, putFacturaEntradaDTO, putHabitatDTO, putHistorialEventosDTO, putHistorialSaludDTO, putTipoAlimentacionDTO } from "../routes/DTO/putPostDTO.js";
 
 function validador(req, res, next) {
     const errors = validationResult(req);
@@ -234,13 +234,31 @@ const postHistorialEventosDTOMiddleware = Router()
 postHistorialEventosDTOMiddleware.use(postHistorialEventosDTO, (req, res, next) => {
     validador(req, res, next)
 });
+
 const putHistorialEventosDTOMiddleware = Router()
 putHistorialEventosDTOMiddleware.use(putHistorialEventosDTO, (req, res, next) => {
     validador(req, res, next)
 });
 
+//horarioAlimentacionMantenimiento
+const postHorarioAlimentacionDTOMiddleware = Router()
+postHorarioAlimentacionDTOMiddleware.use(postHorarioAlimentacionDTO, (req, res, next) => {
+    const errFlag = validador2(req, res)
+    if (errFlag === false) {
+        const { habitat, hora, encargado, descripcion } = req.body
+        const nuevoBody = {
+            id_habitat: habitat,
+            hora_alimentacionMantenimiento: hora,
+            id_encargado: encargado,
+            descripcion: descripcion
+        };
+        req.body = nuevoBody
+        next()
+    }
+});
 
 export {
+    postHorarioAlimentacionDTOMiddleware,
     getT1DTOMiddleware,
     getT2DTOMiddleware,
     deleteT1DTOMiddleware,
