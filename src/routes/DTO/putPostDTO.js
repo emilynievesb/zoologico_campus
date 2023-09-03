@@ -419,7 +419,17 @@ const postListaBoletasDTO = [
         .isInt({ min: 1 }).withMessage("El ID de la factura debe ser un número entero positivo"),
 ];
 
+const putListaBoletasDTO = [
+    check("id")
+        .notEmpty().withMessage("El ID es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID debe ser un número entero positivo"),
+    check("factura")
+        .notEmpty().withMessage("El ID de la factura es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID de la factura debe ser un número entero positivo"),
+];
+
 export {
+    putListaBoletasDTO,
     putHorarioTrabajoDTO,
     putHorarioAlimentacionDTO,
     postHorarioAlimentacionDTO,
