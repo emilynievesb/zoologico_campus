@@ -6,7 +6,7 @@ class EstadoHabitat {
     descripcionEstado;
 
     constructor() {
-        id = "AUTORIZACIÓN TABLA ESTADO HABITAT"
+        this.id = "AUTORIZACIÓN TABLA ESTADO HABITAT"
     }
 
     async connect() {

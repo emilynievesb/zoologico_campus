@@ -11,7 +11,7 @@ class Eventos {
   session;
 
   constructor() {
-    id = "AUTORIZACIÓN TABLA EVENTOS"
+    this.id = "AUTORIZACIÓN TABLA EVENTOS"
   }
 
   async connect() {

@@ -9,7 +9,7 @@ class EvaluacionDesempeno {
     descripcion;
 
     constructor() {
-        id = "AUTORIZACIÓN TABLA EVALUACION DESEMPEÑO"
+        this.id = "AUTORIZACIÓN TABLA EVALUACION DESEMPEÑO"
     }
 
     async connect() {

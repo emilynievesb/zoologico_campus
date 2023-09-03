@@ -7,7 +7,7 @@ class Zona {
     descripcion;
 
     constructor() {
-        id = "AUTORIZACIÓN TABLA ZONAS"
+        this.id = "AUTORIZACIÓN TABLA ZONAS"
     }
 
     async connect() {

@@ -7,7 +7,7 @@ class SeguimientoEmpleado {
     actualizacion;
 
     constructor() {
-        id = "AUTORIZACIÓN TABLA SEGUIMIENTO EMPLEADO"
+        this.id = "AUTORIZACIÓN TABLA SEGUIMIENTO EMPLEADO"
     }
 
     async connect() {

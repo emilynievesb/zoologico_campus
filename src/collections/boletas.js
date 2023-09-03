@@ -8,7 +8,7 @@ class Boletas {
   cantidad;
 
   constructor() {
-    id = "AUTORIZACIÓN TABLA BOLETAS"
+    this.id = "AUTORIZACIÓN TABLA BOLETAS"
 
   }
 

@@ -11,7 +11,7 @@ class FacturaEntrada {
     listaBoletas;
 
     constructor() {
-        id = "AUTORIZACIÓN TABLA FACTURA VENTA"
+        this.id = "AUTORIZACIÓN TABLA FACTURA VENTA"
     }
 
     async connect() {

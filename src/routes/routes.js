@@ -16,7 +16,6 @@ const v2Routes = () => {
   const router = Router();
   router.use("/put", middlewareRateLimit, putInitRoute());
   router.use("/delete", middlewareRateLimit, deleteRoute());
-  router.use("/put", middlewareRateLimit, putInitRoute());
   return router;
 };
 

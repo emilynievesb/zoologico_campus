@@ -7,7 +7,7 @@ class Alimentacion {
   session;
 
   constructor() {
-    id = "AUTORIZACIÓN TABLA ALIMENTACION"
+    this.id = "AUTORIZACIÓN TABLA ALIMENTACION"
   }
 
   async connect() {

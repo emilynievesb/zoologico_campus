@@ -9,7 +9,7 @@ class CitasMedicas {
   id_veterinario;
 
   constructor() {
-    id = "AUTORIZACIÓN TABLA CITAS MÉDICAS"
+    this.id = "AUTORIZACIÓN TABLA CITAS MÉDICAS"
   }
 
   async connect() {

@@ -3,29 +3,29 @@ import { plainToClass, classToPlain } from "class-transformer";
 import dotenv from "dotenv";
 import { Router } from "express";
 import { SignJWT, jwtVerify } from "jose";
-import { Alimentacion } from "../collections/alimentacion";
-import { Animales } from "../collections/animales";
-import { Boletas } from "../collections/boletas";
-import { Capacitaciones } from "../collections/capacitaciones";
-import { CitasMedicas } from "../collections/citasMedicas";
-import { Empleado } from "../collections/empleado";
-import { EstadoHabitat } from "../collections/estadohabitad";
-import { EstadosSalud } from "../collections/estadoSalud";
-import { EvaluacionDesempeno } from "../collections/evaluacion_desempeno";
-import { Eventos } from "../collections/eventos";
-import { FacturaEntrada } from "../collections/facturaEntrada";
-import { Habitat } from "../collections/habitat";
-import { HistorialesSalud } from "../collections/historialesSalud";
-import { HistorialEventos } from "../collections/historialEventos";
-import { HorariosAlimentacionMantenimiento } from "../collections/horariosAlimentacionMantenimiento";
-import { HorariosTrabajo } from "../collections/horariosTrabajo";
-import { ListaBoletas } from "../collections/lista_boletas";
-import { PlanificacionEventos } from "../collections/planificacion_eventos";
-import { Promociones } from "../collections/promociones";
-import { Puestos } from "../collections/puestos";
-import { SeguimientoEmpleado } from "../collections/seguimientoEmpleados";
-import { TipoBoleta } from "../collections/tiposBoletas";
-import { Zona } from "../collections/zonas";
+import { Alimentacion } from "../collections/alimentacion.js";
+import { Animales } from "../collections/animales.js";
+import { Boletas } from "../collections/boletas.js";
+import { Capacitaciones } from "../collections/capacitaciones.js";
+import { CitasMedicas } from "../collections/citasMedicas.js";
+import { Empleado } from "../collections/empleado.js";
+import { EstadoHabitat } from "../collections/estadohabitad.js";
+import { EstadosSalud } from "../collections/estadoSalud.js";
+import { EvaluacionDesempeno } from "../collections/evaluacion_desempeno.js";
+import { Eventos } from "../collections/eventos.js";
+import { FacturaEntrada } from "../collections/facturaEntrada.js";
+import { Habitat } from "../collections/habitat.js";
+import { HistorialesSalud } from "../collections/historialesSalud.js";
+import { HistorialEventos } from "../collections/historialEventos.js";
+import { HorariosAlimentacionMantenimiento } from "../collections/horariosAlimentacionMantenimiento.js";
+import { HorariosTrabajo } from "../collections/horariosTrabajo.js";
+import { ListaBoletas } from "../collections/lista_boletas.js";
+import { PlanificacionEventos } from "../collections/planificacion_eventos.js";
+import { Promociones } from "../collections/promociones.js";
+import { Puestos } from "../collections/puestos.js";
+import { SeguimientoEmpleado } from "../collections/seguimientoEmpleados.js";
+import { TipoBoleta } from "../collections/tiposBoletas.js";
+import { Zona } from "../collections/zonas.js";
 
 dotenv.config();
 const appToken = Router();
@@ -34,7 +34,7 @@ appToken.use("/:colletion", async (req, res) => {
   try {
     const { colletion } = req.params;
     const classMappings = {
-      alimentacio: Alimentacion,
+      alimentacion: Alimentacion,
       animales: Animales,
       boletas: Boletas,
       capacitaciones: Capacitaciones,
@@ -98,6 +98,7 @@ const authorizationMiddleware = async (req, res, next) => {
 };
 
 const contentMiddlewareAlimentacion = (req, res, next) => {
+  console.log(req.data)
   let { payload } = req.data;
   const { iat, exp, ...newPayload } = payload;
   payload = newPayload;
