@@ -536,7 +536,18 @@ const putPuestosDTO = [
         .isInt({ min: 1 }).withMessage("El ID del horario de trabajo debe ser un número entero positivo"),
 ];
 
+//seguimiento empleado
+const postSeguimientoEmpleadoDTO = [
+    check("creacion")
+        .notEmpty().withMessage("La fecha de creación es obligatoria")
+        .matches(/^\d{4}-\d{2}-\d{2}$/).withMessage("La fecha de creación debe tener el formato 'YYYY-MM-DD'"),
+    check("actualizacion")
+        .notEmpty().withMessage("La fecha de actualización es obligatoria")
+        .matches(/^\d{4}-\d{2}-\d{2}$/).withMessage("La fecha de actualización debe tener el formato 'YYYY-MM-DD'"),
+];
+
 export {
+    postSeguimientoEmpleadoDTO,
     putPuestosDTO,
     postPuestosDTO,
     putPromocionesDTO,

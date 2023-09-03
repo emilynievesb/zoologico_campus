@@ -1,7 +1,7 @@
 import { validationResult } from "express-validator";
 import { Router } from "express";
 import { deleteT1DTO, deleteT2DTO, getT1DTO, getT2DTO } from "../routes/DTO/getDeleteDTO.js";
-import { postAnimalDTO, postCapacitacionDTO, postEmpleadoDTO, postEvaluacionDesempenoDTO, postEventoDTO, postFacturaEntradaDTO, postHabitatDTO, postHistorialEventosDTO, postHistorialSaludDTO, postHorarioAlimentacionDTO, postHorarioTrabajoDTO, postListaBoletasDTO, postPlanificacionEventosDTO, postPromocionesDTO, postPuestosDTO, postTipoAlimentacionDTO, postestadoSaludDTO, putAnimalDTO, putCapacitacionDTO, putEstadoSaludDTO, putEvaluacionDesempenoDTO, putEventoDTO, putFacturaEntradaDTO, putHabitatDTO, putHistorialEventosDTO, putHistorialSaludDTO, putHorarioAlimentacionDTO, putHorarioTrabajoDTO, putListaBoletasDTO, putPlanificacionEventosDTO, putPromocionesDTO, putPuestosDTO, putTipoAlimentacionDTO } from "../routes/DTO/putPostDTO.js";
+import { postAnimalDTO, postCapacitacionDTO, postEmpleadoDTO, postEvaluacionDesempenoDTO, postEventoDTO, postFacturaEntradaDTO, postHabitatDTO, postHistorialEventosDTO, postHistorialSaludDTO, postHorarioAlimentacionDTO, postHorarioTrabajoDTO, postListaBoletasDTO, postPlanificacionEventosDTO, postPromocionesDTO, postPuestosDTO, postSeguimientoEmpleadoDTO, postTipoAlimentacionDTO, postestadoSaludDTO, putAnimalDTO, putCapacitacionDTO, putEstadoSaludDTO, putEvaluacionDesempenoDTO, putEventoDTO, putFacturaEntradaDTO, putHabitatDTO, putHistorialEventosDTO, putHistorialSaludDTO, putHorarioAlimentacionDTO, putHorarioTrabajoDTO, putListaBoletasDTO, putPlanificacionEventosDTO, putPromocionesDTO, putPuestosDTO, putTipoAlimentacionDTO } from "../routes/DTO/putPostDTO.js";
 
 function validador(req, res, next) {
     const errors = validationResult(req);
@@ -415,7 +415,22 @@ putPuestosDTOMiddleware.use(putPuestosDTO, (req, res, next) => {
     validador(req, res, next)
 });
 
+//seguimiento empleado
+const postSeguimientoEmpleadoDTOMiddleware = Router()
+postSeguimientoEmpleadoDTOMiddleware.use(postSeguimientoEmpleadoDTO, (req, res, next) => {
+    const errFlag = validador2(req, res)
+    if (errFlag === false) {
+        const { creacion, actualizacion } = req.body
+        const nuevoBody = {
+            fecha_creacion: creacion,
+            fecha_actualizacion: actualizacion
+        };
+        req.body = nuevoBody
+        next()
+    }
+})
 export {
+    postSeguimientoEmpleadoDTOMiddleware,
     putPuestosDTOMiddleware,
     postPuestosDTOMiddleware,
     putPromocionesDTOMiddleware,
