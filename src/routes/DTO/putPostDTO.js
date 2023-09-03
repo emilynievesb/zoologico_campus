@@ -310,6 +310,24 @@ const postEvaluacionDesempenoDTO = [
         .isString().withMessage("La descripción de la evaluación de desempeño debe ser una cadena de texto"),
 ];
 
+const putEvaluacionDesempenoDTO = [
+    check("id")
+        .notEmpty().withMessage("El ID es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID debe ser un número entero positivo"),
+    check("seguimiento")
+        .notEmpty().withMessage("El ID de seguimiento es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID de seguimiento debe ser un número entero positivo"),
+    check("fecha")
+        .notEmpty().withMessage("La fecha de reporte es obligatoria")
+        .matches(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/).withMessage("La fecha de reporte debe tener el formato 'YYYY-MM-DD HH:MM:SS'"),
+    check("jefe")
+        .notEmpty().withMessage("El ID del empleado que realiza el reporte es obligatorio")
+        .matches(/^[0-9]{10}$/).withMessage("El ID del empleado debe ser una cadena de 10 dígitos numéricos"),
+    check("descripcion")
+        .notEmpty().withMessage("La descripción de la evaluación de desempeño es obligatoria")
+        .isString().withMessage("La descripción de la evaluación de desempeño debe ser una cadena de texto"),
+];
+
 
 export {
     postTipoAlimentacionDTO,
@@ -329,5 +347,6 @@ export {
     postCapacitacionDTO,
     putCapacitacionDTO,
     postEmpleadoDTO,
-    postEvaluacionDesempenoDTO
+    postEvaluacionDesempenoDTO,
+    putEvaluacionDesempenoDTO
 }
