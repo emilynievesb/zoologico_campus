@@ -446,7 +446,29 @@ const postPlanificacionEventosDTO = [
         .isString().withMessage("La descripción del evento debe ser una cadena de texto"),
 ];
 
+const putPlanificacionEventosDTO = [
+    check("id")
+        .notEmpty().withMessage("El ID es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID debe ser un número entero positivo"),
+    check("nombre")
+        .notEmpty().withMessage("El nombre del evento es obligatorio")
+        .isString().withMessage("El nombre del evento debe ser una cadena de texto"),
+    check("inicio")
+        .notEmpty().withMessage("La fecha de inicio del evento es obligatoria")
+        .matches(/^\d{4}-\d{2}-\d{2}$/).withMessage("La fecha de inicio debe tener el formato 'YYYY-MM-DD'"),
+    check("fin")
+        .notEmpty().withMessage("La fecha de finalización del evento es obligatoria")
+        .matches(/^\d{4}-\d{2}-\d{2}$/).withMessage("La fecha de finalización debe tener el formato 'YYYY-MM-DD'"),
+    check("idZona")
+        .notEmpty().withMessage("El ID de la zona es obligatorio")
+        .isInt({ min: 1 }).withMessage("El ID de la zona debe ser un número entero positivo"),
+    check("descripcion")
+        .notEmpty().withMessage("La descripción del evento es obligatoria")
+        .isString().withMessage("La descripción del evento debe ser una cadena de texto"),
+];
+
 export {
+    putPlanificacionEventosDTO,
     postPlanificacionEventosDTO,
     putListaBoletasDTO,
     putHorarioTrabajoDTO,
