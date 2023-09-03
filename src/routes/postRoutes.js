@@ -120,6 +120,8 @@ const postInitRoute = () => {
   );
   router.post(
     "/agregarEstadoHabitat",
+    authorizationMiddleware,
+    contentMiddlewareEstadoHabitat,
     postEstadoHabitatDTOMiddleware,
     agregarEstadoHabitatController
   );
