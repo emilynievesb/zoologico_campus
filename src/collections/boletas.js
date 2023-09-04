@@ -8,8 +8,7 @@ class Boletas {
   cantidad;
 
   constructor() {
-    this.id = "AUTORIZACIÓN TABLA BOLETAS"
-
+    this.id = "AUTORIZACIÓN TABLA BOLETAS";
   }
 
   async connect() {
@@ -139,20 +138,18 @@ class Boletas {
     try {
       this.session = await startTransaction();
       const connection = await this.connect();
-      const resultado = await connection
-        .updateOne(
-          {
-            id: this.id,
+      const resultado = await connection.updateOne(
+        {
+          id: this.id,
+        },
+        {
+          $set: {
+            idLista: this.idLista,
+            idtipo: this.idtipo,
+            cantidad: this.cantidad,
           },
-          {
-            $set: {
-              idLista: this.idLista,
-              idtipo: this.idtipo,
-              cantidad: this.cantidad,
-            },
-          }
-        )
-        .toArray();
+        }
+      );
       await this.session.commitTransaction();
       return resultado;
     } catch (error) {

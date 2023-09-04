@@ -9,7 +9,7 @@ class CitasMedicas {
   id_veterinario;
 
   constructor() {
-    this.id = "AUTORIZACIÓN TABLA CITAS MÉDICAS"
+    this.id = "AUTORIZACIÓN TABLA CITAS MÉDICAS";
   }
 
   async connect() {
@@ -55,6 +55,7 @@ class CitasMedicas {
 
   async obtenerCitaMedica(citaMedicaId) {
     try {
+      this.session = await startTransaction();
       const connection = await this.connect();
       const resultado = await connection
         .aggregate([
@@ -167,7 +168,6 @@ class CitasMedicas {
       }
     }
   }
-
 }
 
 export { CitasMedicas };
