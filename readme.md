@@ -114,28 +114,28 @@ Para ejecutar correctamente el servidor debes asegurarte de tener `nodemon`, ya 
 ### Usuarios:
 
       {
-         usuario: "superAdmin",
-         contraseña: "superAdmin123",
+         "usuario": "superAdmin",
+         "contrasena": "superAdmin123"
       }
 
       {
-         usuario: "jefepersonal",
-         contraseña: "jefepersonal123",
+         "usuario": "jefepersonal",
+         "contrasena": "jefepersonal123"
       }
 
       {
-         usuario: "medico",
-         contraseña: "medico123",
+         "usuario": "medico",
+         "contrasena": "medico123"
       }
 
       {
-         usuario: "staff",
-         contraseña: "staff123",
+         "usuario": "staff",
+         "contrasena": "staff123"
       }
 
       {
-         usuario: "taquillero",
-         contraseña: "taquillero123",
+         "usuario": "taquillero",
+         "contrasena": "taquillero123"
       }
 
 ## Versiones
