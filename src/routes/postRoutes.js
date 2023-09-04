@@ -73,12 +73,14 @@ import {
   contentMiddlewareTipoBoleta,
   contentMiddlewareZonas,
 } from "../middlewares/middlewareContent.js";
+import { rolVerificatorMiddlewareAdmin, rolVerificatorMiddlewareJefePersonal, rolVerificatorMiddlewareMedico, rolVerificatorMiddlewareStaff, rolVerificatorMiddlewareTaquillero } from "../middlewares/rolVerificationMiddlewares.js";
 
 const postInitRoute = () => {
   const router = Router();
   router.post(
     "/agregarTipoAlimentacion",
     authorizationMiddleware,
+    rolVerificatorMiddlewareMedico,
     contentMiddlewareAlimentacion,
     postTipoAlimentacionDTOMiddleware,
     agregarTipoAlimentacionController
@@ -86,6 +88,7 @@ const postInitRoute = () => {
   router.post(
     "/agregarAnimal",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewareAnimales,
     postAnimalDTOMiddleware,
     agregarAnimalController
@@ -93,6 +96,7 @@ const postInitRoute = () => {
   router.post(
     "/agregarBoletas",
     authorizationMiddleware,
+    rolVerificatorMiddlewareTaquillero,
     contentMiddlewareBoletas,
     postBoletasDTOMiddleware,
     agregarBoletaController
@@ -100,6 +104,7 @@ const postInitRoute = () => {
   router.post(
     "/agregarCapitacion",
     authorizationMiddleware,
+    rolVerificatorMiddlewareJefePersonal,
     contentMiddlewareCapacitaciones,
     postCapacitacionDTOMiddleware,
     agregarCapacitacionController
@@ -107,6 +112,7 @@ const postInitRoute = () => {
   router.post(
     "/agregarCitaMedica",
     authorizationMiddleware,
+    rolVerificatorMiddlewareMedico,
     contentMiddlewareCitasMedicas,
     postCitasMedicasDTOMiddleware,
     agregarCitaMedicaController
@@ -114,6 +120,7 @@ const postInitRoute = () => {
   router.post(
     "/agregarEmpleado",
     authorizationMiddleware,
+    rolVerificatorMiddlewareJefePersonal,
     contentMiddlewareEmpleados,
     postEmpleadoDTOMiddleware,
     agregarEmpleadoController
@@ -121,6 +128,7 @@ const postInitRoute = () => {
   router.post(
     "/agregarEstadoHabitat",
     authorizationMiddleware,
+    rolVerificatorMiddlewareStaff,
     contentMiddlewareEstadoHabitat,
     postEstadoHabitatDTOMiddleware,
     agregarEstadoHabitatController
@@ -128,6 +136,7 @@ const postInitRoute = () => {
   router.post(
     "/agregarEstadoSalud",
     authorizationMiddleware,
+    rolVerificatorMiddlewareMedico,
     contentMiddlewareEstadoSalud,
     postestadoSaludDTOMiddleware,
     agregarEstadoSaludController
@@ -135,6 +144,7 @@ const postInitRoute = () => {
   router.post(
     "/agregarEvaluacionDesempeno",
     authorizationMiddleware,
+    rolVerificatorMiddlewareJefePersonal,
     contentMiddlewareEvaluacionDesempeno,
     postEvaluacionDesempenoDTOMiddleware,
     agregarEmpleadoController
@@ -142,6 +152,7 @@ const postInitRoute = () => {
   router.post(
     "/agregarEventos",
     authorizationMiddleware,
+    rolVerificatorMiddlewareStaff,
     contentMiddlewareEventos,
     postEventoDTOMiddleware,
     agregarEventoController
@@ -149,6 +160,7 @@ const postInitRoute = () => {
   router.post(
     "/agregarFacturaEntrada",
     authorizationMiddleware,
+    rolVerificatorMiddlewareTaquillero,
     contentMiddlewareFacturaEntrada,
     postFacturaEntradaDTOMiddleware,
     agregarFacturaEntradaController
@@ -156,6 +168,7 @@ const postInitRoute = () => {
   router.post(
     "/agregarHabitat",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewareHabitat,
     postHabitatDTOMiddleware,
     agregarHabitatController
@@ -163,6 +176,7 @@ const postInitRoute = () => {
   router.post(
     "/agregarHistorialSalud",
     authorizationMiddleware,
+    rolVerificatorMiddlewareMedico,
     contentMiddlewareHistorialesSalud,
     postHistorialSaludDTOMiddleware,
     agregarHistorialSaludController
@@ -170,6 +184,7 @@ const postInitRoute = () => {
   router.post(
     "/agregarHistorialEvento",
     authorizationMiddleware,
+    rolVerificatorMiddlewareStaff,
     contentMiddlewareHistorialEventos,
     postHistorialEventosDTOMiddleware,
     agregarEmpleadoController
@@ -177,6 +192,7 @@ const postInitRoute = () => {
   router.post(
     "/agregarHorariosAlimentacion",
     authorizationMiddleware,
+    rolVerificatorMiddlewareStaff,
     contentMiddlewareHorariosAlimentacion,
     postHorarioAlimentacionDTOMiddleware,
     agregarHorarioAlimentacionController
@@ -184,6 +200,7 @@ const postInitRoute = () => {
   router.post(
     "/agregarHorarioTrabajo",
     authorizationMiddleware,
+    rolVerificatorMiddlewareJefePersonal,
     contentMiddlewareHorariosTrabajo,
     postHorarioTrabajoDTOMiddleware,
     agregarHorarioTrabajoController
@@ -191,6 +208,7 @@ const postInitRoute = () => {
   router.post(
     "/agregarListaBoletas",
     authorizationMiddleware,
+    rolVerificatorMiddlewareTaquillero,
     contentMiddlewareListaBoletas,
     postListaBoletasDTOMiddleware,
     agregarListaBoletasController
@@ -198,6 +216,7 @@ const postInitRoute = () => {
   router.post(
     "/agregarPlanificacionEvento",
     authorizationMiddleware,
+    rolVerificatorMiddlewareStaff,
     contentMiddlewarePlanificacionEventos,
     postPlanificacionEventosDTOMiddleware,
     agregarPlanificacionEventosController
@@ -205,6 +224,7 @@ const postInitRoute = () => {
   router.post(
     "/agregarPromocion",
     authorizationMiddleware,
+    rolVerificatorMiddlewareTaquillero,
     contentMiddlewarePromociones,
     postPromocionesDTOMiddleware,
     agregarPromocionesController
@@ -212,6 +232,7 @@ const postInitRoute = () => {
   router.post(
     "/agregarPuesto",
     authorizationMiddleware,
+    rolVerificatorMiddlewareJefePersonal,
     contentMiddlewarePuestos,
     postPuestosDTOMiddleware,
     agregarPuestoController
@@ -219,6 +240,7 @@ const postInitRoute = () => {
   router.post(
     "/agregarSeguimientoEmpleado",
     authorizationMiddleware,
+    rolVerificatorMiddlewareJefePersonal,
     contentMiddlewareSeguimientoEmpleados,
     postSeguimientoEmpleadoDTOMiddleware,
     agregarSeguimientoEmpleadoController
@@ -226,6 +248,7 @@ const postInitRoute = () => {
   router.post(
     "/agregarTipoBoleta",
     authorizationMiddleware,
+    rolVerificatorMiddlewareTaquillero,
     contentMiddlewareTipoBoleta,
     postTiposBoletasDTOMiddleware,
     agregarTipoBoletaController
@@ -233,6 +256,7 @@ const postInitRoute = () => {
   router.post(
     "/agregarZona",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewareZonas,
     postZonasDTOMiddleware,
     agregarZonaController
