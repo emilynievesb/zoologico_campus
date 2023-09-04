@@ -75,12 +75,14 @@ import {
   contentMiddlewareTipoBoleta,
   contentMiddlewareZonas,
 } from "../middlewares/middlewareContent.js";
+import { rolVerificatorMiddlewareAdmin, rolVerificatorMiddlewareJefePersonal, rolVerificatorMiddlewareMedico, rolVerificatorMiddlewareStaff, rolVerificatorMiddlewareTaquillero } from "../middlewares/rolVerificationMiddlewares.js";
 
 const putInitRoute = () => {
   const router = Router();
   router.put(
     "/actualizarTipoAlimentacion",
     authorizationMiddleware,
+    rolVerificatorMiddlewareMedico,
     contentMiddlewareAlimentacion,
     putTipoAlimentacionDTOMiddleware,
     actualizarTipoAlimentacionController
@@ -88,6 +90,7 @@ const putInitRoute = () => {
   router.put(
     "/actualizarAnimal",
     authorizationMiddleware,
+    rolVerificatorMiddlewareMedico,
     contentMiddlewareAnimales,
     putAnimalDTOMiddleware,
     actualizarAnimalController
@@ -95,6 +98,7 @@ const putInitRoute = () => {
   router.put(
     "/actualizarBoleta",
     authorizationMiddleware,
+    rolVerificatorMiddlewareTaquillero,
     contentMiddlewareBoletas,
     putBoletasDTOMiddleware,
     actualizarBoletaController
@@ -102,6 +106,7 @@ const putInitRoute = () => {
   router.put(
     "/actualizarCapacitacion",
     authorizationMiddleware,
+    rolVerificatorMiddlewareJefePersonal,
     contentMiddlewareCapacitaciones,
     putCapacitacionDTOMiddleware,
     actualizarCapacitacionController
@@ -109,6 +114,7 @@ const putInitRoute = () => {
   router.put(
     "/actualizarCitaMedica",
     authorizationMiddleware,
+    rolVerificatorMiddlewareMedico,
     contentMiddlewareCitasMedicas,
     putCitasMedicasDTOMiddleware,
     actualizarCitaMedicaController
@@ -116,6 +122,7 @@ const putInitRoute = () => {
   router.put(
     "/actualizarEmpleado",
     authorizationMiddleware,
+    rolVerificatorMiddlewareJefePersonal,
     contentMiddlewareEmpleados,
     postEmpleadoDTOMiddleware,
     actualizarEmpleadoController
@@ -123,6 +130,7 @@ const putInitRoute = () => {
   router.put(
     "/actualizarEstadoHabitat",
     authorizationMiddleware,
+    rolVerificatorMiddlewareStaff,
     contentMiddlewareEstadoHabitat,
     putEstadoHabitatDTOMiddleware,
     actualizarEstadoHabitatController
@@ -130,6 +138,7 @@ const putInitRoute = () => {
   router.put(
     "/actualizarEstadoSalud",
     authorizationMiddleware,
+    rolVerificatorMiddlewareMedico,
     contentMiddlewareEstadoSalud,
     putestadoSaludDTOMiddleware,
     actualizarEstadoSaludController
@@ -137,6 +146,7 @@ const putInitRoute = () => {
   router.put(
     "/actualizarEvaluacion",
     authorizationMiddleware,
+    rolVerificatorMiddlewareJefePersonal,
     contentMiddlewareEvaluacionDesempeno,
     putEvaluacionDesempenoDTOMiddleware,
     actualizarEvaluacionDesempenoController
@@ -144,6 +154,7 @@ const putInitRoute = () => {
   router.put(
     "/actualizarEvento",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewareEventos,
     putEventoDTOMiddleware,
     actualizarEventoController
@@ -151,6 +162,7 @@ const putInitRoute = () => {
   router.put(
     "/actualizarFactura",
     authorizationMiddleware,
+    rolVerificatorMiddlewareTaquillero,
     contentMiddlewareFacturaEntrada,
     putFacturaEntradaDTOMiddleware,
     actualizarFacturaEntradaController
@@ -158,6 +170,7 @@ const putInitRoute = () => {
   router.put(
     "/actualizarHabitat",
     authorizationMiddleware,
+    rolVerificatorMiddlewareStaff,
     contentMiddlewareHabitat,
     putHabitatDTOMiddleware,
     actualizarHabitatController
@@ -165,6 +178,7 @@ const putInitRoute = () => {
   router.put(
     "/actualizarHistorialSalud",
     authorizationMiddleware,
+    rolVerificatorMiddlewareMedico,
     contentMiddlewareHistorialesSalud,
     putHistorialSaludDTOMiddleware,
     actualizarHistorialSaludController
@@ -172,6 +186,7 @@ const putInitRoute = () => {
   router.put(
     "/actualizarHistorialEvento",
     authorizationMiddleware,
+    rolVerificatorMiddlewareStaff,
     contentMiddlewareHistorialEventos,
     putHistorialEventosDTOMiddleware,
     actualizarHistorialEventoController
@@ -179,6 +194,7 @@ const putInitRoute = () => {
   router.put(
     "/actualizarHorarioAlimentacion",
     authorizationMiddleware,
+    rolVerificatorMiddlewareMedico,
     contentMiddlewareHorariosAlimentacion,
     putHorarioAlimentacionDTOMiddleware,
     actualizarHorarioAlimentacionController
@@ -186,6 +202,7 @@ const putInitRoute = () => {
   router.put(
     "/actualizarHorarioTrabajo",
     authorizationMiddleware,
+    rolVerificatorMiddlewareJefePersonal,
     contentMiddlewareHorariosTrabajo,
     putHorarioTrabajoDTOMiddleware,
     actualizarHorarioTrabajoController
@@ -193,6 +210,7 @@ const putInitRoute = () => {
   router.put(
     "/actualizarListaBoletas",
     authorizationMiddleware,
+    rolVerificatorMiddlewareTaquillero,
     contentMiddlewareListaBoletas,
     putListaBoletasDTOMiddleware,
     actualizarListaBoletasController
@@ -200,6 +218,7 @@ const putInitRoute = () => {
   router.put(
     "/actualizarPlanificacionEventos",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewarePlanificacionEventos,
     putPlanificacionEventosDTOMiddleware,
     actualizarPlanificacionEventosController
@@ -207,6 +226,7 @@ const putInitRoute = () => {
   router.put(
     "/actualizarPromociones",
     authorizationMiddleware,
+    rolVerificatorMiddlewareTaquillero,
     contentMiddlewarePromociones,
     putPromocionesDTOMiddleware,
     actualizarPromocionesController
@@ -214,6 +234,7 @@ const putInitRoute = () => {
   router.put(
     "/actualizarPuesto",
     authorizationMiddleware,
+    rolVerificatorMiddlewareJefePersonal,
     contentMiddlewarePuestos,
     putPuestosDTOMiddleware,
     actualizarPuestoController
@@ -221,6 +242,7 @@ const putInitRoute = () => {
   router.put(
     "/actualizarSeguimientoEmpleado",
     authorizationMiddleware,
+    rolVerificatorMiddlewareJefePersonal,
     contentMiddlewareSeguimientoEmpleados,
     putSeguimientoEmpleadoDTOMiddleware,
     actualizarSeguimientoEmpleadoController
@@ -228,6 +250,7 @@ const putInitRoute = () => {
   router.put(
     "/actualizarTipoBoleta",
     authorizationMiddleware,
+    rolVerificatorMiddlewareTaquillero,
     contentMiddlewareTipoBoleta,
     putTiposBoletasDTOMiddleware,
     actualizarTipoBoletaController
@@ -235,6 +258,7 @@ const putInitRoute = () => {
   router.put(
     "/actualizarZona",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewareZonas,
     putZonasDTOMiddleware,
     actualizarZonaController

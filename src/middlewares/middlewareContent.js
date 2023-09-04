@@ -26,6 +26,7 @@ import { Puestos } from "../collections/puestos.js";
 import { SeguimientoEmpleado } from "../collections/seguimientoEmpleados.js";
 import { TipoBoleta } from "../collections/tiposBoletas.js";
 import { Zona } from "../collections/zonas.js";
+import { Usuarios } from "../collections/usuarios.js";
 
 dotenv.config();
 const appToken = Router();
@@ -62,16 +63,25 @@ appToken.use("/:colletion", async (req, res) => {
     if (!ClassType) {
       throw new Error("Clase no encontrada");
     }
-    const inst = plainToClass(ClassType, {});
-    const encoder = new TextEncoder();
-    const jwtconstructor = new SignJWT(Object.assign({}, classToPlain(inst)));
-    const jwt = await jwtconstructor
-      .setProtectedHeader({ alg: "HS256", typ: "JWT" })
-      .setIssuedAt()
-      .setExpirationTime("30m")
-      .sign(encoder.encode(process.env.JWT_PRIVATE_KEY));
-    req.data = jwt;
-    res.status(201).send({ status: 201, message: jwt });
+    const user = new Usuarios()
+    const { usuario, contrasena } = req.body;
+    user.usuario = usuario;
+    user.contrasena = contrasena
+    const rol = await user.getRol()
+    if (rol.length == 0) {
+      return res.status(500).send({ message: "No existe ningun usuario con esas credenciales" })
+    } else {
+      const inst = plainToClass(ClassType, {});
+      const encoder = new TextEncoder();
+      const jwtconstructor = new SignJWT(Object.assign({}, Object.assign(classToPlain(inst), rol[0])));
+      const jwt = await jwtconstructor
+        .setProtectedHeader({ alg: "HS256", typ: "JWT" })
+        .setIssuedAt()
+        .setExpirationTime("30m")
+        .sign(encoder.encode(process.env.JWT_PRIVATE_KEY));
+      req.data = jwt;
+      res.status(201).send({ status: 201, message: jwt });
+    }
   } catch (error) {
     console.log(error);
     res

@@ -53,12 +53,14 @@ import {
   contentMiddlewareTipoBoleta,
   contentMiddlewareZonas,
 } from "../middlewares/middlewareContent.js";
+import { rolVerificatorMiddlewareAdmin } from "../middlewares/rolVerificationMiddlewares.js";
 
 const deleteRoute = () => {
   const router = Router();
   router.delete(
     "/eliminarTiposAlimentacion",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewareAlimentacion,
     deleteT1DTOMiddleware,
     eliminarTipoAlimentacionController
@@ -66,6 +68,7 @@ const deleteRoute = () => {
   router.delete(
     "/eliminarAnimal",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewareAnimales,
     deleteT1DTOMiddleware,
     eliminarAnimalController
@@ -73,6 +76,7 @@ const deleteRoute = () => {
   router.delete(
     "/eliminarBoleta",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewareBoletas,
     deleteT1DTOMiddleware,
     eliminarBoletasController
@@ -80,6 +84,7 @@ const deleteRoute = () => {
   router.delete(
     "/eliminarCapacitaciones",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewareCapacitaciones,
     deleteT1DTOMiddleware,
     eliminarCapacitacioncesControler
@@ -87,6 +92,7 @@ const deleteRoute = () => {
   router.delete(
     "/eliminarCitaMedica",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewareCitasMedicas,
     deleteT1DTOMiddleware,
     eliminarCitaMedicaController
@@ -94,6 +100,7 @@ const deleteRoute = () => {
   router.delete(
     "/eliminarEmpleado",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewareEmpleados,
     deleteT2DTOMiddleware,
     eliminarEmpleadoController
@@ -101,6 +108,7 @@ const deleteRoute = () => {
   router.delete(
     "/eliminarEstadoHabitat",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewareEstadoHabitat,
     deleteT1DTOMiddleware,
     eliminarEstadoHabitatController
@@ -108,6 +116,7 @@ const deleteRoute = () => {
   router.delete(
     "/eliminarEstadoSalud",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewareEstadoSalud,
     deleteT1DTOMiddleware,
     eliminarEstadoSaludController
@@ -115,6 +124,7 @@ const deleteRoute = () => {
   router.delete(
     "/eliminarEvaluacionDesempeno",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewareEvaluacionDesempeno,
     deleteT1DTOMiddleware,
     eliminarEvaluacionDesempenoController
@@ -122,6 +132,7 @@ const deleteRoute = () => {
   router.delete(
     "/eliminarEvento",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewareEventos,
     deleteT1DTOMiddleware,
     eliminarEventoController
@@ -129,6 +140,7 @@ const deleteRoute = () => {
   router.delete(
     "/eliminarFacturasEntrada",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewareFacturaEntrada,
     deleteT1DTOMiddleware,
     eliminarFacturaEntradaController
@@ -136,6 +148,7 @@ const deleteRoute = () => {
   router.delete(
     "/eliminarHabitat",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewareHabitat,
     deleteT1DTOMiddleware,
     eliminarHabitatController
@@ -143,6 +156,7 @@ const deleteRoute = () => {
   router.delete(
     "/eliminarHistorialesSalud",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewareHistorialesSalud,
     deleteT1DTOMiddleware,
     eliminarHistorialesSaludController
@@ -150,6 +164,7 @@ const deleteRoute = () => {
   router.delete(
     "/eliminarHistorialEvento",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewareHistorialEventos,
     deleteT1DTOMiddleware,
     eliminarHistorialesSaludController
@@ -157,6 +172,7 @@ const deleteRoute = () => {
   router.delete(
     "/eliminarHorarAlMant",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewareHorariosAlimentacion,
     deleteT1DTOMiddleware,
     eliminarHorarioAlimentacionMantenimientoController
@@ -164,6 +180,7 @@ const deleteRoute = () => {
   router.delete(
     "/eliminarHorarioTrabajo",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewareHorariosTrabajo,
     deleteT1DTOMiddleware,
     eliminarHorarioTrabajoController
@@ -171,6 +188,7 @@ const deleteRoute = () => {
   router.delete(
     "/eliminarListaBoletas",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewareListaBoletas,
     deleteT1DTOMiddleware,
     eliminarListaBoletasController
@@ -178,6 +196,7 @@ const deleteRoute = () => {
   router.delete(
     "/eliminarPlanificacionEventos",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewarePlanificacionEventos,
     deleteT1DTOMiddleware,
     eliminarPlanificacionEventosController
@@ -185,6 +204,7 @@ const deleteRoute = () => {
   router.delete(
     "/eliminarPromociones",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewarePromociones,
     deleteT1DTOMiddleware,
     eliminarPromocionesController
@@ -192,6 +212,7 @@ const deleteRoute = () => {
   router.delete(
     "/eliminarPuesto",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewarePuestos,
     contentMiddlewarePuestos,
     deleteT1DTOMiddleware,
@@ -200,6 +221,7 @@ const deleteRoute = () => {
   router.delete(
     "/eliminarSeguimientoEmpleado",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewareSeguimientoEmpleados,
     deleteT1DTOMiddleware,
     eliminarSeguimientoEmpleadoController
@@ -207,6 +229,7 @@ const deleteRoute = () => {
   router.delete(
     "/eliminarTipoBoleta",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewareTipoBoleta,
     deleteT1DTOMiddleware,
     eliminarTipoBoletasController
@@ -214,6 +237,7 @@ const deleteRoute = () => {
   router.delete(
     "/eliminarZonas",
     authorizationMiddleware,
+    rolVerificatorMiddlewareAdmin,
     contentMiddlewareZonas,
     deleteT1DTOMiddleware,
     eliminarZonasController
