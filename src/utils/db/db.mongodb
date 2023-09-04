@@ -1,0 +1,1255 @@
+use("db_zoologico_campus");
+
+// Coleccion de autoincrementables
+db.createCollection("counters");
+db.counters.insertMany([
+    { _id: "animalesId", sequence_value: 0 },
+    { _id: "estadoSaludId", sequence_value: 0 },
+    { _id: "historialSaludId", sequence_value: 0 },
+    { _id: "citas_medicasId", sequence_value: 0 },
+    { _id: "alimentacionId", sequence_value: 0 },
+    { _id: "habitatId", sequence_value: 0 },
+    { _id: "horarios_de_alimentacionMantenimientoId", sequence_value: 0 },
+    { _id: "historial_de_eventosId", sequence_value: 0 },
+    { _id: "eventosId", sequence_value: 0 },
+    { _id: "puestosId", sequence_value: 0 },
+    { _id: "horarios_trabajoId", sequence_value: 0 },
+    { _id: "seguimiento_empleadoId", sequence_value: 0 },
+    { _id: "capacitacionesId", sequence_value: 0 },
+    { _id: "evaluacion_desempenoId", sequence_value: 0 },
+    { _id: "zonasId", sequence_value: 0 },
+    { _id: "estadohabitatId", sequence_value: 0 },
+    { _id: "planificacion_eventosId", sequence_value: 0 },
+    { _id: "facturaEntradaId", sequence_value: 0 },
+    { _id: "lista_boletasId", sequence_value: 0 },
+    { _id: "boletasId", sequence_value: 0 },
+    { _id: "tipos_boletasId", sequence_value: 0 },
+    { _id: "promocionesId", sequence_value: 0 },
+
+]);
+db.createCollection("usuarios", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["usuario", "contrasena", "rol"],
+            properties: {
+                usuario: {
+                    bsonType: "string",
+                    description: "usuario requerido"
+                },
+                contrasena: {
+                    bsonType: "string",
+                    description: "contrasena requerida"
+                },
+                rol: {
+                    bsonType: "string",
+                    description: "rol del usuario"
+                }
+            }
+        }
+    }
+})
+db.usuarios.insertMany([
+    {
+        usuario: "superAdmin",
+        contrasena: "superAdmin123",
+        rol: "admin"
+    },
+    {
+        usuario: "jefepersonal",
+        contrasena: "jefepersonal123",
+        rol: "jefePersonal"
+    },
+    {
+        usuario: "taquillero",
+        contrasena: "taquillero123",
+        rol: "taquillero"
+    },
+    {
+        usuario: "medico",
+        contrasena: "medico123",
+        rol: "medico"
+    },
+    {
+        usuario: "staff",
+        contrasena: "staff123",
+        rol: "staff"
+    }
+
+])
+
+
+function siguienteId(coleccion) {
+    const sequenceDocument = db.counters.findOneAndUpdate(
+        { _id: `${coleccion}Id` },
+        { $inc: { sequence_value: 1 } },
+        { returnDocument: "after" }
+    );
+    return sequenceDocument.sequence_value;
+}
+
+// Gestion de animales:
+// Coleccion animales
+db.createCollection("animales", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "nombre", "especie", "historialSalud", "alimentacion", "habitat", "reproduccion"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del animañ"
+                },
+                nombre: {
+                    bsonType: "string",
+                    description: "Nombre del animal"
+                },
+                especie: {
+                    bsonType: "int",
+                    description: "ID de la especie del animal"
+                },
+                historialSalud: {
+                    bsonType: "int",
+                    description: "ID de la información de salud del animal"
+                },
+                alimentacion: {
+                    bsonType: "int",
+                    description: "ID de la información de alimentación del animal"
+                },
+                habitat: {
+                    bsonType: "int",
+                    description: "ID de la información de hábitat del animal"
+                },
+                reproduccion: {
+                    bsonType: "object",
+                    description: "Información de reproducción del animal"
+                }
+            }
+        }
+    }
+});
+db.animales.insertMany([
+    {
+        id: siguienteId("animales"),
+        nombre: "León",
+        especie: 1,
+        historialSalud: 1,
+        alimentacion: 1,
+        habitat: 1,
+        reproduccion: {
+            gestacion: "90 días",
+            camadas_anuales: 1,
+            promedio_crias: 3
+        }
+    },
+    {
+        id: siguienteId("animales"),
+        nombre: "Tigre",
+        especie: 2,
+        historialSalud: 2,
+        alimentacion: 2,
+        habitat: 2,
+        reproduccion: {
+            gestacion: "100 días",
+            camadas_anuales: 1,
+            promedio_crias: 2
+        }
+    },
+    {
+        id: siguienteId("animales"),
+        nombre: "Jirafa",
+        especie: 3,
+        historialSalud: 3,
+        alimentacion: 3,
+        habitat: 3,
+        reproduccion: {
+            gestacion: "450 días",
+            camadas_anuales: 1,
+            promedio_crias: 1
+        }
+    }
+]);
+
+// Seccion Salud del animal
+// Colección para la información de salud
+db.createCollection("estadoSalud", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "estado"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id de la condicion de salud"
+                },
+                estado: {
+                    bsonType: "string",
+                    description: "Condición de salud del animal"
+                }
+            }
+        }
+    }
+});
+db.estadoSalud.insertMany([
+    {
+        id: siguienteId("estadoSalud"),
+        estado: "Saludable",
+    },
+    {
+        id: siguienteId("estadoSalud"),
+        estado: "En tratamiento"
+    },
+    {
+        id: siguienteId("estadoSalud"),
+        estado: "En recuperacion"
+    },
+    {
+        id: siguienteId("estadoSalud"),
+        estado: "Estado critico"
+    },
+    {
+        id: siguienteId("estadoSalud"),
+        estado: "Muerto"
+    },
+]);
+
+// Colección para los historiales medicos
+db.createCollection("historialSalud", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "idEstadoSalud", "fecha_apertura", "ultima_modificacion"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del historial medico"
+                },
+                idEstadoSalud: {
+                    bsonType: "int",
+                    description: "Id del estado de salud actual del animal"
+                },
+                fecha_apertura: {
+                    bsonType: "date",
+                    description: "Fecha de apertura del historial médico"
+                },
+                ultima_modificacion: {
+                    bsonType: "date",
+                    description: "Fecha de la última modificación del historial médico"
+                }
+            }
+        }
+    }
+});
+db.historialSalud.insertMany([
+    {
+        id: siguienteId("historialSalud"),
+        idEstadoSalud: 1,
+        fecha_apertura: new Date(),
+        ultima_modificacion: new Date()
+    },
+    {
+        id: siguienteId("historialSalud"),
+        idEstadoSalud: 2,
+        fecha_apertura: new Date(),
+        ultima_modificacion: new Date()
+    },
+    {
+        id: siguienteId("historialSalud"),
+        idEstadoSalud: 3,
+        fecha_apertura: new Date(),
+        ultima_modificacion: new Date()
+    }
+]);
+
+// Colección para las citas médicas
+db.createCollection("citas_medicas", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "idHistorialSalud", "fecha_cita", "descripcion", "id_veterinario"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id de la cita medica"
+                },
+                idHistorialSalud: {
+                    bsonType: "int",
+                    description: "ID del historial médico asociado a la cita"
+                },
+                fecha_cita: {
+                    bsonType: "date",
+                    description: "Fecha de la cita médica"
+                },
+                descripcion: {
+                    bsonType: "string",
+                    description: "Descripción de la cita médica"
+                },
+                id_veterinario: {
+                    bsonType: "string",
+                    pattern: "^[0-9]{10}$",
+                    description: "ID del veterinario que atiende la cita"
+                }
+            }
+        }
+    }
+});
+db.citas_medicas.insertMany([
+    {
+        id: siguienteId("citas_medicas"),
+        idHistorialSalud: 1,
+        fecha_cita: new Date("2023-08-28T10:30:00"),
+        descripcion: "Cita de control",
+        id_veterinario: "1098817776"
+    },
+    {
+        id: siguienteId("citas_medicas"),
+        idHistorialSalud: 2,
+        fecha_cita: new Date("2023-08-29T14:00:00"),
+        descripcion: "Cita de seguimiento",
+        id_veterinario: "2088776555"
+    },
+    {
+        id: siguienteId("citas_medicas"),
+        idHistorialSalud: 3,
+        fecha_cita: new Date("2023-08-30T11:45:00"),
+        descripcion: "Cita de revisión",
+        id_veterinario: "3078634444"
+    }
+]);
+
+// Colección para la información de alimentación
+db.createCollection("alimentacion", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "tipo"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del tipo de alimentacion"
+                },
+                tipo: {
+                    bsonType: "string",
+                    description: "Tipo de alimentación del animal"
+                }
+            }
+        }
+    }
+});
+db.alimentacion.insertMany([
+    {
+        id: siguienteId("alimentacion"),
+        tipo: "vegetariana"
+    },
+    {
+        id: siguienteId("alimentacion"),
+        tipo: "carnívora"
+    },
+    {
+        id: siguienteId("alimentacion"),
+        tipo: "omnívora"
+    }
+]);
+
+// Seccion mantenimiento de habitat
+// Colección para la información del hábitat
+db.createCollection("habitat", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "tipo", "descripcion", "idHistorial", "idZona"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del habitat"
+                },
+                tipo: {
+                    bsonType: "string",
+                    description: "Tipo de hábitat del animal"
+                },
+                descripcion: {
+                    bsonType: "string",
+                    description: "Descripción del hábitat"
+                },
+                idHistorial: {
+                    bsonType: "int",
+                    description: "Id de historial de eventos asociados al habitat"
+                },
+                idZona: {
+                    bsonType: "int",
+                    description: "Id de la zona"
+                }
+            }
+        }
+    }
+});
+db.habitat.insertMany([
+    {
+        id: siguienteId("habitat"),
+        tipo: "acuario",
+        descripcion: "zona húmeda",
+        idHistorial: 1,
+        idZona: 1
+    },
+    {
+        id: siguienteId("habitat"),
+        tipo: "selva tropical",
+        descripcion: "entorno exuberante",
+        idHistorial: 2,
+        idZona: 2
+    },
+    {
+        id: siguienteId("habitat"),
+        tipo: "sabana africana",
+        descripcion: "llanura extensa",
+        idHistorial: 3,
+        idZona: 3
+    }
+]);
+
+// Colección para los horarios de alimentación y manteimiento
+db.createCollection("horarios_de_alimentacionMantenimiento", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "id_habitat", "hora_alimentacionMantenimiento", "id_encargado", "descripcion"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del horario de almientacion y mantenimiento"
+                },
+                id_habitat: {
+                    bsonType: "int",
+                    description: "ID del hábitat asociado"
+                },
+                hora_alimentacionMantenimiento: {
+                    bsonType: "string",
+                    pattern: "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$",
+                    description: "Hora de alimentación y mantenimiento en formato HH:MM"
+                },
+                id_encargado: {
+                    bsonType: "string",
+                    description: "ID del encargado de los alimentos y mantenimiento"
+                },
+                descripcion: {
+                    bsonType: "string",
+                    description: "Descripcion de el trabajo realizado"
+                },
+            }
+        }
+    }
+});
+db.horarios_de_alimentacionMantenimiento.insertMany([
+    {
+        id: siguienteId("horarios_de_alimentacionMantenimiento"),
+        id_habitat: 1,
+        hora_alimentacionMantenimiento: "10:10",
+        id_encargado: "1698847776",
+        descripcion: "alimentación diaria"
+    },
+    {
+        id: siguienteId("horarios_de_alimentacionMantenimiento"),
+        id_habitat: 2,
+        hora_alimentacionMantenimiento: "15:30",
+        id_encargado: "2777665555",
+        descripcion: "cuidado de plantas"
+    },
+    {
+        id: siguienteId("horarios_de_alimentacionMantenimiento"),
+        id_habitat: 3,
+        hora_alimentacionMantenimiento: "09:45",
+        id_encargado: "3866554444",
+        descripcion: "limpieza y mantenimiento"
+    }
+]);
+
+// Colección para el historial de eventos asociado a hábitats
+db.createCollection("historial_de_eventos", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "fecha_creacion", "ultima_modificacion", "idEstadohabitat"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id de el historial de eventos"
+                },
+                fecha_creacion: {
+                    bsonType: "date",
+                    description: "Fecha de creación del historial de eventos"
+                },
+                ultima_modificacion: {
+                    bsonType: "date",
+                    description: "Fecha de la última modificación del historial de eventos"
+                },
+                idEstadohabitat: {
+                    bsonType: "int",
+                    description: "id del estado del habitat"
+                },
+            }
+        }
+    }
+});
+db.historial_de_eventos.insertMany([
+    {
+        id: siguienteId("historial_de_eventos"),
+        fecha_creacion: new Date(),
+        ultima_modificacion: new Date(),
+        idEstadohabitat: 1
+    },
+    {
+        id: siguienteId("historial_de_eventos"),
+        fecha_creacion: new Date(),
+        ultima_modificacion: new Date(),
+        idEstadohabitat: 2
+    },
+    {
+        id: siguienteId("historial_de_eventos"),
+        fecha_creacion: new Date(),
+        ultima_modificacion: new Date(),
+        idEstadohabitat: 3
+    }
+]);
+
+// Colección para eventos específicos
+db.createCollection("eventos", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "historialId", "empleadoId", "fecha_evento", "descripcion", "recomendaciones"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del evento"
+                },
+                historialId: {
+                    bsonType: "int",
+                    description: "id del historial asociado"
+                },
+                empleadoId: {
+                    bsonType: "string",
+                    pattern: "^[0-9]{10}$",
+                    description: "Id del empleado que reporta el evento"
+                },
+                fecha_evento: {
+                    bsonType: "date",
+                    description: "Fecha del evento"
+                },
+                descripcion: {
+                    bsonType: "string",
+                    description: "Descripción general del evento"
+                },
+                recomendaciones: {
+                    bsonType: "string",
+                    description: "Recomendaciones relacionadas con el evento"
+                }
+            }
+        }
+    }
+});
+db.eventos.insertMany([
+    {
+        id: siguienteId("eventos"),
+        historialId: 1,
+        empleadoId: "1526684995",
+        fecha_evento: new Date("2023-08-30T10:50:00"),
+        descripcion: "Se quebró hamaca de la zona de pandas",
+        recomendaciones: "Cambiar lo más pronto posible"
+    },
+    {
+        id: siguienteId("eventos"),
+        historialId: 2,
+        empleadoId: "2599777333",
+        fecha_evento: new Date("2023-08-31T14:20:00"),
+        descripcion: "Lluvia intensa en el hábitat de los leones",
+        recomendaciones: "Verificar el drenaje"
+    },
+    {
+        id: siguienteId("eventos"),
+        historialId: 3,
+        empleadoId: "3677888222",
+        fecha_evento: new Date("2023-09-01T09:00:00"),
+        descripcion: "Visitantes en el área restringida",
+        recomendaciones: "Reforzar la seguridad"
+    }
+]);
+
+
+//Seccion manejo de personal
+//Coleccion empleados
+db.createCollection("empleados", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "nombre", "fecha_contratacion", "id_seguimiento", "idPuesto"],
+            properties: {
+                id: {
+                    bsonType: "string",
+                    pattern: "^[0-9]{10}$",
+                    description: "Id del empleado"
+                },
+                nombre: {
+                    bsonType: "string",
+                    description: "Nombre del empleado"
+                },
+                fecha_contratacion: {
+                    bsonType: "date",
+                    description: "Fecha de contratación del empleado"
+                },
+                id_seguimiento: {
+                    bsonType: "int",
+                    description: "ID de seguimiento del empleado"
+                },
+                idPuesto: {
+                    bsonType: "int",
+                    description: "id del puesto del empleado"
+                }
+            }
+        }
+    }
+});
+db.empleados.insertMany([
+    {
+        id: "1234567890",
+        nombre: "Juan Pérez",
+        fecha_contratacion: new Date("2022-01-15"),
+        salario: 45000,
+        id_seguimiento: 1,
+        idPuesto: 1
+    },
+    {
+        id: "9876543210",
+        nombre: "María González",
+        fecha_contratacion: new Date("2021-11-10"),
+        salario: 38000,
+        id_seguimiento: 2,
+        idPuesto: 2
+    },
+    {
+        id: "5432109876",
+        nombre: "Carlos Rodríguez",
+        fecha_contratacion: new Date("2022-03-20"),
+        salario: 52000,
+        id_seguimiento: 3,
+        idPuesto: 1
+    }
+]);
+
+// Coleccion pustos
+db.createCollection("puestos", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "nombre", "salario", "idHorario"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del puesto"
+                },
+                nombre: {
+                    bsonType: "string",
+                    description: "Nombre del puesto"
+                },
+                salario: {
+                    bsonType: "number",
+                    description: "Salario del empleado"
+                },
+                horario: {
+                    bsonType: "int",
+                    description: "Id del horario de trabajo"
+                }
+            }
+        }
+    }
+});
+// Inserción de puestos de ejemplo
+db.puestos.insertMany([
+    {
+        id: siguienteId("puestos"),
+        nombre: "Gerente de Operaciones",
+        salario: 60000,
+        idHorario: 1
+    },
+    {
+        id: siguienteId("puestos"),
+        nombre: "Cuidador de Animales",
+        salario: 35000,
+        idHorario: 2
+    },
+    {
+        id: siguienteId("puestos"),
+        nombre: "Asistente de Ventas",
+        salario: 40000,
+        idHorario: 3
+    },
+    {
+        id: siguienteId("puestos"),
+        nombre: "Veterinario",
+        salario: 55000,
+        idHorario: 4
+    }
+]);
+
+// Coleccion horarios_trabajo
+db.createCollection("horarios_trabajo", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "hora_inicio", "hora_fin"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del horario de trabajo"
+                },
+                hora_inicio: {
+                    bsonType: "string",
+                    description: "Hora de inicio del horario en formato HH:MM"
+                },
+                hora_fin: {
+                    bsonType: "string",
+                    description: "Hora de fin del horario en formato HH:MM"
+                }
+            }
+        }
+    }
+});
+db.horarios_trabajo.insertMany([
+    {
+        id: siguienteId("horarios_trabajo"),
+        hora_inicio: "08:00",
+        hora_fin: "16:00"
+    },
+    {
+        id: siguienteId("horarios_trabajo"),
+        hora_inicio: "10:00",
+        hora_fin: "18:00"
+    },
+    {
+        id: siguienteId("horarios_trabajo"),
+        hora_inicio: "09:00",
+        hora_fin: "17:00"
+    },
+    {
+        id: siguienteId("horarios_trabajo"),
+        hora_inicio: "07:30",
+        hora_fin: "15:30"
+    }
+]);
+
+// Coleccion seguimiento empleado
+db.createCollection("seguimiento_empleado", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "fecha_creacion", "fecha_actualizacion"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del seguimiento del trabajador"
+                },
+                fecha_creacion: {
+                    bsonType: "date",
+                    description: "Fecha de creación del seguimiento"
+                },
+                fecha_actualizacion: {
+                    bsonType: "date",
+                    description: "Fecha de actualización del seguimiento"
+                }
+            }
+        }
+    }
+});
+db.seguimiento_empleado.insertMany([
+    {
+        id: siguienteId("seguimiento_empleado"),
+        fecha_creacion: new Date(),
+        fecha_actualizacion: new Date()
+    },
+    {
+        id: siguienteId("seguimiento_empleado"),
+        fecha_creacion: new Date(),
+        fecha_actualizacion: new Date()
+    },
+    {
+        id: siguienteId("seguimiento_empleado"),
+        fecha_creacion: new Date(),
+        fecha_actualizacion: new Date()
+    }
+]);
+
+// Coleccion capacitaciones
+db.createCollection("capacitaciones", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "id_seguimiento", "nombre", "fecha", "descripcion"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del la capacitacion"
+                },
+                id_seguimiento: {
+                    bsonType: "int",
+                    description: "ID de seguimiento relacionado con la capacitación"
+                },
+                nombre: {
+                    bsonType: "string",
+                    description: "Nombre de la capacitación"
+                },
+                fecha: {
+                    bsonType: "date",
+                    description: "Fecha de la capacitación"
+                },
+                descripcion: {
+                    bsonType: "string",
+                    description: "Descripción de la capacitación"
+                }
+            }
+        }
+    }
+});
+db.capacitaciones.insertMany([
+    {
+        id: siguienteId("capacitaciones"),
+        id_seguimiento: 1,
+        nombre: "Curso de Primeros Auxilios",
+        fecha: new Date("2023-09-10"),
+        descripcion: "Capacitación en primeros auxilios para el personal"
+    },
+    {
+        id: siguienteId("capacitaciones"),
+        id_seguimiento: 2,
+        nombre: "Taller de Comunicación Efectiva",
+        fecha: new Date("2023-09-15"),
+        descripcion: "Taller sobre técnicas de comunicación efectiva"
+    },
+    {
+        id: siguienteId("capacitaciones"),
+        id_seguimiento: 3,
+        nombre: "Entrenamiento en Conservación",
+        fecha: new Date("2023-09-20"),
+        descripcion: "Capacitación en técnicas de conservación de la fauna"
+    }
+]);
+
+// coleccion evaluacion de desempeño
+db.createCollection("evaluacion_desempeno", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "id_seguimiento", "fecha_reporte", "id_empleado_reporte", "descripcion"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del la capacitacion"
+                },
+                id_seguimiento: {
+                    bsonType: "int",
+                    description: "ID de seguimiento relacionado con la evaluación"
+                },
+                fecha_reporte: {
+                    bsonType: "date",
+                    description: "Fecha del reporte de evaluación"
+                },
+                id_empleado_reporte: {
+                    bsonType: "string",
+                    pattern: "^[0-9]{10}$",
+                    description: "ID del empleado que realiza el reporte"
+                },
+                descripcion: {
+                    bsonType: "string",
+                    description: "Descripción de la evaluación de desempeño"
+                }
+            }
+        }
+    }
+});
+db.evaluacion_desempeno.insertMany([
+    {
+        id: siguienteId("evaluacion_desempeno"),
+        id_seguimiento: 1,
+        fecha_reporte: new Date("2023-09-25"),
+        id_empleado_reporte: "1234567890",
+        descripcion: "Evaluación de desempeño trimestral"
+    },
+    {
+        id: siguienteId("evaluacion_desempeno"),
+        id_seguimiento: 2,
+        fecha_reporte: new Date("2023-09-30"),
+        id_empleado_reporte: "9876543210",
+        descripcion: "Evaluación de desempeño anual"
+    },
+    {
+        id: siguienteId("evaluacion_desempeno"),
+        id_seguimiento: 3,
+        fecha_reporte: new Date("2023-10-05"),
+        id_empleado_reporte: "5432109876",
+        descripcion: "Evaluación de desempeño semestral"
+    }
+]);
+
+//Seccion exhibicion e infraestructura
+// Coleccion zonas
+db.createCollection("zonas", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "nombre", "descripcion"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del la zona"
+                },
+                nombre: {
+                    bsonType: "string",
+                    description: "Nombre de la zona"
+                },
+                descripcion: {
+                    bsonType: "string",
+                    description: "Descripción de la zona"
+                }
+            }
+        }
+    }
+});
+db.zonas.insertMany([
+    {
+        id: siguienteId("zonas"),
+        nombre: "Zona de mamiferos selvaticos",
+        descripcion: "Hábitat de los leones en el zoológico",
+    },
+    {
+        id: siguienteId("zonas"),
+        nombre: "Zona de agua",
+        descripcion: "Hábitat de los pandas en el zoológico",
+    },
+    {
+        id: siguienteId("zonas"),
+        nombre: "Zona de las aves tropicales",
+        descripcion: "Hábitat de aves tropicales en el zoológico",
+    }
+]);
+
+// Colección "estadohabitat"
+db.createCollection("estadohabitat", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "descripcionEstado"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del estadoDelhabitat"
+                },
+                descripcionEstado: {
+                    bsonType: "string",
+                    description: "Descripcion del estado del habitat"
+                }
+            }
+        }
+    }
+});
+db.estadohabitat.insertMany([
+    {
+        id: siguienteId("estadohabitat"),
+        descripcionEstado: "En buen estado",
+    },
+    {
+        id: siguienteId("estadohabitat"),
+        descripcionEstado: "Requiere mantenimiento",
+    },
+    {
+        id: siguienteId("estadohabitat"),
+        descripcionEstado: "En construcción",
+    }
+]);
+
+// Coleccion planificacion_de eventos
+db.createCollection("planificacion_eventos", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "nombre", "fecha_inicio", "fecha_fin", "idZona", "descripcion"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del evento planificado"
+                },
+                nombre: {
+                    bsonType: "string",
+                    description: "Nombre del evento"
+                },
+                fecha_inicio: {
+                    bsonType: "date",
+                    description: "Fecha de inicio del evento"
+                },
+                fecha_fin: {
+                    bsonType: "date",
+                    description: "Fecha de finalización del evento"
+                },
+                idZona: {
+                    bsonType: "int",
+                    description: "id de la zona donde se enfocara el evento del evento en el zoológico"
+                },
+                descripcion: {
+                    bsonType: "string",
+                    description: "Descripción del evento"
+                }
+            }
+        }
+    }
+});
+db.planificacion_eventos.insertMany([
+    {
+        id: siguienteId("planificacion_eventos"),
+        nombre: "Día de los pandas",
+        fecha_inicio: new Date("2023-09-15"),
+        fecha_fin: new Date("2023-09-16"),
+        idZona: 2,
+        descripcion: "Evento especial para celebrar a los pandas del zoológico.",
+    },
+    {
+        id: siguienteId("planificacion_eventos"),
+        nombre: "Festival de aves tropicales",
+        fecha_inicio: new Date("2023-10-20"),
+        fecha_fin: new Date("2023-10-22"),
+        idZona: 3,
+        descripcion: "Un festival dedicado a las coloridas aves tropicales del zoológico.",
+    }
+]);
+
+
+//Seccion gestion de entradas
+// Coleccion de facturacion de entradas
+db.createCollection("facturaEntrada", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "fecha_compra", "documento_visitante", "precio", "evento_especial", "precio_descuento", "idLista_boletas"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id de la factura"
+                },
+                fecha_compra: {
+                    bsonType: "date",
+                    description: "Fecha de compra de la entrada"
+                },
+                documento_visitante: {
+                    bsonType: "string",
+                    pattern: "^[0-9]{10}$",
+                    description: "documento del visitante que compró la entrada"
+                },
+                precio: {
+                    bsonType: "number",
+                    description: "total facturacion"
+                },
+                evento_especial: {
+                    bsonType: "bool",
+                    description: "Indica si la entrada es para un evento especial"
+                },
+                precio_descuento: {
+                    bsonType: "number",
+                    description: "total facturacion"
+                },
+                idLista_boletas: {
+                    bsonType: "int",
+                    description: "Id de la lista de boletas compradas"
+                }
+            }
+        }
+    }
+});
+db.facturaEntrada.insertMany([
+    {
+        id: siguienteId("facturaEntrada"),
+        fecha_compra: new Date(),
+        documento_visitante: "1234567890",
+        precio: 55.0,
+        evento_especial: false,
+        precio_descuento: 0,
+        idLista_boletas: 1
+    },
+    {
+        id: siguienteId("facturaEntrada"),
+        fecha_compra: new Date(),
+        documento_visitante: "0987654321",
+        precio: 75.0,
+        evento_especial: true,
+        precio_descuento: 0,
+        idLista_boletas: 2
+    }
+]);
+
+// Coleccion de lista boletas
+db.createCollection("lista_boletas", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "idFactura"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id de la lista de boletas"
+                },
+                idFactura: {
+                    bsonType: "int",
+                    description: "Id de la factura"
+                }
+            }
+        }
+    }
+});
+db.lista_boletas.insertMany([
+    {
+        id: siguienteId("lista_boletas"),
+        idFactura: 1
+    },
+    {
+        id: siguienteId("lista_boletas"),
+        idFactura: 2
+    }
+]);
+
+// Coleccion de boletas
+db.createCollection("boletas", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "idLista", "idtipo", "cantidad"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id de la lista de boletas"
+                },
+                idLista: {
+                    bsonType: "int",
+                    description: "Id de la lista asociada a la factura"
+                },
+                idtipo: {
+                    bsonType: "int",
+                    description: "Id de la factura"
+                },
+                cantidad: {
+                    bsonType: "int",
+                    description: "cantidad del tipo comprado"
+                }
+            }
+        }
+    }
+});
+db.boletas.insertMany([
+    {
+        id: siguienteId("boletas"),
+        idLista: 1,
+        idtipo: 2,
+        cantidad: 2
+    },
+    {
+        id: siguienteId("boletas"),
+        idLista: 1,
+        idtipo: 1,
+        cantidad: 2
+    },
+    {
+        id: siguienteId("boletas"),
+        idLista: 2,
+        idtipo: 1,
+        cantidad: 3
+    }
+]);
+
+// Coleccion de tipos de boletas
+db.createCollection("tipos_boletas", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "tipo", "precio"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id del precio de entrada"
+                },
+                tipo: {
+                    bsonType: "string",
+                    description: "Tipo de entrada"
+                },
+                precio: {
+                    bsonType: "number",
+                    description: "Precio de la entrada para este tipo"
+                }
+            }
+        }
+    }
+});
+db.tipos_boletas.insertMany([
+    {
+        id: siguienteId("tipos_boletas"),
+        tipo: "Adulto",
+        precio: 20.0
+    },
+    {
+        id: siguienteId("tipos_boletas"),
+        tipo: "Niño",
+        precio: 10.0
+    },
+    {
+        id: siguienteId("tipos_boletas"),
+        tipo: "Grupo",
+        precio: 15.0
+    }
+]);
+
+// Coleccion de promociones
+db.createCollection("promociones", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id", "nombre", "descripcion", "descuento", "fecha_inicio", "fecha_fin"],
+            properties: {
+                id: {
+                    bsonType: "int",
+                    description: "Id de la promoción"
+                },
+                nombre: {
+                    bsonType: "string",
+                    description: "Nombre de la promoción"
+                },
+                descripcion: {
+                    bsonType: "string",
+                    description: "Descripción de la promoción"
+                },
+                descuento: {
+                    bsonType: "number",
+                    description: "Descuento ofrecido por la promoción (porcentaje)"
+                },
+                fecha_inicio: {
+                    bsonType: "date",
+                    description: "Fecha de inicio de la promoción"
+                },
+                fecha_fin: {
+                    bsonType: "date",
+                    description: "Fecha de finalización de la promoción"
+                }
+            }
+        }
+    }
+});
+db.promociones.insertMany([
+    {
+        id: siguienteId("promociones"),
+        nombre: "Verano Especial",
+        descripcion: "Descuento de verano",
+        descuento: 10.0,
+        fecha_inicio: new Date("2023-07-01"),
+        fecha_fin: new Date("2023-08-31")
+    },
+    {
+        id: siguienteId("promociones"),
+        nombre: "Día del Niño",
+        descripcion: "Promoción especial para niños",
+        descuento: 15.0,
+        fecha_inicio: new Date("2023-04-01"),
+        fecha_fin: new Date("2023-04-30")
+    }
+]);

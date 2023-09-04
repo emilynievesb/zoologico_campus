@@ -1,0 +1,27 @@
+{
+  "name": "zoologico_campus",
+  "version": "1.0.0",
+  "description": "<justify>El proyecto \"ZooDB\" es una plataforma de gestión integral diseñada para facilitar y mejorar la administración de un zoológico. La plataforma está basada en una API desarrollada con las tecnologías MongoDB, Express, y Node.js que permite a los administradores del zoológico manejar de manera eficiente y centralizada todas las operaciones relacionadas con los animales, empleados, exhibiciones, entradas, comentarios y valoraciones.</justify>",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --quiet ./src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "class-transformer": "^0.5.1",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "6.8.1",
+    "express-routes-versioning": "^1.0.1",
+    "express-validator": "7.0.1",
+    "jose": "^4.14.5",
+    "mongodb": "^5.7.0",
+    "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "nodemon": "3.0.1"
+  }
+}
