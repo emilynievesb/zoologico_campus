@@ -54,12 +54,14 @@ import {
   contentMiddlewareTipoBoleta,
   contentMiddlewareZonas,
 } from "../middlewares/middlewareContent.js";
+import { rolVerificatorMiddlewareJefePersonal, rolVerificatorMiddlewareMedico, rolVerificatorMiddlewareStaff, rolVerificatorMiddlewareTaquillero } from "../middlewares/rolVerificationMiddlewares.js";
 
 const getInitRoute = () => {
   const router = Router();
   router.get(
     "/obtenerTiposAlimentacion",
     authorizationMiddleware,
+    rolVerificatorMiddlewareMedico,
     contentMiddlewareAlimentacion,
     getT1DTOMiddleware,
     obtenerAlimentracionController
@@ -67,6 +69,7 @@ const getInitRoute = () => {
   router.get(
     "/obtenerAnimales",
     authorizationMiddleware,
+    rolVerificatorMiddlewareMedico,
     contentMiddlewareAnimales,
     getT1DTOMiddleware,
     obtenerAnimalesController
@@ -74,6 +77,7 @@ const getInitRoute = () => {
   router.get(
     "/obtenerBoletas",
     authorizationMiddleware,
+    rolVerificatorMiddlewareTaquillero,
     contentMiddlewareBoletas,
     getT1DTOMiddleware,
     obtenerBoletasController
@@ -81,6 +85,7 @@ const getInitRoute = () => {
   router.get(
     "/obtenerCapacitaciones",
     authorizationMiddleware,
+    rolVerificatorMiddlewareJefePersonal,
     contentMiddlewareCapacitaciones,
     getT1DTOMiddleware,
     obtenerCapacitacionesController
@@ -88,6 +93,7 @@ const getInitRoute = () => {
   router.get(
     "/obtenerCitasMedicas",
     authorizationMiddleware,
+    rolVerificatorMiddlewareMedico,
     contentMiddlewareCitasMedicas,
     getT1DTOMiddleware,
     obtenerCitasMedicasController
@@ -95,6 +101,7 @@ const getInitRoute = () => {
   router.get(
     "/obtenerEmpleados",
     authorizationMiddleware,
+    rolVerificatorMiddlewareJefePersonal,
     contentMiddlewareEmpleados,
     getT2DTOMiddleware,
     obtenerEmpleadosController
@@ -102,12 +109,14 @@ const getInitRoute = () => {
   router.get(
     "/obtenerEstadoHabitat",
     authorizationMiddleware,
+    rolVerificatorMiddlewareStaff,
     contentMiddlewareEstadoHabitat,
     obtenerEstadoHabitatController
   );
   router.get(
     "/obtenerEstadosSalud",
     authorizationMiddleware,
+    rolVerificatorMiddlewareMedico,
     contentMiddlewareEstadoSalud,
     getT1DTOMiddleware,
     obtenerEstadosSaludController
@@ -115,6 +124,7 @@ const getInitRoute = () => {
   router.get(
     "/obtenerEvaluacionesDesempeno",
     authorizationMiddleware,
+    rolVerificatorMiddlewareJefePersonal,
     contentMiddlewareEvaluacionDesempeno,
     getT1DTOMiddleware,
     obtenerEvaluacionesDesempenoController
@@ -122,6 +132,7 @@ const getInitRoute = () => {
   router.get(
     "/obtenerEventos",
     authorizationMiddleware,
+    rolVerificatorMiddlewareTaquillero,
     contentMiddlewareEventos,
     getT1DTOMiddleware,
     obtenerEventosController
@@ -129,6 +140,7 @@ const getInitRoute = () => {
   router.get(
     "/obtenerFacturasEntrada",
     authorizationMiddleware,
+    rolVerificatorMiddlewareTaquillero,
     contentMiddlewareFacturaEntrada,
     getT1DTOMiddleware,
     obtenerFavturasEntradaController
@@ -136,6 +148,7 @@ const getInitRoute = () => {
   router.get(
     "/obtenerHabitats",
     authorizationMiddleware,
+    rolVerificatorMiddlewareStaff,
     contentMiddlewareHabitat,
     getT1DTOMiddleware,
     obtenerHabitatsController
@@ -143,6 +156,7 @@ const getInitRoute = () => {
   router.get(
     "/obtenerHistorialesSalud",
     authorizationMiddleware,
+    rolVerificatorMiddlewareMedico,
     contentMiddlewareHistorialesSalud,
     getT1DTOMiddleware,
     obtenerHistorialesSaludController
@@ -150,6 +164,7 @@ const getInitRoute = () => {
   router.get(
     "/obtenerHistorialesEvento",
     authorizationMiddleware,
+    rolVerificatorMiddlewareTaquillero,
     contentMiddlewareHistorialEventos,
     getT1DTOMiddleware,
     obtenerHistorialesEventoController
@@ -157,6 +172,7 @@ const getInitRoute = () => {
   router.get(
     "/obtenerHorarAlMant",
     authorizationMiddleware,
+    rolVerificatorMiddlewareStaff,
     contentMiddlewareHorariosAlimentacion,
     getT1DTOMiddleware,
     obtenerHorariosAlimentacionMantenimientoController
@@ -164,6 +180,7 @@ const getInitRoute = () => {
   router.get(
     "/obtenerHorariosTrabajo",
     authorizationMiddleware,
+    rolVerificatorMiddlewareJefePersonal,
     contentMiddlewareHorariosTrabajo,
     getT1DTOMiddleware,
     obtenerHorariosTrabajoController
@@ -171,6 +188,7 @@ const getInitRoute = () => {
   router.get(
     "/obtenerListasBoletas",
     authorizationMiddleware,
+    rolVerificatorMiddlewareTaquillero,
     contentMiddlewareListaBoletas,
     getT1DTOMiddleware,
     obtenerListasBoletasController
@@ -178,6 +196,7 @@ const getInitRoute = () => {
   router.get(
     "/obtenerPlanificacionesEventos",
     authorizationMiddleware,
+    rolVerificatorMiddlewareTaquillero,
     contentMiddlewarePlanificacionEventos,
     getT1DTOMiddleware,
     obtenerPlanificacionesEventosController
@@ -185,6 +204,7 @@ const getInitRoute = () => {
   router.get(
     "/obtenerPromociones",
     authorizationMiddleware,
+    rolVerificatorMiddlewareTaquillero,
     contentMiddlewarePromociones,
     getT1DTOMiddleware,
     obtenerPromocionesController
@@ -192,6 +212,7 @@ const getInitRoute = () => {
   router.get(
     "/obtenerPuestos",
     authorizationMiddleware,
+    rolVerificatorMiddlewareJefePersonal,
     contentMiddlewarePuestos,
     getT1DTOMiddleware,
     obtenerPuestosController
@@ -199,6 +220,7 @@ const getInitRoute = () => {
   router.get(
     "/obtenerSeguimientoEmpleados",
     authorizationMiddleware,
+    rolVerificatorMiddlewareJefePersonal,
     contentMiddlewareSeguimientoEmpleados,
     getT1DTOMiddleware,
     obtenerSeguimientosEmpleadoController
@@ -206,6 +228,7 @@ const getInitRoute = () => {
   router.get(
     "/obtenerTiposBoleta",
     authorizationMiddleware,
+    rolVerificatorMiddlewareTaquillero,
     contentMiddlewareTipoBoleta,
     getT1DTOMiddleware,
     obtenerTiposBoletasController
@@ -213,6 +236,7 @@ const getInitRoute = () => {
   router.get(
     "/obtenerZonas",
     authorizationMiddleware,
+    rolVerificatorMiddlewareStaff,
     contentMiddlewareZonas,
     getT1DTOMiddleware,
     obtenerZonasController
