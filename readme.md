@@ -109,6 +109,7 @@ Para ejecutar correctamente el servidor debes asegurarte de tener `nodemon`, ya 
 - Taquillero: Boletas, eventos, facturas de entrada, historiales de evento, - lista de boletas, planificaciones de eventos, promociones, tipos de boleta
 - Jefe de personal: Capacitaciones, empleados, evaluaciones de desempeño, horarios de trabajo, puestos.
 - Staff: Estado habitat, habitats, horarios alimentación y mantenimiento, zonas.
+- Admin: TIENE ACCESO A TODO.
 
 ### Usuarios:
 
