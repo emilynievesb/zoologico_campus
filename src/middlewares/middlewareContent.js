@@ -108,7 +108,7 @@ const authorizationMiddleware = async (req, res, next) => {
 };
 
 const contentMiddlewareAlimentacion = (req, res, next) => {
-  console.log(req.data)
+  console.log(req.data);
   let { payload } = req.data;
   const { iat, exp, ...newPayload } = payload;
   payload = newPayload;
@@ -271,7 +271,7 @@ const contentMiddlewareHorariosAlimentacion = (req, res, next) => {
   let { payload } = req.data;
   const { iat, exp, ...newPayload } = payload;
   payload = newPayload;
-  const inst = new Empleado();
+  const inst = new HorariosAlimentacionMantenimiento();
   const classPlain = classToPlain(inst);
   let equal = JSON.stringify(classPlain) === JSON.stringify(payload);
   !equal
@@ -293,7 +293,7 @@ const contentMiddlewareListaBoletas = (req, res, next) => {
   let { payload } = req.data;
   const { iat, exp, ...newPayload } = payload;
   payload = newPayload;
-  const inst = new Empleado();
+  const inst = new ListaBoletas();
   const classPlain = classToPlain(inst);
   let equal = JSON.stringify(classPlain) === JSON.stringify(payload);
   !equal
