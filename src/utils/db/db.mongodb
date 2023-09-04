@@ -31,15 +31,19 @@ db.createCollection("usuarios", {
     validator: {
         $jsonSchema: {
             bsonType: "object",
-            required: ["usuario", "contraseña"],
+            required: ["usuario", "contrasena", "rol"],
             properties: {
                 usuario: {
                     bsonType: "string",
                     description: "usuario requerido"
                 },
-                contraseña: {
+                contrasena: {
                     bsonType: "string",
-                    description: "contraseña requerida"
+                    description: "contrasena requerida"
+                },
+                rol: {
+                    bsonType: "string",
+                    description: "rol del usuario"
                 }
             }
         }
@@ -48,19 +52,28 @@ db.createCollection("usuarios", {
 db.usuarios.insertMany([
     {
         usuario: "superAdmin",
-        contraseña: "superAdmin123"
+        contrasena: "superAdmin123",
+        rol: "admin"
     },
     {
         usuario: "jefepersonal",
-        contraseña: "jefepersonal123"
+        contrasena: "jefepersonal123",
+        rol: "jefePersonal"
     },
     {
         usuario: "taquillero",
-        contraseña: "taquillero123"
+        contrasena: "taquillero123",
+        rol: "taquillero"
     },
     {
         usuario: "medico",
-        contraseña: "medico123"
+        contrasena: "medico123",
+        rol: "medico"
+    },
+    {
+        usuario: "staff",
+        contrasena: "staff123",
+        rol: "staff"
     }
 
 ])
