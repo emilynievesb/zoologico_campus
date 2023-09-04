@@ -100,7 +100,37 @@ Para ejecutar correctamente el servidor debes asegurarte de tener `nodemon`, ya 
 
 ## Autorización
 
-Para ejecutar correctamente los endpoints, debes obtener el token de cada tabla antes de hacer la consulta, por lo que en el apartado de los endpoints dejaremos escrita la url a ejecutar antes, y debes copiar el token en el header de autorización, además de copiar correctamente un header de aceptación de versión con la versión de endpoint que vas a usar. También dejaremos esto descrito en cada endpoint
+- Para ejecutar correctamente los endpoints, debes obtener el token de cada colección antes de hacer la consulta, así como "logearte" a través del body con un usuario y contraseña, ya que dependiendo del tipo de usuario será si tienes permiso o no de acceder a la información.
+- En el apartado de los endpoints dejaremos escrita la url a ejecutar antes, y debes copiar el token en el header de autorización, además de copiar correctamente un header de aceptación de versión con la versión de endpoint que vas a usar. También dejaremos esto descrito en cada endpoint.
+
+### Roles y colecciones autorizadas:
+
+- Médico: Alimentación, animales, citas médicas, estados de salud, historiales de salud.
+- Taquillero: Boletas, eventos, facturas de entrada, historiales de evento, - lista de boletas, planificaciones de eventos, promociones, tipos de boleta
+- Jefe de personal: Capacitaciones, empleados, evaluaciones de desempeño, horarios de trabajo, puestos.
+- Staff: Estado habitat, habitats, horarios alimentación y mantenimiento, zonas.
+
+### Usuarios:
+
+      {
+         usuario: "superAdmin",
+         contraseña: "superAdmin123",
+      }
+
+      {
+         usuario: "jefepersonal",
+         contraseña: "jefepersonal123",
+      }
+
+      {
+         usuario: "medico",
+         contraseña: "medico123",
+      }
+
+      {
+         usuario: "staff",
+         contraseña: "staff123",
+      }
 
 ## Versiones
 
