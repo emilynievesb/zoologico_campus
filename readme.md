@@ -132,6 +132,11 @@ Para ejecutar correctamente el servidor debes asegurarte de tener `nodemon`, ya 
          contraseña: "staff123",
       }
 
+      {
+         usuario: "taquillero",
+         contraseña: "taquillero123",
+      }
+
 ## Versiones
 
 Según el tipo de consulta que vayas a usar, debes poner en el header la versión a la que vayas a acceder:
